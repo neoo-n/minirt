@@ -1,8 +1,9 @@
-NAME	=	animal
-SRCS	=	main.c
+NAME	=	minirt
+GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
+SRCS	=	main.c $(GNL)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
-CFLAGS	=	-Werror -Wextra -Wall
+CFLAGS	=	-Werror -Wextra -Wall -I.
 
 # Colors and style
 END		:= \033[0m
@@ -17,7 +18,7 @@ YELLOW	:= \033[0;33m
 BLUE	:= \033[34m
 REPLACE := \033[9A\033[9K\033[A
 
- # Rules
+# Rules
 all:	${NAME} header
 
 header:

@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 15:30:14 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/26 15:30:24 by akabbaj          ###   ########.ch       */
+/*   Created: 2024/11/10 12:50:46 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/01/11 13:10:18 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 60
+# endif
 
-int	main(void)
-{
-	return (0);
-}
+char	*get_next_line(int fd);
+int		in(char	*str, char c);
+void	*ft_calloc(unsigned int nmemb, size_t size);
+int		ft_strlen(const char *s);
+char	*concat(char *s1, char *s2);
+void	*free_return(void *tofree);
+
+#endif
