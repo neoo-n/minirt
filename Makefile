@@ -1,0 +1,80 @@
+NAME	=	animal
+SRCS	=	main.c
+OBJS	=	${SRCS:.c=.o}
+CC		=	cc
+CFLAGS	=	-Werror -Wextra -Wall
+
+# Colors and style
+END		:= \033[0m
+WHITE	:= \033[1;37m
+NC		:= \033[0m
+RED		:= \033[0;31m
+PINK	:= \033[1;35m
+GREEN	:= \033[0;32m
+BOLD	:= \033[1m
+L_PURPLE:= \033[38;5;55m
+YELLOW	:= \033[0;33m
+BLUE	:= \033[34m
+REPLACE := \033[9A\033[9K\033[A
+
+ # Rules
+all:	${NAME} header
+
+header:
+	@for i in 1 2 3 4 5 ; do \
+		sleep 0.5 ; \
+		echo "$(L_PURPLE)"  ; \
+		echo "  __  __              _   _                 ____      _____   " ; \
+		echo "U|' \/ '|u   ___     | \ |\"|       ___   U |  _\"\ u  |_ \" _|  " ; \
+		echo "\| |\/| |/  |_\"_|   <|  \| |>     |_\"_|   \| |_) |/    | |    " ; \
+		echo " | |  | |    | |    U| |\  |u      | |     |  _ <     /| |\   " ; \
+		echo " |_|  |_|  U/| |\u   |_| \_|     U/| |\u   |_| \_\   u |_|U   " ; \
+		echo "<<,-,,-..-,_|___|_,-.||   "'\\'"\,-.-,_|___|_,-.//   "'\\'"\_  _// "'\\'"\_  " ; \
+		echo " (./  \.)\_)-' '-(_/ (_\")  (_/ \_)-' '-(_/(__)  (__)(__) (__) " ; \
+		echo "$(END)" ;	 \
+		sleep 0.5 ; \
+		echo "$(REPLACE)" ; \
+		echo "$(GREEN)" ; \
+		echo "  __  __              _   _                 ____      _____   " ; \
+		echo "U|' \/ '|u   ___     | \ |\"|       ___   U |  _\"\ u  |_ \" _|  " ; \
+		echo "\| |\/| |/  |_\"_|   <|  \| |>     |_\"_|   \| |_) |/  u\| |/U   " ; \
+		echo " | |  | |  U\\| |/u  U| |\  |u    U\\| |/u   |  _ <      | |    " ; \
+		echo " |_|  |_|    | |     |_| \_|       | |     |_| \_\     |_|    " ; \
+		echo "<<,-,,-..-,_|___|_,-.||   "'\\'"\,-.-,_|___|_,-.//   "'\\'"\_  _// "'\\'"\_  " ; \
+		echo " (./  \.)\_)-' '-(_/ (_\")  (_/ \_)-' '-(_/(__)  (__)(__) (__) " ; \
+		echo "$(END)" ; \
+		echo "$(REPLACE)" ; \
+	done	
+	@echo "$(L_PURPLE)"
+	@echo "  __  __              _   _                 ____      _____   "
+	@echo "U|' \/ '|u   ___     | \ |\"|       ___   U |  _\"\ u  |_ \" _|  "
+	@echo "\| |\/| |/  |_\"_|   <|  \| |>     |_\"_|   \| |_) |/    | |    "
+	@echo " | |  | |    | |    U| |\  |u      | |     |  _ <     /| |\   "
+	@echo " |_|  |_|  U/| |\u   |_| \_|     U/| |\u   |_| \_\   u |_|U   "
+	@echo "<<,-,,-..-,_|___|_,-.||   "'\\'"\,-.-,_|___|_,-.//   "'\\'"\_  _// "'\\'"\_  "
+	@echo " (./  \.)\_)-' '-(_/ (_\")  (_/ \_)-' '-(_/(__)  (__)(__) (__) "
+	@echo "$(END)"
+
+${NAME}:	${OBJS}
+	@echo -n "${BLUE}"
+	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+	@echo -n "${END}"
+
+%.o: %.c
+	@echo -n "${BLUE}"
+	${CC} ${CFLAGS} -c -o $@ $<
+	@echo -n "${END}"
+
+clean:
+	@echo -n "${RED}"
+	rm -f ${OBJS}
+	@echo -n "${END}"
+
+fclean: clean
+	@echo -n "${RED}"
+	rm -f ${NAME}
+	@echo -n "${END}"
+
+re: fclean all
+
+.PHONY: all clean fclean re header
