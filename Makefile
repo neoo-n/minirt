@@ -3,7 +3,7 @@ GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
 SRCS	=	main.c $(GNL)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
-CFLAGS	=	-Werror -Wextra -Wall -I.
+CFLAGS	=	-Werror -Wextra -Wall -I. -lm
 
 # Colors and style
 END		:= \033[0m
