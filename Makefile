@@ -1,9 +1,15 @@
 NAME	=	minirt
 GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
-SRCS	=	main.c $(GNL)
+PARSING =	parsing/handle_shapes.c parsing/handling.c \
+			parsing/helper.c parsing/initialization.c \
+			parsing/insert.c parsing/validation.c
+UTILS	=	utils/atoi.c utils/errors.c \
+			utils/frees.c utils/libft.c \
+			utils/split.c
+SRCS	=	main.c $(GNL) $(PARSING) $(UTILS)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
-CFLAGS	=	-Werror -Wextra -Wall -I. -lm
+CFLAGS	=	-Werror -Wextra -Wall -I.
 
 # Colors and style
 END		:= \033[0m
@@ -19,7 +25,7 @@ BLUE	:= \033[34m
 REPLACE := \033[9A\033[9K\033[A
 
 # Rules
-all:	${NAME} header
+all:	${NAME} #header
 
 header:
 	@for i in 1 2 3 4 5 ; do \
@@ -58,7 +64,7 @@ header:
 
 ${NAME}:	${OBJS}
 	@echo -n "${BLUE}"
-	${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME}
 	@echo -n "${END}"
 
 %.o: %.c

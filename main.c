@@ -1,18 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handling.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 15:39:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/26 15:39:50 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 15:47:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 15:54:06 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include <stdio.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	return (0);
+	t_gen	*gen;
+	int		fd;
+	int		i;
+
+	if (argc != 2)
+		return (print_error(NO_ARGS, 0, 0));
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (print_error(NO_FILE, 0, 0));
+	gen = parse_file(fd);
+	if (!gen)
+		return (-1);
+	printf("Ambient Lighting\nLighting Ratio: %f\nRGB: %d,%d,%d\n\n", gen->a->light, gen->a->rgb.r, gen->a->rgb.g, gen->a->rgb.b);
+	printf("Camera\nCoords: %f,%f,%f\nVector: %f,%f,%f\nFOV: %f\n\n", gen->c->coords.x, gen->c->coords.y, gen->c->coords.z, gen->c->vector.x, gen->c->vector.y, gen->c->vector.z, gen->c->fov);
+	printf("Light\nCoords: %f,%f,%f\nBrightness: %f\n", gen->l->coords.x, gen->l->coords.y, gen->l->coords.z, gen->l->bright);
+	if (gen->l->rgb.r != -1)
+		printf("RGB: %i,%i,%i\n",gen->l->rgb.r, gen->l->rgb.g, gen->l->rgb.b);
+	printf("\n");
+	i = 0;
+	while (gen->shapes[i])
+	{
+		printf("ID: %d\nCoords: %f,%f,%f\n", gen->shapes[i]->shape, gen->shapes[i]->coords.x, gen->shapes[i]->coords.y, gen->shapes[i]->coords.z);
+		if (gen->shapes[i]->shape == SPHERE || gen->shapes[i]->shape == CYLINDER)
+			printf("Diameter: %f\n", gen->shapes[i]->diam);
+		if (gen->shapes[i]->shape == CYLINDER)
+			printf("Height: %f\n", gen->shapes[i]->height);
+		if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == PLANE)
+			printf("Vector: %f,%f,%f\n", gen->shapes[i]->vector.x, gen->shapes[i]->vector.y, gen->shapes[i]->vector.z);
+		printf("RGB: %d,%d,%d\n\n", gen->shapes[i]->rgb.r, gen->shapes[i]->rgb.g, gen->shapes[i]->rgb.b);
+		i++;
+	}
 }

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 12:50:53 by akabbaj           #+#    #+#             */
-/*   Updated: 2024/11/10 12:50:53 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 11:30:27 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 11:30:27 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	in(char	*str, char c)
+int	in(char c, char	*str)
 {
 	int	i;
 

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 12:50:46 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/01/11 13:10:18 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 11:31:55 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 14:33:41 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # endif
 
 char	*get_next_line(int fd);
-int		in(char	*str, char c);
+int		in(char c, char	*str);
 void	*ft_calloc(unsigned int nmemb, size_t size);
 int		ft_strlen(const char *s);
 char	*concat(char *s1, char *s2);

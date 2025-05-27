@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 15:34:14 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/26 15:34:14 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 11:30:46 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 11:30:46 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*fill_buf(char *buffer, int fd)
 			return (0);
 	}
 	reading = 1;
-	while (!in(buffer, '\n') && reading != 0)
+	while (!in('\n', buffer) && reading != 0)
 	{
 		res = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 		if (!res)
