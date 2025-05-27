@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:04:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:04:44 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 16:38:59 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 16:38:59 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		print_error(t_errmes mes, char *str, int i);
 void	free_gen(t_gen *gen);
 char	**free_strarr_char(char **tofree);
 int		free_strarr(char **tofree);
+int		free_strarr_str(char **tofree, char *strtofree, int i);
 
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s);

@@ -2,7 +2,8 @@ NAME	=	minirt
 GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
 PARSING =	parsing/handle_shapes.c parsing/handling.c \
 			parsing/helper.c parsing/initialization.c \
-			parsing/insert.c parsing/validation.c
+			parsing/insert.c parsing/validation.c \
+			parsing/handle_helper.c
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
 			utils/split.c

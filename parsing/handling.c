@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:55:52 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:55:52 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 16:49:12 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 16:49:44 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,8 @@ int	handle_c(t_gen *gen, char *line)
 	return (1);
 }
 
-int	handle_l(t_gen *gen, char *line)
+int	handle_l(t_gen *gen, char *line, int i)
 {
-	int	i;
-
 	if (gen->l->bright != -1)
 		return (0);
 	i = next_elem(line, 0);

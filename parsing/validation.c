@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:58:29 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:58:29 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 17:16:44 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 17:16:47 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,17 @@ int	valid_rgb(char *str)
 {
 	char	**rgb;
 	int		i;
-	int		j;
 
 	rgb = ft_split(str, ",");
 	if (!rgb)
 		return (0);
 	i = 0;
-	while (rgb[i])
-		i++;
-	if (i != 3)
+	if (arr_len(rgb) != 3)
 		return (free_strarr(rgb));
-	i = 0;
 	while (rgb[i])
 	{
-		j = 0;
-		while (rgb[i][j] && rgb[i][j] != '\n')
-		{
-			if (rgb[i][j] < '0' || rgb[i][j] > '9')
-				return (free_strarr(rgb));
-			j++;
-		}
+		if (!is_numeric(rgb[i]))
+			return (free_strarr(rgb));
 		if (ft_datoi(rgb[i]) < 0 || ft_datoi(rgb[i]) > 255)
 			return (free_strarr(rgb));
 		i++;
@@ -85,7 +76,6 @@ int	valid_rgb(char *str)
 int	valid_double(char *str)
 {
 	char	**split_res;
-	int		i;
 	int		j;
 
 	str = ft_substr(str, 0, find_end(str));
@@ -94,50 +84,20 @@ int	valid_double(char *str)
 	split_res = ft_split(str, ".");
 	if (!split_res)
 		return (free(str), 0);
-	i = 0;
-	while (split_res[i])
-		i++;
-	if (i != 1 && i != 2)
-	{
-		free(str);
-		return (free_strarr(split_res));
-	}
+	if (arr_len(split_res) != 1 && arr_len(split_res) != 2)
+		return (free_strarr_str(split_res, str, 0));
 	j = 0;
 	if (split_res[0][0] == '-')
 		j++;
-	while (split_res[0][j] && split_res[0][j] != '\n' && split_res[0][j] != ' ')
-	{
-		if (split_res[0][j] < '0' || split_res[0][j] > '9')
-		{
-			free(str);
-			return (free_strarr(split_res));
-		}
-		j++;
-	}
-	if (i == 1)
-	{
-		free(str);
-		free_strarr(split_res);
-		return (1);
-	}
+	if (!is_numeric(split_res[0] + j))
+		return (free_strarr_str(split_res, str, 0));
+	if (arr_len(split_res) == 1)
+		return (free_strarr_str(split_res, str, 1));
 	if (!split_res[0][0] || !split_res[1][0])
-	{
-		free(str);
-		return (0);
-	}
-	j = 0;
-	while (split_res[1][j] && split_res[1][j] != '\n' && split_res[1][j] != ' ')
-	{
-		if (split_res[1][j] < '0' || split_res[1][j] > '9')
-		{
-			free(str);
-			return (free_strarr(split_res));
-		}
-		j++;
-	}
-	free(str);
-	free_strarr(split_res);
-	return (1);
+		return (free_strarr_str(split_res, str, 0));
+	if (!is_numeric(split_res[0]))
+		return (free_strarr_str(split_res, str, 0));
+	return (free_strarr_str(split_res, str, 1));
 }
 
 int	valid_coords(char *str)
@@ -150,29 +110,18 @@ int	valid_coords(char *str)
 		return (0);
 	coords = ft_split(str, ",");
 	if (!coords)
-	{
-		free(str);
-		return (0);
-	}
+		return (free(str), 0);
 	i = 0;
 	while (coords[i])
 		i++;
 	if (i != 3)
-	{
-		free(str);
-		return (free_strarr(coords));
-	}
+		return (free_strarr_str(coords, str, 0));
 	i = 0;
 	while (i < 3)
 	{
 		if (!valid_double(coords[i]))
-		{
-			free(str);
-			return (free_strarr(coords));
-		}
+			return (free_strarr_str(coords, str, 0));
 		i++;
 	}
-	free(str);
-	free_strarr(coords);
-	return (1);
+	return (free_strarr_str(coords, str, 1));
 }

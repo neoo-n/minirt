@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:57:22 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:57:22 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 17:08:35 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 17:08:35 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,29 @@ int	init_elem(t_gen *gen, char *line)
 	if (line[0] == 'C')
 		return (handle_c(gen, line));
 	if (line[0] == 'L')
-		return (handle_l(gen, line));
+		return (handle_l(gen, line, 0));
 	if (line[0] == 's')
-		return (handle_sp(gen, line));
+		return (handle_sp(gen, line, 0));
 	if (line[0] == 'p')
-		return (handle_pl(gen, line));
+		return (handle_pl(gen, line, 0));
 	if (line[0] == 'c')
-		return (handle_cy(gen, line));
+		return (handle_cy(gen, line, 0));
 	return (0);
 }
 
-t_gen	*parse_file(int fd)
+t_gen	*handle_err(t_errmes mes, char *line, int i, t_gen *res)
+{
+	print_error(mes, line, i);
+	free(line);
+	free_gen(res);
+	return (0);
+}
+
+t_gen	*parse_file(int fd, int i)
 {
 	char	*line;
-	int		i;
 	t_gen	*res;
 
-	i = 0;
 	line = get_next_line(fd);
 	res = init_gen();
 	if (!res)
@@ -73,16 +79,9 @@ t_gen	*parse_file(int fd)
 			continue ;
 		}
 		if (!valid_line(line))
-		{
-			print_error(PARSE_ERR, line, i);
-			return (0);
-		}
+			return (handle_err(PARSE_ERR, line, i, res));
 		if (!init_elem(res, line))
-		{
-			print_error(PARSE_ERR, line, i);
-			free_gen(res);
-			return (0);
-		}
+			return (handle_err(PARSE_ERR, line, i, res));
 		free(line);
 		line = get_next_line(fd);
 	}

@@ -5,37 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:56:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:56:11 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 17:12:43 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 17:12:43 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	handle_sp(t_gen *gen, char *line)
+int	handle_sp(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
-	int		i;
 
 	shape = malloc(sizeof(t_shape));
 	if (!shape)
 		return (0);
 	shape->shape = SPHERE;
 	i = next_elem(line, 0);
-	if (!valid_coords(line + i))
+	i = parse_coords(line, i, &shape->coords);
+	if (i == -1)
 		return (free(shape), 0);
-	ins_coords(line + i, &shape->coords);
-	if (!shape->coords.valid)
+	i = parse_double(line, i, &shape->diam);
+	if (i == -1)
 		return (free(shape), 0);
-	i = next_elem(line, i);
-	if (!(valid_double(line + i) && ft_atof(line + i) > 0))
+	i = parse_rgb(line, i, &shape->rgb);
+	if (i == -1)
 		return (free(shape), 0);
-	shape->diam = ft_atof(line + i);
-	i = next_elem(line, i);
-	if (!valid_rgb(line + i))
-		return (free(shape), 0);
-	ins_rgb(line + i, &shape->rgb);
-	i = next_elem(line, i);
 	if (line[i] && line[i] != '\n')
 		return (free(shape), 0);
 	gen->shapes = realloc_shape(gen->shapes, shape);
@@ -44,32 +38,26 @@ int	handle_sp(t_gen *gen, char *line)
 	return (1);
 }
 
-int	handle_pl(t_gen *gen, char *line)
+int	handle_pl(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
-	int		i;
 
 	shape = malloc(sizeof(t_shape));
 	if (!shape)
 		return (0);
 	shape->shape = PLANE;
 	i = next_elem(line, 0);
-	if (!valid_coords(line + i))
+	i = parse_coords(line, i, &shape->coords);
+	if (i == -1)
 		return (free(shape), 0);
-	ins_coords(line + i, &shape->coords);
-	if (!shape->coords.valid)
+	i = parse_coords(line, i, &shape->vector);
+	if (i == -1)
 		return (free(shape), 0);
-	i = next_elem(line, i);
-	if (!valid_coords(line + i))
-		return (0);
-	ins_coords(line + i, &shape->vector);
 	if (shape->vector.valid != 1)
-		return (0);
-	i = next_elem(line, i);
-	if (!valid_rgb(line + i))
 		return (free(shape), 0);
-	ins_rgb(line + i, &shape->rgb);
-	i = next_elem(line, i);
+	i = parse_rgb(line, i, &shape->rgb);
+	if (i == -1)
+		return (free(shape), 0);
 	if (line[i] && line[i] != '\n')
 		return (free(shape), 0);
 	gen->shapes = realloc_shape(gen->shapes, shape);
@@ -78,40 +66,39 @@ int	handle_pl(t_gen *gen, char *line)
 	return (1);
 }
 
-int	handle_cy(t_gen *gen, char *line)
+int	cy_helper(t_shape *shape, char *line, int i)
+{
+	i = parse_double(line, i, &shape->diam);
+	if (i == -1)
+		return (-1);
+	i = parse_double(line, i, &shape->height);
+	if (i == -1)
+		return (-1);
+	i = parse_rgb(line, i, &shape->rgb);
+	if (i == -1)
+		return (-1);
+	return (i);
+}
+
+int	handle_cy(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
-	int		i;
 
 	shape = malloc(sizeof(t_shape));
 	if (!shape)
 		return (0);
 	shape->shape = CYLINDER;
-	i = next_elem(line, 0);
-	if (!valid_coords(line + i))
+	i = parse_coords(line, next_elem(line, 0), &shape->coords);
+	if (i == -1)
 		return (free(shape), 0);
-	ins_coords(line + i, &shape->coords);
-	if (!shape->coords.valid)
+	i = parse_coords(line, i, &shape->vector);
+	if (i == -1)
 		return (free(shape), 0);
-	i = next_elem(line, i);
-	if (!valid_coords(line + i))
-		return (0);
-	ins_coords(line + i, &shape->vector);
-	if (gen->c->vector.valid != 1)
-		return (0);
-	i = next_elem(line, i);
-	if (!(valid_double(line + i) && ft_atof(line + i) > 0))
+	if (shape->vector.valid != 1)
 		return (free(shape), 0);
-	shape->diam = ft_atof(line + i);
-	i = next_elem(line, i);
-	if (!(valid_double(line + i) && ft_atof(line + i) > 0))
+	i = cy_helper(shape, line, i);
+	if (i == -1)
 		return (free(shape), 0);
-	shape->height = ft_atof(line + i);
-	i = next_elem(line, i);
-	if (!valid_rgb(line + i))
-		return (free(shape), 0);
-	ins_rgb(line + i, &shape->rgb);
-	i = next_elem(line, i);
 	if (line[i] && line[i] != '\n')
 		return (free(shape), 0);
 	gen->shapes = realloc_shape(gen->shapes, shape);

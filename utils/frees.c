@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:59:06 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:59:13 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 16:38:52 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 16:46:01 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int	free_strarr_str(char **tofree, char *strtofree, int i)
+{
+	free_strarr(tofree);
+	free(strtofree);
+	return (i);
+}
 
 int	free_strarr(char **tofree)
 {

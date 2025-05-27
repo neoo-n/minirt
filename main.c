@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handling.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:47:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:54:06 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 17:14:32 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 17:16:22 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include <stdio.h>
 
-int	main(int argc, char **argv)
+void	print_gen(t_gen	*gen)
 {
-	t_gen	*gen;
-	int		fd;
-	int		i;
+	int	i;
 
-	if (argc != 2)
-		return (print_error(NO_ARGS, 0, 0));
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (print_error(NO_FILE, 0, 0));
-	gen = parse_file(fd);
-	if (!gen)
-		return (-1);
 	printf("Ambient Lighting\nLighting Ratio: %f\nRGB: %d,%d,%d\n\n", gen->a->light, gen->a->rgb.r, gen->a->rgb.g, gen->a->rgb.b);
 	printf("Camera\nCoords: %f,%f,%f\nVector: %f,%f,%f\nFOV: %f\n\n", gen->c->coords.x, gen->c->coords.y, gen->c->coords.z, gen->c->vector.x, gen->c->vector.y, gen->c->vector.z, gen->c->fov);
 	printf("Light\nCoords: %f,%f,%f\nBrightness: %f\n", gen->l->coords.x, gen->l->coords.y, gen->l->coords.z, gen->l->bright);
@@ -45,5 +35,22 @@ int	main(int argc, char **argv)
 			printf("Vector: %f,%f,%f\n", gen->shapes[i]->vector.x, gen->shapes[i]->vector.y, gen->shapes[i]->vector.z);
 		printf("RGB: %d,%d,%d\n\n", gen->shapes[i]->rgb.r, gen->shapes[i]->rgb.g, gen->shapes[i]->rgb.b);
 		i++;
-	}
+	}	
+}
+
+int	main(int argc, char **argv)
+{
+	t_gen	*gen;
+	int		fd;
+
+	if (argc != 2)
+		return (print_error(NO_ARGS, 0, 0));
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (print_error(NO_FILE, 0, 0));
+	gen = parse_file(fd, 0);
+	if (!gen)
+		return (-1);
+	print_gen(gen);
+	return (0);
 }
