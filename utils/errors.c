@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:58:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:58:58 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/27 17:22:05 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/27 17:22:05 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_error(t_errmes mes, char *str, int i)
 	if (mes == NO_FILE)
 		ft_putstr_fd("Error\nFile not found\n", 2);
 	else if (mes == NO_ARGS)
-		ft_putstr_fd("Error\nNot enough arguments\n", 2);
+		ft_putstr_fd("Error\nIncorrect amount of arguments\n", 2);
 	else if (mes == PARSE_ERR)
 	{
 		ft_putstr_fd("Error\nParsing error on line: ", 2);

@@ -26,7 +26,7 @@ BLUE	:= \033[34m
 REPLACE := \033[9A\033[9K\033[A
 
 # Rules
-all:	${NAME} #header
+all:	${NAME} header
 
 header:
 	@for i in 1 2 3 4 5 ; do \
@@ -36,7 +36,7 @@ header:
 		echo "U|' \/ '|u   ___     | \ |\"|       ___   U |  _\"\ u  |_ \" _|  " ; \
 		echo "\| |\/| |/  |_\"_|   <|  \| |>     |_\"_|   \| |_) |/    | |    " ; \
 		echo " | |  | |    | |    U| |\  |u      | |     |  _ <     /| |\   " ; \
-		echo " |_|  |_|  U/| |\u   |_| \_|     U/| |\u   |_| \_\   u |_|U   " ; \
+		echo " |_|  |_|  U/| |\u   |_| \_|     U/| |\u   |_| \_\   u |_| U  " ; \
 		echo "<<,-,,-..-,_|___|_,-.||   "'\\'"\,-.-,_|___|_,-.//   "'\\'"\_  _// "'\\'"\_  " ; \
 		echo " (./  \.)\_)-' '-(_/ (_\")  (_/ \_)-' '-(_/(__)  (__)(__) (__) " ; \
 		echo "$(END)" ;	 \
@@ -85,4 +85,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re header
+good: fclean all clean
+	clear
+
+.PHONY: all clean fclean re header good
