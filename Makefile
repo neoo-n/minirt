@@ -85,7 +85,8 @@ fclean: clean
 
 re: fclean all
 
-good: fclean all clean
+good: fclean all
+	make clean
 	clear
 
 .PHONY: all clean fclean re header good
