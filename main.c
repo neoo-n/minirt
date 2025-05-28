@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:40:00 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 11:40:44 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/05/28 11:47:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int	main(int argc, char **argv)
 	close(fd);
 	if (!gen)
 		return (-1);
+	if (gen->a->light == -1 || gen->c->fov == -1 || gen->l->bright == -1)
+	{
+		free_gen(gen);
+		return (print_error(INCOMP_ELEM, 0, 0));
+	}
 	print_gen(gen);
 	free_gen(gen);
 	return (0);

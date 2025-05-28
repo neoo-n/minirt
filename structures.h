@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 10:47:37 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 10:47:37 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 11:49:50 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef enum e_errmes
 	NO_FILE,
 	NO_ARGS,
 	INVALID_EXT,
+	INCOMP_ELEM,
 	PARSE_ERR
 }	t_errmes;
 
