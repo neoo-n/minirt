@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:49:12 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:49:44 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 10:54:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 10:55:21 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	handle_a(t_gen *gen, char *line)
 	if (gen->a->light != -1)
 		return (0);
 	i = next_elem(line, 0);
-	if (!valid_ratio(line + i))
+	if (!(valid_ratio(line + i) && ft_atof(line + i) >= 0
+			&& ft_atof(line + i) <= 1))
 		return (0);
 	gen->a->light = ft_atof(line + i);
 	i = next_elem(line, i);

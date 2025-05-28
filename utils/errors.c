@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 17:22:05 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 17:22:05 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:26:48 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 11:26:48 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	print_error(t_errmes mes, char *str, int i)
 		ft_putstr_fd("Error\nFile not found\n", 2);
 	else if (mes == NO_ARGS)
 		ft_putstr_fd("Error\nIncorrect amount of arguments\n", 2);
+	else if (mes == INVALID_EXT)
+		ft_putstr_fd("Error\nInvalid file extension. Must be '.rt'\n", 2);
 	else if (mes == PARSE_ERR)
 	{
 		ft_putstr_fd("Error\nParsing error on line: ", 2);
@@ -31,4 +33,18 @@ int	print_error(t_errmes mes, char *str, int i)
 		free(num);
 	}
 	return (-1);
+}
+
+int	ext_check(char *argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	if (i < 3)
+		return (0);
+	if (argv[i - 3] != '.' || argv[i - 2] != 'r' || argv[i - 1] != 't')
+		return (0);
+	return (1);
 }

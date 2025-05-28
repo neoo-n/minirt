@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:38:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:38:59 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 10:47:56 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 10:47:56 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ double	ft_datoi(const char *nptr);
 char	*ft_itoa(int n);
 
 int		print_error(t_errmes mes, char *str, int i);
+int		ext_check(char *argv);
 
 void	free_gen(t_gen *gen);
 char	**free_strarr_char(char **tofree);

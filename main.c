@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 17:14:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 17:16:22 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:40:00 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 11:40:44 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ void	print_gen(t_gen	*gen)
 	}	
 }
 
+void	flush_buffer(int fd)
+{
+	char	*flush;
+
+	flush = get_next_line(fd);
+	while (flush)
+	{
+		free(flush);
+		flush = get_next_line(fd);
+	}
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
 	t_gen	*gen;
@@ -45,12 +58,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (print_error(NO_ARGS, 0, 0));
+	if (!ext_check(argv[1]))
+		return (print_error(INVALID_EXT, 0, 0));
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (print_error(NO_FILE, 0, 0));
 	gen = parse_file(fd, 0);
+	flush_buffer(fd);
+	close(fd);
 	if (!gen)
 		return (-1);
 	print_gen(gen);
+	free_gen(gen);
 	return (0);
 }

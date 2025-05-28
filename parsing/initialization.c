@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 17:08:35 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 17:08:35 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 11:38:36 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ t_gen	*parse_file(int fd, int i)
 	char	*line;
 	t_gen	*res;
 
-	line = get_next_line(fd);
 	res = init_gen();
 	if (!res)
 		return (0);
+	line = get_next_line(fd);
 	while (line)
 	{
 		i++;
@@ -85,6 +85,5 @@ t_gen	*parse_file(int fd, int i)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(fd);
 	return (res);
 }

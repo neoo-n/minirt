@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 11:30:46 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 11:30:46 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:31:36 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/05/28 11:32:48 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static char	*gen_new_buffer(char *buffer)
 	while (buffer[i])
 		newbuf[len++] = buffer[i++];
 	newbuf[len] = '\0';
-	free(buffer);
 	return (newbuf);
 }
 
@@ -94,6 +93,7 @@ char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*next_line;
+	char		*newbuf;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
@@ -104,8 +104,11 @@ char	*get_next_line(int fd)
 	if (!next_line)
 	{
 		free(buffer);
+		buffer = 0;
 		return (0);
 	}
-	buffer = gen_new_buffer(buffer);
+	newbuf = gen_new_buffer(buffer);
+	free(buffer);
+	buffer = newbuf;
 	return (next_line);
 }

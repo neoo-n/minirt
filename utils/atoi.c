@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:58:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:58:52 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/05/28 11:22:09 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ double	ft_atof(char *str)
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	if (str[i] == ' ')
+	if (str[i] != '.')
 		return (n1);
 	i++;
 	j = i;
