@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:31:10 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/05/29 14:47:40 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:47:30 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	creating_window()
 	t_vars		vars;
 
 	creating_all(&vars);
+	vars.epsilon = 1;
+	drawing(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);

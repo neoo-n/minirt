@@ -7,7 +7,7 @@ PARSING =	parsing/handle_shapes.c parsing/handling.c \
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
 			utils/split.c
-SRCS	=	main.c create_window.c $(GNL) $(PARSING) $(UTILS)
+SRCS	=	main.c create_window.c drawing.c my_mlx_pixel_put.c $(GNL) $(PARSING) $(UTILS)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
 CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
@@ -31,7 +31,7 @@ REPLACE := \033[9A\033[9K\033[A
 all:	${NAME} header
 
 header:
-	@for i in 1 2 3 4 5 ; do \
+	@for i in 1 ; do \
 		sleep 0.5 ; \
 		echo "$(L_PURPLE)"  ; \
 		echo "  __  __              _   _                 ____      _____   " ; \

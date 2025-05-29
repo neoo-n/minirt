@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/29 14:30:16 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:29:28 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_vars
 	t_dataimg	img;
 	t_win_size	win_sizes;
 	t_gen		*gen;
+	int			epsilon;
 }	t_vars;
 
 #endif
