@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 11:49:50 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/05/29 14:30:16 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,29 @@ typedef struct s_gen
 	t_light	*l;
 	t_shape	**shapes;
 }	t_gen;
+
+typedef struct s_dataimg
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_dataimg;
+
+typedef struct s_win_size
+{
+	int	x_len;
+	int	y_height;
+}	t_win_size;
+
+typedef struct s_vars
+{
+	void		*mlx;
+	void		*win;
+	t_dataimg	img;
+	t_win_size	win_sizes;
+	t_gen		*gen;
+}	t_vars;
 
 #endif

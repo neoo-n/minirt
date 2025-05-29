@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:40:00 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 11:47:03 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/05/29 14:43:07 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int argc, char **argv)
 		return (print_error(INCOMP_ELEM, 0, 0));
 	}
 	print_gen(gen);
+	creating_window();
 	free_gen(gen);
 	return (0);
 }

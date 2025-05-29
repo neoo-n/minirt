@@ -7,10 +7,12 @@ PARSING =	parsing/handle_shapes.c parsing/handling.c \
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
 			utils/split.c
-SRCS	=	main.c $(GNL) $(PARSING) $(UTILS)
+SRCS	=	main.c create_window.c $(GNL) $(PARSING) $(UTILS)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
-CFLAGS	=	-Werror -Wextra -Wall -I.
+CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
+MLX_FLAGS = -lmlx -lXext -lX11 -L./minilibx-linux -lm
+MLX 	= minilibx-linux/libmlx_Linux.a
 
 # Colors and style
 END		:= \033[0m
@@ -63,15 +65,19 @@ header:
 	@echo " (./  \.)\_)-' '-(_/ (_\")  (_/ \_)-' '-(_/(__)  (__)(__) (__) "
 	@echo "$(END)"
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} ${MLX}
 	@echo -n "${BLUE}"
-	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME}
+	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME} ${MLX_FLAGS}
 	@echo -n "${END}"
 
 %.o: %.c
 	@echo -n "${BLUE}"
 	${CC} ${CFLAGS} -c -o $@ $<
 	@echo -n "${END}"
+
+${MLX} :
+		cd minilibx-linux && ./configure
+		cd ..
 
 clean:
 	@echo -n "${RED}"
