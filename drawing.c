@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:40:38 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/05/29 16:45:10 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:53:47 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void	drawing(t_vars *vars)
 {
 	disc(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	camera(vars);
 }

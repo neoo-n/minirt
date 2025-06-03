@@ -6,12 +6,11 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:40:00 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/29 14:43:07 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:42:56 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <stdio.h>
 
 void	print_gen(t_gen	*gen)
 {
