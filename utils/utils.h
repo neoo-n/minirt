@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:47:56 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 10:47:56 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/05 16:02:18 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define UTILS_H
 # include "gnl/get_next_line.h"
 # include "../structures.h"
+# include <math.h>
+# define PI 3.14159265358979323846
+
+double	deg_to_rad(double angle);
 
 double	ft_atof(char *str);
 double	ft_datoi(const char *nptr);

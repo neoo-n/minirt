@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 14:31:10 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/03 10:55:39 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:34:57 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 20;
-	vars->win_sizes.y_height = 10;
+	vars->win_sizes.x_len = 1350;
+	vars->win_sizes.y_height = 980;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);

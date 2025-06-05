@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/29 16:29:28 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:21:55 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ typedef struct s_cam
 	t_coords	vector;
 	double		fov;
 }	t_cam;
+
+typedef struct s_cam_screen
+{
+	t_coords	vect_x;
+	t_coords	vect_y;
+	double		len_x;
+	double		len_y;
+	double		len_pix_x;
+	double		len_pix_y;
+	t_coords	p_mid;
+}	t_cam_screen;
 
 typedef struct s_light
 {

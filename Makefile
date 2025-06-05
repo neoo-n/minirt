@@ -6,8 +6,8 @@ PARSING =	parsing/handle_shapes.c parsing/handling.c \
 			parsing/handle_helper.c
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
-			utils/split.c
-SRCS	=	main.c create_window.c drawing.c my_mlx_pixel_put.c camera.c $(GNL) $(PARSING) $(UTILS)
+			utils/split.c utils/angle_calcul.c
+SRCS	=	main.c create_window.c drawing.c my_mlx_pixel_put.c camera.c vect.c $(GNL) $(PARSING) $(UTILS)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
 CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
