@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:05:06 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/29 16:42:16 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/03 10:42:54 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/03 10:44:09 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 
 void	drawing(t_vars *vars);
-void	creating_window();
+void	creating_window(void);
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 13:36:12 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/04 14:42:26 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/05 12:55:22 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/05 12:55:22 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,10 @@
 # include "../structures.h"
 # include "../minirt.h"
 
+double		plane_intersect(t_coords ray, t_coords origin, t_shape *plane);
+double		dot_prod(t_coords a, t_coords b);
+t_coords	vect_sub(t_coords	a, t_coords b);
+t_coords	vect_add(t_coords	a, t_coords b);
+t_coords	vect_mult(t_coords a, double mult);
 
 #endif
