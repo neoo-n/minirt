@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 14:33:39 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/09 15:31:38 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 15:31:42 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ typedef struct s_dataimg
 
 typedef struct s_win_size
 {
-	int	x_len;
-	int	y_height;
+	float	x_len;
+	float	y_height;
 }	t_win_size;
 
 typedef struct s_vars

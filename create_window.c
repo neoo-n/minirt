@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 15:12:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 15:12:26 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 16:15:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 16:15:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	creating_window()
 	t_vars		vars;
 
 	creating_all(&vars);
-	printf("heyy\n");
 	vars.epsilon = 1;
 	drawing(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);

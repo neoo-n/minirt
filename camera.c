@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 15:10:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 15:11:31 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 16:17:00 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 16:31:49 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,41 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 	return (vect_ij);
 }
 
+t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes)
+{
+	int		i;
+	int		j;
+	float	t;
+	float	ot;
+
+	i = 0;
+	ot = -1;
+	while (shapes[i])
+	{
+		if (shapes[i]->shape == CYLINDER)
+			t = cyl_intersect(ray, origin, shapes[i], 0);
+		if (shapes[i]->shape == SPHERE)
+			t = sphere_intersect(ray, origin, shapes[i]);
+		if (shapes[i]->shape == PLANE)
+			t = plane_intersect(ray, origin, shapes[i]);
+		if ((ot == -1 || t < ot) && t != -1)
+		{
+			j = i;
+			ot = t;
+		}
+		i++;
+	}
+	if (ot == -1)
+		return (0);
+	return (shapes[j]);
+}
+
 void	camera(t_vars *vars)
 {
 	int				i;
 	int				j;
-	t_coords 		vect;
+	t_shape			*shape;
+	t_coords		vect;
 	t_cam_screen	screen;
 
 	i = 0;
@@ -57,15 +87,11 @@ void	camera(t_vars *vars)
 		while (j < vars->win_sizes.y_height)
 		{
 			vect = camera_vect(vars, i, j, screen);
-			if (sphere_intersect(vect, vars->gen->c->coords, vars->gen->shapes[0]) >= 0)
-			{
-				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(vars->gen->shapes[0]->rgb));
-			}
-				//printf("vect(%f, %f, %f)\n", vect.x, vect.y, vect.z);
-			//void)vect;
+			shape = find_closest_shape(vect, vars->gen->c->coords, vars->gen->shapes);
+			if (shape)
+				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape->rgb));
 			j++;
 		}
 		i++;
 	}
-	printf("done\n");
 }

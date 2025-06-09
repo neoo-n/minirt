@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 15:05:47 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 15:08:52 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 15:20:15 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 15:21:02 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ double	sphere_intersect(t_coords ray, t_coords origin, t_shape *sphere)
 	delta = b * b - (4 * c);
 	if (delta > 0)
 	{
-		if ((-b + sqrt(delta)) / 2 < (-b - sqrt(delta)) / 2
-			&& (-b + sqrt(delta)) / 2 >= 0)
-		{
-			return ((-b + sqrt(delta)) / 2);
-		}
-		else if ((-b - sqrt(delta)) / 2 < (-b + sqrt(delta)) / 2
-			&& (-b - sqrt(delta)) / 2 >= 0)
+		if ((-b - sqrt(delta)) / 2 >= 0)
 		{
 			return ((-b - sqrt(delta)) / 2);
+		}
+		else if ((-b + sqrt(delta)) / 2 >= 0)
+		{
+			return ((-b + sqrt(delta)) / 2);
 		}
 	}
 	else if (delta == 0)
