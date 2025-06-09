@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:58 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/05 16:04:03 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:26:53 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	camera(t_vars *vars)
 		while (j < vars->win_sizes.y_height)
 		{
 			vect = camera_vect(vars, i, j, screen);
-			(void)vect;
 			printf("vect(%f, %f, %f)\n", vect.x, vect.y, vect.z);
+			(void)vect;
 			j++;
 		}
 		i++;
