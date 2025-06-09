@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:17:00 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:31:49 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/09 16:40:32 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_cam_screen	screen_calcul(t_vars *vars)
 {
 	t_cam_screen	screen;
 
-	screen.len_x = tan(deg_to_rad(vars->gen->c->fov / 2)) * 2;
+	screen.len_x = tan(deg_to_rad(vars->gen->c->fov / 2.0)) * 2.0;
 	screen.len_y = vars->win_sizes.y_height / vars->win_sizes.x_len * screen.len_x;
 	screen.len_pix_x = screen.len_x / vars->win_sizes.x_len;
 	screen.len_pix_y = screen.len_y / vars->win_sizes.y_height;

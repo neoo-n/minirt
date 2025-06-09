@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:15:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:15:03 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/09 16:42:49 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 1350;
-	vars->win_sizes.y_height = 980;
+	vars->win_sizes.x_len = 1350.0;
+	vars->win_sizes.y_height = 980.0;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);
@@ -73,12 +73,13 @@ static void	creating_all(t_vars *vars)
 			&(vars->img.endian));
 }
 
-void	creating_window()
+void	creating_window(t_gen *gen)
 {
 	t_vars		vars;
 
 	creating_all(&vars);
 	vars.epsilon = 1;
+	vars.gen = gen;
 	drawing(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
