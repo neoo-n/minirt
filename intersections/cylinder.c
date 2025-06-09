@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 12:56:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/05 13:17:11 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/09 14:06:32 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,3 +109,32 @@ double	cyl_intersect(t_coords ray, t_coords origin, t_shape *cyl, double t)
 	t = check_caps(ray, origin, cyl, t);
 	return (t);
 }
+
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	t_coords	ray;
+// 	t_coords	origin;
+// 	t_shape		cyl;
+
+// 	ray.x = 0.52;
+// 	ray.y = 0.38;
+// 	ray.z = 0.76;
+// 	origin.x = -2.87;
+// 	origin.y = 3.61;
+// 	origin.z = 0;
+// 	cyl.coords.x = 0.5;
+// 	cyl.coords.y = 5.5;
+// 	cyl.coords.z = 4.5;
+// 	cyl.vector.x = -0.19;
+// 	cyl.vector.y = 0.19;
+// 	cyl.vector.z = 0.96;
+// 	cyl.height = 5.2;
+// 	cyl.diam = 2;
+
+// 	if (cyl_intersect(ray, origin, &cyl, 0) >= 0)
+// 		printf("Intersect\n");
+// 	if (cyl_intersect(ray, origin, &cyl, 0) == -1)
+// 		printf("No Interesect\n");
+// }

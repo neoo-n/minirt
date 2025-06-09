@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 12:55:22 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/05 12:55:22 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 13:54:20 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 13:54:38 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define INTERSECTIONS_H
 # include "../structures.h"
 # include "../minirt.h"
+# include <math.h>
 
 double		plane_intersect(t_coords ray, t_coords origin, t_shape *plane);
 double		dot_prod(t_coords a, t_coords b);
