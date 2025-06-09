@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vect.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 14:39:30 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/05 15:31:28 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/09 14:35:30 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 14:35:30 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,4 @@ t_coords	vect_y(void)
 	v.y = 1.0;
 	v.z = 0.0;
 	return (v);
-}
-
-t_coords	vect_add(t_coords a, t_coords b, int i)
-{
-	t_coords	res;
-
-	res.x = a.x + (i * b.x);
-	res.y = a.y + (i * b.y);
-	res.z = a.z + (i * b.z);
-	return (res);
-}
-
-t_coords	vect_mult(t_coords a, double mult)
-{
-	t_coords	res;
-
-	res.x = a.x * mult;
-	res.y = a.y * mult;
-	res.z = a.z * mult;
-	return (res);
 }

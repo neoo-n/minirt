@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:40:38 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/03 10:53:47 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/09 14:47:43 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 15:01:27 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	get_rgb(t_rgb rgb)
+int	get_rgb(t_rgb rgb)
 {
 	return ((rgb.r << 16 | rgb.g << 8 | rgb.b));
 }
@@ -46,7 +46,7 @@ void	disc(t_vars *vars)
 
 void	drawing(t_vars *vars)
 {
-	disc(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	//disc(vars);
 	camera(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }

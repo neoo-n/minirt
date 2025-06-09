@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 14:31:10 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/05 15:34:57 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/09 15:12:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 15:12:26 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	creating_all(t_vars *vars)
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);
 	vars->win = mlx_new_window(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height, "FdF");
+			vars->win_sizes.y_height, "minirt");
 	if (!vars->win)
 		error_exit_vars(vars, "Error mlx win\n", 0);
 	vars->img.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
@@ -78,6 +78,7 @@ void	creating_window()
 	t_vars		vars;
 
 	creating_all(&vars);
+	printf("heyy\n");
 	vars.epsilon = 1;
 	drawing(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 14:38:58 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/09 14:26:53 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/09 15:10:11 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 15:11:31 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "intersections/intersections.h"
 
 static t_cam_screen	screen_calcul(t_vars *vars)
 {
@@ -22,7 +23,7 @@ static t_cam_screen	screen_calcul(t_vars *vars)
 	screen.len_pix_y = screen.len_y / vars->win_sizes.y_height;
 	screen.vect_x = vect_normalised(vect_cross(vect_y(), vars->gen->c->vector));
 	screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector, screen.vect_x));
-	screen.p_mid = vect_add(vars->gen->c->vector, vars->gen->c->coords, 1);
+	screen.p_mid = vect_add(vars->gen->c->vector, vars->gen->c->coords);
 	return (screen);
 }
 
@@ -34,9 +35,9 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 
 	p_ij = vect_mult(screen.vect_x, (i * screen.len_pix_x) - (screen.len_x / 2));
 	temp = vect_mult(screen.vect_y, (j * screen.len_pix_y) - (screen.len_y / 2));
-	p_ij = vect_add(p_ij, temp, 1);
-	p_ij = vect_add(p_ij, screen.p_mid, 1);
-	vect_ij = vect_add(p_ij, vars->gen->c->coords, -1);
+	p_ij = vect_add(p_ij, temp);
+	p_ij = vect_add(p_ij, screen.p_mid);
+	vect_ij = vect_sub(p_ij, vars->gen->c->coords);
 	vect_ij = vect_normalised(vect_ij);
 	return (vect_ij);
 }
@@ -56,10 +57,15 @@ void	camera(t_vars *vars)
 		while (j < vars->win_sizes.y_height)
 		{
 			vect = camera_vect(vars, i, j, screen);
-			printf("vect(%f, %f, %f)\n", vect.x, vect.y, vect.z);
-			(void)vect;
+			if (sphere_intersect(vect, vars->gen->c->coords, vars->gen->shapes[0]) >= 0)
+			{
+				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(vars->gen->shapes[0]->rgb));
+			}
+				//printf("vect(%f, %f, %f)\n", vect.x, vect.y, vect.z);
+			//void)vect;
 			j++;
 		}
 		i++;
 	}
+	printf("done\n");
 }
