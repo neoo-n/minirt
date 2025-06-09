@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:17:00 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:40:32 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:51:39 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void	camera(t_vars *vars)
 		}
 		i++;
 	}
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }

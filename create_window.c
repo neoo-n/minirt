@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:15:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:42:49 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:51:49 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	creating_window(t_gen *gen)
 	creating_all(&vars);
 	vars.epsilon = 1;
 	vars.gen = gen;
-	drawing(&vars);
+	camera(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);

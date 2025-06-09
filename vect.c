@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   vect.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:35:30 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 14:35:30 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/09 16:50:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	get_rgb(t_rgb rgb)
+{
+	return ((rgb.r << 16 | rgb.g << 8 | rgb.b));
+}
 
 double	vect_norm(t_coords v)
 {
