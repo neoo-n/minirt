@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 10:47:56 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 10:47:56 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 13:52:45 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 13:53:18 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-# include "gnl/get_next_line.h"
+# include <stddef.h>
+//# include "gnl/get_next_line.h"
 # include "../structures.h"
 
 double	ft_atof(char *str);

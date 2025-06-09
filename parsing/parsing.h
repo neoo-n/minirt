@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:55:57 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:55:57 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 13:52:25 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 13:52:25 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
 # include "../structures.h"
-# include "../gnl/get_next_line.h"
+//# include "../gnl/get_next_line.h"
 # include "../utils/utils.h"
 
 int		parse_coords(char *line, int i, t_coords *coords);
