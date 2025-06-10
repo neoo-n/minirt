@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 09:51:09 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 09:51:57 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/10 13:25:35 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:25:35 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "intersections.h"
+#include "vector.h"
 
 double	dot_prod(t_coords a, t_coords b)
 {

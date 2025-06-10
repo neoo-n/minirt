@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 16:15:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:51:49 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/10 13:26:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:26:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "camera.h"
 
 static int	mouse_closing(t_vars *vars)
 {

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.h                                    :+:      :+:    :+:   */
+/*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:29:43 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:29:43 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/10 13:19:04 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:19:04 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERSECTIONS_H
-# define INTERSECTIONS_H
-# include "../structures.h"
-# include "../minirt.h"
+#include "camera.h"
 
-double		sphere_intersect(t_coords ray, t_coords origin, t_shape *sphere);
-double		plane_intersect(t_coords ray, t_coords origin, t_shape *plane);
-double		cyl_intersect(t_coords ray, t_coords origin,
-				t_shape *cyl, double t);
-
-#endif
+int	get_rgb(t_rgb rgb, t_gen *gen)
+{
+	(void) gen;
+	return (rgb.r << 16 | rgb.g << 8 | rgb.b);
+}
