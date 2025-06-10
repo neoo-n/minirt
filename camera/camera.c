@@ -94,7 +94,7 @@ void	camera(t_vars *vars)
 					vars->gen->shapes);
 			if (shape)
 				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape,
-						vars->gen));
+						vars->gen, vect, vars->gen->c->coords));
 			j++;
 		}
 		i++;
