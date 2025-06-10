@@ -5,15 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:19:04 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:19:04 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/10 13:52:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:52:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-int	get_rgb(t_rgb rgb, t_gen *gen)
+double	calc_dif_int(t_shape *shape, t_gen *gen)
 {
-	(void) gen;
-	return (rgb.r << 16 | rgb.g << 8 | rgb.b);
+	
+}
+
+int	get_rgb(t_shape *shape, t_gen *gen)
+{
+	double	dif_int;
+
+	dif_int = calc_dif_int(shape, gen);
+	return (shape->rgb.r << 16 | shape->rgb.g << 8 | shape->rgb.b);
 }

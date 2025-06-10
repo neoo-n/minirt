@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:28:26 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:29:17 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/10 13:51:28 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:51:28 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes)
 	while (shapes[i])
 	{
 		if (shapes[i]->shape == CYLINDER)
-			t = cyl_intersect(ray, origin, shapes[i], 0);
+			shapes[i]->t = cyl_intersect(ray, origin, shapes[i], 0);
 		if (shapes[i]->shape == SPHERE)
-			t = sphere_intersect(ray, origin, shapes[i]);
+			shapes[i]->t = sphere_intersect(ray, origin, shapes[i]);
 		if (shapes[i]->shape == PLANE)
-			t = plane_intersect(ray, origin, shapes[i]);
-		if ((ot == -1 || t < ot) && t != -1)
+			shapes[i]->t = plane_intersect(ray, origin, shapes[i]);
+		if ((ot == -1 || t < ot) && shapes[i]->t != -1)
 		{
 			j = i;
-			ot = t;
+			ot = shapes[i]->t;
 		}
 		i++;
 	}
@@ -93,7 +93,7 @@ void	camera(t_vars *vars)
 			shape = find_closest_shape(vect, vars->gen->c->coords,
 					vars->gen->shapes);
 			if (shape)
-				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape->rgb,
+				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape,
 						vars->gen));
 			j++;
 		}
