@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:28:26 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:29:17 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/11 14:27:02 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	camera(t_vars *vars)
 			shape = find_closest_shape(vect, vars->gen->c->coords,
 					vars->gen->shapes);
 			if (shape)
-				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape->rgb,
-						vars->gen));
+				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(specular(vars,
+					vect, shape), vars->gen));
 			j++;
 		}
 		i++;

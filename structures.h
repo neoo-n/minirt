@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:31:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 15:31:42 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/11 13:34:10 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_shape
 	t_coords	coords;
 	double		diam;
 	double		height;
+	double		t;
 	t_coords	vector;
 	t_rgb		rgb;
 }	t_shape;
