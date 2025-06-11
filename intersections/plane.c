@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 13:50:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 13:50:34 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/11 15:50:25 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/11 15:50:25 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
 	else
 		return (val / mult);
 }
+
 
 // #include <stdio.h>
 

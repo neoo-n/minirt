@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 13:45:30 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/11 13:45:43 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/11 15:39:05 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/11 15:39:12 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ double	calc_dif_int(t_shape *shape, t_gen *gen, t_coords ray, t_coords origin)
 		}
 	}
 	angle = dot_prod(n, light_dir);
+	if (shape->shape == PLANE)
+		return (fabs(angle * gen->l->bright));
 	if (angle <= 0)
 		return (0);
 	return (angle * gen->l->bright);

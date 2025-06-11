@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 10:18:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/11 10:18:34 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/11 15:39:43 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/11 15:44:58 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_s
 	float	ot;
 
 	i = 0;
-	ot = -1;
+	j = -1;
+	ot = INFINITY;
 	while (shapes[i])
 	{
 		if (shapes[i] == check_shape)
@@ -66,14 +67,14 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_s
 			shapes[i]->t = sphere_intersect(ray, origin, shapes[i]);
 		if (shapes[i]->shape == PLANE)
 			shapes[i]->t = plane_intersect(ray, origin, shapes[i]);
-		if ((ot == -1 || shapes[i]->t < ot) && shapes[i]->t != -1)
+		if (shapes[i]->t >= 0 && shapes[i]->t < ot)
 		{
 			j = i;
 			ot = shapes[i]->t;
 		}
 		i++;
 	}
-	if (ot == -1)
+	if (ot == -1 || j == -1)
 		return (0);
 	return (shapes[j]);
 }
