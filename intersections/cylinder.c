@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/05 12:56:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 14:06:32 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/11 11:37:01 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/11 11:38:17 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,30 @@ double	check_caps(t_coords ray, t_coords origin, t_shape *cyl, double t)
 {
 	t_shape		top;
 	t_shape		bottom;
+	double		top_intersect;
+	double		bottom_intersect;
 
 	top.coords = vect_add(cyl->coords, vect_mult(cyl->vector, cyl->height / 2));
 	top.vector = cyl->vector;
+	top_intersect = plane_intersect(ray, origin, &top);
 	bottom.coords = vect_sub(cyl->coords,
 			vect_mult(cyl->vector, cyl->height / 2));
 	bottom.vector = cyl->vector;
-	if (plane_intersect(ray, origin, &top) > 0)
+	bottom_intersect = plane_intersect(ray, origin, &bottom);
+	if (top_intersect > 1e-6)
 	{
 		if (inter_dist(ray, origin, top) <= pow(cyl->diam / 2, 2))
 		{
-			if (plane_intersect(ray, origin, &top) < t || t == -1)
-				t = plane_intersect(ray, origin, &top);
+			if (top_intersect < t || t == -1)
+				t = top_intersect;
 		}
 	}
-	if (plane_intersect(ray, origin, &bottom) > 0)
+	if (bottom_intersect > 1e-6)
 	{
 		if (inter_dist(ray, origin, bottom) <= pow(cyl->diam / 2, 2))
 		{
-			if (plane_intersect(ray, origin, &bottom) < t || t == -1)
-				t = plane_intersect(ray, origin, &bottom);
+			if (bottom_intersect < t || t == -1)
+				t = bottom_intersect;
 		}
 	}
 	return (t);
@@ -94,6 +98,7 @@ double	cyl_intersect(t_coords ray, t_coords origin, t_shape *cyl, double t)
 	t_coords	p;
 	double		dist;
 
+	cyl->vector = vect_normalised(cyl->vector);
 	m = vect_sub(origin, cyl->coords);
 	b = vect_sub(m, vect_mult(cyl->vector, dot_prod(m, cyl->vector)));
 	a = vect_sub(ray, vect_mult(cyl->vector, dot_prod(ray, cyl->vector)));

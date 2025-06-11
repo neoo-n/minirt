@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:51:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:51:28 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/11 10:18:34 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/11 10:18:34 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,28 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 	return (vect_ij);
 }
 
-t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes)
+t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_shape *check_shape)
 {
 	int		i;
 	int		j;
-	float	t;
 	float	ot;
 
 	i = 0;
 	ot = -1;
 	while (shapes[i])
 	{
+		if (shapes[i] == check_shape)
+		{
+			i++;
+			continue ;
+		}
 		if (shapes[i]->shape == CYLINDER)
 			shapes[i]->t = cyl_intersect(ray, origin, shapes[i], 0);
 		if (shapes[i]->shape == SPHERE)
 			shapes[i]->t = sphere_intersect(ray, origin, shapes[i]);
 		if (shapes[i]->shape == PLANE)
 			shapes[i]->t = plane_intersect(ray, origin, shapes[i]);
-		if ((ot == -1 || t < ot) && shapes[i]->t != -1)
+		if ((ot == -1 || shapes[i]->t < ot) && shapes[i]->t != -1)
 		{
 			j = i;
 			ot = shapes[i]->t;
@@ -91,7 +95,7 @@ void	camera(t_vars *vars)
 		{
 			vect = camera_vect(vars, i, j, screen);
 			shape = find_closest_shape(vect, vars->gen->c->coords,
-					vars->gen->shapes);
+					vars->gen->shapes, 0);
 			if (shape)
 				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape,
 						vars->gen, vect, vars->gen->c->coords));
