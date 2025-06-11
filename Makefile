@@ -19,7 +19,7 @@ CAM		=	camera/camera.c camera/create_window.c \
 
 VECT	=	vector/vector.c vector/vector_ops.c
 
-SRCS	=	main.c $(GNL) $(PARSING) $(UTILS) $(INTER) $(CAM) $(VECT)
+SRCS	=	main.c specular.c $(GNL) $(PARSING) $(UTILS) $(INTER) $(CAM) $(VECT)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
 CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
