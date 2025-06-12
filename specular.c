@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 11:45:55 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/12 14:09:25 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/12 14:28:13 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,25 @@ static t_coords	calc_norm(t_shape *shape, t_coords ray, t_coords origin)
 
 static t_coords	refl_vect(t_vars *vars, t_coords vision, t_shape *shape)
 {
+	t_coords	norm;
 	t_coords	light;
 	t_coords	refl_v;
 
+	norm = calc_norm(shape, vision, vars->gen->c->coords);
 	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(vision, shape->t)), vars->gen->l->coords));
-	// refl_v = vect_normalised(vect_sub(vect_mult(norm, 2 * dot_prod(light, norm)), light));
-	refl_v = vect_normalised(vect_add(light, vision));
+	refl_v = vect_normalised(vect_sub(vect_mult(norm, 2 * dot_prod(light, norm)), light));
 	return (refl_v);
 }
 
 t_rgb	specular(t_vars *vars, t_coords vision, t_shape *shape)
 {
-	t_coords	norm;
 	t_coords	refl;
 	double		prod_HN;
 	double		spec;
 	t_rgb		color;
 
-	norm = calc_norm(shape, vision, vars->gen->l->coords);
 	refl = refl_vect(vars, vision, shape);
-	prod_HN = dot_prod(refl, norm);
+	prod_HN = dot_prod(refl, vision);
 	if (prod_HN > 0)
 	{
 		spec = pow(prod_HN, vars->gen->l->bright);
