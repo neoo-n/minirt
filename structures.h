@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:49:53 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:49:53 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/12 14:57:10 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/12 14:57:10 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_coords
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
+	double	r;
+	double	g;
+	double	b;
 }	t_rgb;
 
 typedef struct s_amb
