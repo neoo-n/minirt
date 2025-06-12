@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 11:52:12 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 11:52:12 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/12 16:43:46 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_cam_screen	screen_calcul(t_vars *vars)
 	screen.vect_x = vect_normalised(vect_cross(vect_y(), vars->gen->c->vector));
 	screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector,
 				screen.vect_x));
+	screen.vect_y = vect_mult(screen.vect_y, -1);
 	screen.vect_y = vect_mult(screen.vect_y, -1);
 	screen.p_mid = vect_add(vars->gen->c->vector, vars->gen->c->coords);
 	return (screen);
