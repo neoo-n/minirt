@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 11:45:55 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/11 16:21:32 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:38:26 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static t_coords	refl_vect(t_vars *vars, t_coords vision, t_shape *shape)
 	t_coords	refl_v;
 
 	norm = calc_norm(shape, vision, vars->gen->l->coords);
-	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords,
-		vect_mult(vision, shape->t)), vars->gen->l->coords));
+	light = vect_normalised(vect_add(vars->gen->c->coords, vect_mult(vision, shape->t)));
+	light = vect_normalised(vect_sub(light, vars->gen->l->coords));
 	refl_v = vect_normalised(vect_sub(vect_mult(norm, 2 * dot_prod(light, norm)), light));
 	return (refl_v);
 }
@@ -69,13 +69,10 @@ t_rgb	specular(t_vars *vars, t_coords vision, t_shape *shape)
 		printf("\n --------------------------------------- \n");
 		printf("spec : %f\n", spec);
 		color.r = vars->gen->l->rgb.r * spec;
-		color.r *= shape->rgb.r;
 		printf("red : %d, %d\n", vars->gen->l->rgb.r, color.r);
 		color.g = vars->gen->l->rgb.g * spec;
-		color.g *= shape->rgb.g;
 		printf("green: %d, %d\n", vars->gen->l->rgb.g, color.g);
 		color.b = vars->gen->l->rgb.b * spec;
-		color.b *= shape->rgb.b;
 		printf("blue: %d, %d\n", vars->gen->l->rgb.b, color.b);
 	}
 	else
