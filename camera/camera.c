@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 15:39:43 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/11 15:44:58 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/12 11:52:12 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/12 11:52:12 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_cam_screen	screen_calcul(t_vars *vars)
 	screen.vect_x = vect_normalised(vect_cross(vect_y(), vars->gen->c->vector));
 	screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector,
 				screen.vect_x));
+	screen.vect_y = vect_mult(screen.vect_y, -1);
 	screen.p_mid = vect_add(vars->gen->c->vector, vars->gen->c->coords);
 	return (screen);
 }
@@ -52,8 +53,8 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_s
 	float	ot;
 
 	i = 0;
+	ot = -1;
 	j = -1;
-	ot = INFINITY;
 	while (shapes[i])
 	{
 		if (shapes[i] == check_shape)
@@ -67,7 +68,7 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_s
 			shapes[i]->t = sphere_intersect(ray, origin, shapes[i]);
 		if (shapes[i]->shape == PLANE)
 			shapes[i]->t = plane_intersect(ray, origin, shapes[i]);
-		if (shapes[i]->t >= 0 && shapes[i]->t < ot)
+		if ((ot == -1 || shapes[i]->t < ot) && shapes[i]->t != -1)
 		{
 			j = i;
 			ot = shapes[i]->t;
@@ -99,7 +100,7 @@ void	camera(t_vars *vars)
 					vars->gen->shapes, 0);
 			if (shape)
 				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape,
-						vars->gen, vect, vars->gen->c->coords));
+						vars->gen, vect, vars->gen->c->coords, vars));
 			j++;
 		}
 		i++;

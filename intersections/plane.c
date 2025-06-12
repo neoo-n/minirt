@@ -5,33 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 15:50:25 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/11 15:50:25 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/12 11:30:02 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/12 11:31:06 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "intersections.h"
 
-double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
+double plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
 {
-	double	x;
-	double	y;
-	double	z;
-	double	val;
-	double	mult;
+    double denom;
+    t_coords diff;
+    double numerator;
 
-	x = plane->vector.x * origin.x - plane->vector.x * plane->coords.x;
-	y = plane->vector.y * origin.y - plane->vector.y * plane->coords.y;
-	z = plane->vector.z * origin.z - plane->vector.z * plane->coords.z;
-	val = -(x + y + z);
-	mult = dot_prod(plane->vector, ray);
-	if (mult == 0 && val == 0)
-		return (0);
-	else if (mult == 0)
-		return (-1);
-	else
-		return (val / mult);
+    denom = dot_prod(plane->vector, ray);
+    if (fabs(denom) < 1e-6)
+        return (-1); // Ray is parallel to the plane
+
+    diff = vect_sub(plane->coords, origin);
+    numerator = dot_prod(diff, plane->vector);
+    return (fabs(numerator/denom));
 }
+
 
 
 // #include <stdio.h>
