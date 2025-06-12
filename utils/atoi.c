@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/12 16:44:01 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:57:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,14 @@ double	ft_atof(char *str)
 	double	n1;
 	double	n2;
 	int		neg;
-	int		neg;
 
 	n1 = ft_datoi(str);
 	i = 0;
 	neg = 1;
-	neg = 1;
 	if (str[i] == '-')
 	{
 		neg = -1;
-	{
-		neg = -1;
 		i++;
-	}
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
@@ -113,7 +108,6 @@ double	ft_atof(char *str)
 	n2 = ft_datoi(str + i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	if (neg == 1)
 	if (neg == 1)
 		n1 = n1 + (n2 / (pow(10, i - j)));
 	else

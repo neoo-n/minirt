@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:57:25 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 16:42:46 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:56:34 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	main(int argc, char **argv)
 		free_gen(gen);
 		return (print_error(INCOMP_ELEM, 0, 0));
 	}
-	print_gen(gen);
 	creating_window(gen);
 	free_gen(gen);
 	return (0);
