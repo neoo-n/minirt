@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 11:52:12 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 16:59:51 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/13 11:49:22 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/13 14:53:19 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 	return (vect_ij);
 }
 
-t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_shape *check_shape)
+t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_shape *check_shape)
 {
 	int		i;
-	int		j;
-	float	ot;
+	t_inter	result;
+	t_inter	temp;
 
 	i = 0;
-	ot = -1;
-	j = -1;
+	result.shape = 0;
+	result.t = -1;
 	while (shapes[i])
 	{
 		if (shapes[i] == check_shape)
@@ -62,31 +62,33 @@ t_shape	*find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_s
 			i++;
 			continue ;
 		}
+		temp.shape = shapes[i];
 		if (shapes[i]->shape == CYLINDER)
-			shapes[i]->t = cyl_intersect(ray, origin, shapes[i], 0);
+			temp.t = cyl_intersect(ray, origin, shapes[i], 0);
 		if (shapes[i]->shape == SPHERE)
-			shapes[i]->t = sphere_intersect(ray, origin, shapes[i]);
+			temp.t = sphere_intersect(ray, origin, shapes[i]);
 		if (shapes[i]->shape == PLANE)
-			shapes[i]->t = plane_intersect(ray, origin, shapes[i]);
-		if ((ot == -1 || shapes[i]->t < ot) && shapes[i]->t != -1)
-		{
-			j = i;
-			ot = shapes[i]->t;
-		}
+			temp.t = plane_intersect(ray, origin, shapes[i]);
+		if (temp.t > 0 && (result.t == -1 || temp.t < result.t))
+			result = temp;
 		i++;
 	}
-	if (ot == -1 || j == -1)
-		return (0);
-	return (shapes[j]);
+	if (result.shape)
+	{
+		result.point = vect_add(origin, vect_mult(ray, result.t));
+		result.normal = calc_norm(result, ray);
+	}
+	return (result);
 }
 
 void	camera(t_vars *vars)
 {
 	int				i;
 	int				j;
-	t_shape			*shape;
+	t_inter			shape;
 	t_coords		vect;
 	t_cam_screen	screen;
+	int				rgb;
 
 	i = 0;
 	screen = screen_calcul(vars);
@@ -98,9 +100,12 @@ void	camera(t_vars *vars)
 			vect = camera_vect(vars, i, j, screen);
 			shape = find_closest_shape(vect, vars->gen->c->coords,
 					vars->gen->shapes, 0);
-			if (shape)
-				my_mlx_pixel_put(&(vars->img), i, j, get_rgb(shape,
-						vars->gen, vect, vars->gen->c->coords, vars));
+			if (shape.shape)
+			{
+				if (j % 1 == 0 && i % 1 == 0)
+					rgb = get_rgb(shape, vars->gen, vars);
+				my_mlx_pixel_put(&(vars->img), i, j, rgb);
+			}
 			j++;
 		}
 		i++;

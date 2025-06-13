@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 14:57:10 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 16:56:21 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/13 14:52:56 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,17 @@ typedef struct s_shape
 	t_coords	coords;
 	double		diam;
 	double		height;
-	double		t;
 	t_coords	vector;
 	t_rgb		rgb;
 }	t_shape;
+
+typedef struct s_inter
+{
+	t_shape		*shape;
+	double		t;
+	t_coords	point;
+	t_coords	normal;
+}	t_inter;
 
 typedef struct s_gen
 {
