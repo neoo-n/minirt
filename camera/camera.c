@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:49:22 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:53:19 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:58:54 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_sh
 	{
 		result.point = vect_add(origin, vect_mult(ray, result.t));
 		result.normal = calc_norm(result, ray);
+		result.ray = ray;
 	}
 	return (result);
 }

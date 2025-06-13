@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 11:45:55 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/12 14:28:13 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:04:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static t_coords	refl_vect(t_vars *vars, t_coords vision, t_shape *shape)
 t_rgb	specular(t_vars *vars, t_coords vision, t_shape *shape)
 {
 	t_coords	refl;
-	double		prod_HN;
+	double		prod_RV;
 	double		spec;
 	t_rgb		color;
 
 	refl = refl_vect(vars, vision, shape);
-	prod_HN = dot_prod(refl, vision);
-	if (prod_HN > 0)
+	prod_RV = dot_prod(refl, vision);
+	if (prod_RV > 0)
 	{
-		spec = pow(prod_HN, vars->gen->l->bright);
+		spec = pow(prod_RV, vars->gen->l->bright);
 		printf("\n --------------------------------------- \n");
 		printf("spec : %f\n", spec);
 		color.r = vars->gen->l->rgb.r * spec;

@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:52:56 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:58:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_inter
 	double		t;
 	t_coords	point;
 	t_coords	normal;
+	t_coords	ray;
 }	t_inter;
 
 typedef struct s_gen

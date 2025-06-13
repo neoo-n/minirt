@@ -6,10 +6,8 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:11:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:54:20 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:04:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #include "camera.h"
@@ -94,67 +92,29 @@ double	calc_dif_int(t_inter shape, t_gen *gen)
 	return (angle * gen->l->bright);
 }
 
-// static t_coords	refl_vect(t_vars *vars, t_coords vision, t_inter shape)
-// {
-// 	t_coords	norm;
-// 	t_coords	light;
-// 	t_coords	refl_v;
-static t_coords	refl_vect(t_vars *vars, t_coords ray, t_shape *shape)
+static t_coords	refl_vect(t_vars *vars, t_inter shape)
 {
-	t_coords	norm;
 	t_coords	light;
 	t_coords	refl_v;
 
-// 	norm = calc_norm(shape, vision, vars->gen->c->coords);
-// 	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(vision, shape->t)), vars->gen->l->coords));
-// 	refl_v = vect_normalised(vect_sub(vect_mult(norm, 2 * dot_prod(light, norm)), light));
-// 	return (refl_v);
-// }
-	norm = calc_norm(shape, ray, vars->gen->c->coords);
-	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(ray, shape->t)), vars->gen->l->coords));
-	refl_v = vect_normalised(vect_sub(vect_mult(norm, 2 * dot_prod(light, norm)), light));
+	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
+	refl_v = vect_normalised(vect_sub(vect_mult(shape.normal, 2 * dot_prod(light, shape.normal)), light));
 	return (refl_v);
 }
 
-// t_rgb	specular(t_vars *vars, t_coords vision, t_shape *shape)
-// {
-// 	t_coords	refl;
-// 	double		prod_HN;
-// 	double		spec;
-// 	t_rgb		color;
-double	specular(t_vars *vars, t_coords ray, t_shape *shape)
+double	specular(t_vars *vars, t_inter shape)
 {
 	t_coords	refl;
-	double		prod_HN;
+	double		prod_RV;
 	double		spec;
 	// t_rgb		color;
 
-// 	refl = refl_vect(vars, vision, shape);
-// 	prod_HN = dot_prod(refl, vision);
-// 	if (prod_HN > 0)
-// 	{
-// 		spec = pow(prod_HN, vars->gen->l->bright);
-// 		if (spec > 1)
-// 			spec = 1;
-// 		//printf("\n --------------------------------------- \n");
-// 		//("spec : %f\n", spec);
-// 		color.r = vars->gen->l->rgb.r * spec;
-// 		//printf("red : %d, %d\n", vars->gen->l->rgb.r, color.r);
-// 		color.g = vars->gen->l->rgb.g * spec;
-// 		//printf("green: %d, %d\n", vars->gen->l->rgb.g, color.g);
-// 		color.b = vars->gen->l->rgb.b * spec;
-// 		//printf("blue: %d, %d\n", vars->gen->l->rgb.b, color.b);
-// 	}
-// 	else
-// 		spec = 0;
-// 	return (color);
-// }
-	refl = refl_vect(vars, ray, shape);
-	prod_HN = dot_prod(refl, ray);
-	if (prod_HN > 0)
+	refl = refl_vect(vars, shape);
+	prod_RV = dot_prod(refl, shape.ray);
+	if (prod_RV > 0)
 	{
-		spec = pow(prod_HN, vars->gen->l->bright);
-		printf("refl_v : (%f, %f, %f), prod_HN : %f, spec : %f\n", refl.x, refl.y, refl.z, prod_HN, spec);
+		spec = pow(prod_RV, vars->gen->l->bright);
+		printf("refl_v : (%f, %f, %f), prod_RV : %f, spec : %f\n", refl.x, refl.y, refl.z, prod_RV, spec);
 		if (spec > 1)
 			spec = 1;
 		//printf("\n --------------------------------------- \n");
@@ -188,9 +148,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	t_rgb	amb_light;
 
 	dif_int = calc_dif_int(shape, gen);
-	(void) vars;
-	dif_int = calc_dif_int(shape, gen, ray, origin);
-	spec = specular(vars, ray, shape);
+	spec = specular(vars, shape);
 	// dif_int = 0;
 	// gen->a->light = 0;
 	if (in_shade(shape, gen))
@@ -206,6 +164,5 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	amb_light.r =  amb_light.r * gen->a->light;
 	amb_light.g =  amb_light.g * gen->a->light;
 	amb_light.b =  amb_light.b * gen->a->light;
-	return ((int)(shape.shape->rgb.r * fmin(dif_light.r + amb_light.r, 1)) << 16 | (int)(shape.shape->rgb.g * fmin(dif_light.g + amb_light.g, 1)) << 8 | (int)(shape.shape->rgb.b * fmin(dif_light.b + amb_light.b, 1)));
-	return ((int)(shape->rgb.r * fmin(dif_light.r + amb_light.r + spec_light.r, 1)) << 16 | (int)(shape->rgb.g * fmin(dif_light.g + amb_light.g + spec_light.g, 1)) << 8 | (int)(shape->rgb.b * fmin(dif_light.b + amb_light.b + spec_light.b, 1)));
+	return ((int)(shape.shape->rgb.r * fmin(dif_light.r + amb_light.r + spec_light.r, 1)) << 16 | (int)(shape.shape->rgb.g * fmin(dif_light.g + amb_light.g + spec_light.g, 1)) << 8 | (int)(shape.shape->rgb.b * fmin(dif_light.b + amb_light.b + spec_light.b, 1)));
 }
