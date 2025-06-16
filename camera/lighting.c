@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 12:42:37 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 12:50:11 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 13:09:21 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 13:09:25 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ double	specular(t_vars *vars, t_inter shape)
 	prod_RV = dot_prod(refl, shape.ray);
 	if (prod_RV > 0)
 	{
-		spec = pow(prod_RV , 50);
+		spec = pow(prod_RV , 25);
 		//if (shape.shape->shape != CYLINDER && spec > 1e-6)
 			//printf("refl_v : (%f, %f, %f), prod_RV : %f, spec : %f\n", refl.x, refl.y, refl.z, prod_RV, spec);
 		//if (spec > 1)
