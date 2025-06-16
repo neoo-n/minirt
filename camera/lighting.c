@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 15:08:57 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:09:02 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 15:51:34 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 15:51:40 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 	if (shape.shape->shape == PLANE)
 	{
 		n = shape.shape->vector;
-		if (dot_prod(n, ray) > 0)
-			n = vect_mult(n, -1);
 		return (n);
 	}
-	if (shape.shape->shape == SPHERE)
+	else if (shape.shape->shape == SPHERE)
 		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
-	if (shape.shape->shape == CYLINDER)
+	else if (shape.shape->shape == CYLINDER)
 		n = cyl_n(shape);
+	if (dot_prod(n, ray) > 0)
+		n = vect_mult(n, -1);
 	return (n);
 }
 
