@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 11:55:20 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 12:38:34 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 12:42:37 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 12:42:37 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	in_shade(t_inter shape, t_gen *gen)
 	double		dist;
 	double 		shape_dist;
 	t_coords	newpoint;
+	double		angle;
 
 	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
 	closest_shape = find_closest_shape(newray, shape.point, gen->shapes, shape.shape);
@@ -60,6 +61,12 @@ int	in_shade(t_inter shape, t_gen *gen)
 	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
 	if (dist < shape_dist - 1e-6)
 		return (1);
+	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
+	if (angle >= 1e-6)
+	{
+		printf("angle : %f\n", angle);
+		return (1);
+	}
 	return (0);
 }
 
@@ -92,26 +99,24 @@ double	calc_dif_int(t_inter shape, t_gen *gen)
 	return (angle * gen->l->bright);
 }
 
-static t_coords	refl_vect(t_vars *vars, t_inter shape)
-{
-	t_coords	light;
-	t_coords	refl_v;
-
-	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
-	refl_v = vect_normalised(vect_sub(vect_mult(shape.normal, 2 * dot_prod(light, shape.normal)), light));
-	return (refl_v);
-}
-
 double	specular(t_vars *vars, t_inter shape)
 {
 	t_coords	refl;
 	double		prod_RV;
 	double		spec;
+	t_coords	light;
 
-	refl = refl_vect(vars, shape);
+	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
+	refl = vect_normalised(vect_sub(vect_mult(shape.normal, 2 * dot_prod(light, shape.normal)), light));
 	prod_RV = dot_prod(refl, shape.ray);
 	if (prod_RV > 0)
-		spec = pow(prod_RV, 25);
+	{
+		spec = pow(prod_RV , 50);
+		//if (shape.shape->shape != CYLINDER && spec > 1e-6)
+			//printf("refl_v : (%f, %f, %f), prod_RV : %f, spec : %f\n", refl.x, refl.y, refl.z, prod_RV, spec);
+		//if (spec > 1)
+		// 	spec = 1;
+	}
 	else
 		spec = 0;
 	return (spec);
@@ -132,17 +137,28 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	t_rgb	spec_light;
 	t_rgb	dif_light;
 	t_rgb	amb_light;
-    t_rgb    shape_col;
+	t_rgb	shape_col;
+	double	tr;
+	double	tg;
+	double	tb;
+
+	if (in_shade(shape, gen))
+	{
+		dif_int = 0;
+		spec = 0;
+	}
+	else
+	{    t_rgb    shape_col;
     double    tr;
     double    tg;
     double    tb;
 
-	dif_int = calc_dif_int(shape, gen);
-	spec = specular(vars, shape);
+		dif_int = calc_dif_int(shape, gen);
+		// printf("here\n");
+		spec = specular(vars, shape);		
+	}
 	// dif_int = 0;
 	// gen->a->light = 0;
-	if (in_shade(shape, gen))
-		dif_int = 0;
 	dif_light = norm_rgb(gen->l->rgb);
 	dif_light.r =  dif_light.r * dif_int;
 	dif_light.g =  dif_light.g * dif_int;
@@ -152,13 +168,9 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	spec_light.g = spec_light.g * spec * gen->l->bright;
 	spec_light.b = spec_light.b * spec * gen->l->bright;
 	amb_light = norm_rgb(gen->a->rgb);
-	amb_light.r = amb_light.r * gen->a->light;
-	amb_light.g = amb_light.g * gen->a->light;
-	amb_light.b = amb_light.b * gen->a->light;
-	shape_col = norm_rgb(shape.shape->rgb);
-	tr = fmin(shape_col.r * (amb_light.r + dif_light.r) + spec_light.r, 1);
-	tg = fmin(shape_col.g * (amb_light.g + dif_light.g) + spec_light.g, 1);
-	tb = fmin(shape_col.b * (amb_light.b + dif_light.b) + spec_light.b, 1);
-    return ((int)(tr * 255) << 16 | (int)(tg * 255) << 8 | (int)(tb * 255));
+	amb_light.r =  amb_light.r * gen->a->light;
+	amb_light.g =  amb_light.g * gen->a->light;
+	amb_light.b =  amb_light.b * gen->a->light;
+	return ((int)(shape.shape->rgb.r * fmin(dif_light.r + amb_light.r + spec_light.r, 1)) << 16 | (int)(shape.shape->rgb.g * fmin(dif_light.g + amb_light.g + spec_light.g, 1)) << 8 | (int)(shape.shape->rgb.b * fmin(dif_light.b + amb_light.b + spec_light.b, 1)));
 }
 
