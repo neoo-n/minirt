@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:42:37 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 12:44:56 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/16 12:50:11 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	// dif_int = 0;
 	// gen->a->light = 0;
 	dif_light = norm_rgb(gen->l->rgb);
+	dif_light = norm_rgb(gen->l->rgb);
 	dif_light.r =  dif_light.r * dif_int;
 	dif_light.g =  dif_light.g * dif_int;
 	dif_light.b =  dif_light.b * dif_int;
@@ -165,9 +166,13 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	spec_light.g = spec_light.g * spec * gen->l->bright;
 	spec_light.b = spec_light.b * spec * gen->l->bright;
 	amb_light = norm_rgb(gen->a->rgb);
-	amb_light.r =  amb_light.r * gen->a->light;
-	amb_light.g =  amb_light.g * gen->a->light;
-	amb_light.b =  amb_light.b * gen->a->light;
-	return ((int)(shape.shape->rgb.r * fmin(dif_light.r + amb_light.r + spec_light.r, 1)) << 16 | (int)(shape.shape->rgb.g * fmin(dif_light.g + amb_light.g + spec_light.g, 1)) << 8 | (int)(shape.shape->rgb.b * fmin(dif_light.b + amb_light.b + spec_light.b, 1)));
+	amb_light.r = amb_light.r * gen->a->light;
+	amb_light.g = amb_light.g * gen->a->light;
+	amb_light.b = amb_light.b * gen->a->light;
+	shape_col = norm_rgb(shape.shape->rgb);
+	tr = fmin(shape_col.r * (amb_light.r + dif_light.r) + spec_light.r, 1);
+	tg = fmin(shape_col.g * (amb_light.g + dif_light.g) + spec_light.g, 1);
+	tb = fmin(shape_col.b * (amb_light.b + dif_light.b) + spec_light.b, 1);
+    return ((int)(tr * 255) << 16 | (int)(tg * 255) << 8 | (int)(tb * 255));
 }
 
