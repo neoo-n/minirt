@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:09:21 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 13:09:25 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/16 14:43:09 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int	in_shade(t_inter shape, t_gen *gen)
 	t_coords	newpoint;
 	double		angle;
 
+	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
+	if (angle >= -1e-6)
+		return (1);
 	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
 	closest_shape = find_closest_shape(newray, shape.point, gen->shapes, shape.shape);
 	if (!closest_shape.shape || closest_shape.t == -1)
@@ -61,12 +64,6 @@ int	in_shade(t_inter shape, t_gen *gen)
 	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
 	if (dist < shape_dist - 1e-6)
 		return (1);
-	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
-	if (angle >= 1e-6)
-	{
-		printf("angle : %f\n", angle);
-		return (1);
-	}
 	return (0);
 }
 
@@ -149,10 +146,9 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	}
 	else
 	{
-
-		dif_int = calc_dif_int(shape, gen);
 		// printf("here\n");
-		spec = specular(vars, shape);		
+		dif_int = calc_dif_int(shape, gen);
+		spec = specular(vars, shape);
 	}
 	// dif_int = 0;
 	// gen->a->light = 0;
