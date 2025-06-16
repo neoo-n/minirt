@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 11:37:01 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/11 11:38:17 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 13:58:08 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 14:02:37 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,24 @@ double	inter_dist(t_coords ray, t_coords origin, t_shape cap)
 
 double	check_caps(t_coords ray, t_coords origin, t_shape *cyl, double t)
 {
-	t_shape		top;
-	t_shape		bottom;
-	double		top_intersect;
-	double		bottom_intersect;
+	t_shape		cap;
+	double		intersect;
 
-	top.coords = vect_add(cyl->coords, vect_mult(cyl->vector, cyl->height / 2));
-	top.vector = cyl->vector;
-	top_intersect = plane_intersect(ray, origin, &top);
-	bottom.coords = vect_sub(cyl->coords,
+	cap.coords = vect_add(cyl->coords, vect_mult(cyl->vector, cyl->height / 2));
+	cap.vector = cyl->vector;
+	intersect = plane_intersect(ray, origin, &cap);
+	if (intersect > 1e-6)
+		if (inter_dist(ray, origin, cap) <= pow(cyl->diam / 2, 2))
+			if (intersect < t || t == -1)
+				t = intersect;
+	cap.coords = vect_sub(cyl->coords,
 			vect_mult(cyl->vector, cyl->height / 2));
-	bottom.vector = cyl->vector;
-	bottom_intersect = plane_intersect(ray, origin, &bottom);
-	if (top_intersect > 1e-6)
-	{
-		if (inter_dist(ray, origin, top) <= pow(cyl->diam / 2, 2))
-		{
-			if (top_intersect < t || t == -1)
-				t = top_intersect;
-		}
-	}
-	if (bottom_intersect > 1e-6)
-	{
-		if (inter_dist(ray, origin, bottom) <= pow(cyl->diam / 2, 2))
-		{
-			if (bottom_intersect < t || t == -1)
-				t = bottom_intersect;
-		}
-	}
+	cap.vector = cyl->vector;
+	intersect = plane_intersect(ray, origin, &cap);
+	if (intersect > 1e-6)
+		if (inter_dist(ray, origin, cap) <= pow(cyl->diam / 2, 2))
+			if (intersect < t || t == -1)
+				t = intersect;
 	return (t);
 }
 
@@ -114,32 +104,3 @@ double	cyl_intersect(t_coords ray, t_coords origin, t_shape *cyl, double t)
 	t = check_caps(ray, origin, cyl, t);
 	return (t);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	t_coords	ray;
-// 	t_coords	origin;
-// 	t_shape		cyl;
-
-// 	ray.x = 0.52;
-// 	ray.y = 0.38;
-// 	ray.z = 0.76;
-// 	origin.x = -2.87;
-// 	origin.y = 3.61;
-// 	origin.z = 0;
-// 	cyl.coords.x = 0.5;
-// 	cyl.coords.y = 5.5;
-// 	cyl.coords.z = 4.5;
-// 	cyl.vector.x = -0.19;
-// 	cyl.vector.y = 0.19;
-// 	cyl.vector.z = 0.96;
-// 	cyl.height = 5.2;
-// 	cyl.diam = 2;
-
-// 	if (cyl_intersect(ray, origin, &cyl, 0) >= 0)
-// 		printf("Intersect\n");
-// 	if (cyl_intersect(ray, origin, &cyl, 0) == -1)
-// 		printf("No Interesect\n");
-// }

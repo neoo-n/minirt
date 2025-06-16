@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 11:49:22 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:58:54 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 14:55:38 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,35 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 	return (vect_ij);
 }
 
-t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_shape *check_shape)
+double	get_intersection(t_coords ray, t_coords origin, t_shape *shape)
+{
+	if (shape->shape == CYLINDER)
+		return (cyl_intersect(ray, origin, shape, 0));
+	if (shape->shape == SPHERE)
+		return (sphere_intersect(ray, origin, shape));
+	if (shape->shape == PLANE)
+		return (plane_intersect(ray, origin, shape));
+	return (-1);
+}
+
+t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
+		t_shape *check_shape)
 {
 	int		i;
 	t_inter	result;
 	t_inter	temp;
 
-	i = 0;
+	i = -1;
 	result.shape = 0;
 	result.t = -1;
-	while (shapes[i])
+	while (shapes[++i])
 	{
 		if (shapes[i] == check_shape)
-		{
-			i++;
 			continue ;
-		}
 		temp.shape = shapes[i];
-		if (shapes[i]->shape == CYLINDER)
-			temp.t = cyl_intersect(ray, origin, shapes[i], 0);
-		if (shapes[i]->shape == SPHERE)
-			temp.t = sphere_intersect(ray, origin, shapes[i]);
-		if (shapes[i]->shape == PLANE)
-			temp.t = plane_intersect(ray, origin, shapes[i]);
-		if (temp.t > 0 && (result.t == -1 || temp.t < result.t))
+		temp.t = get_intersection(ray, origin, temp.shape);
+		if (temp.t > 1e-6 && (result.t == -1 || temp.t < result.t))
 			result = temp;
-		i++;
 	}
 	if (result.shape)
 	{
@@ -82,16 +85,13 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes, t_sh
 	return (result);
 }
 
-void	camera(t_vars *vars)
+void	camera(t_vars *vars, int i, int rgb)
 {
-	int				i;
 	int				j;
 	t_inter			shape;
 	t_coords		vect;
 	t_cam_screen	screen;
-	int				rgb;
 
-	i = 0;
 	screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
 	{
@@ -104,7 +104,7 @@ void	camera(t_vars *vars)
 			if (shape.shape)
 			{
 				if (j % 1 == 0 && i % 1 == 0)
-					rgb = get_rgb(shape, vars->gen, vars);
+					rgb = get_rgb(shape, vars->gen, vars, 0);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
 			j++;

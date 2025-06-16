@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/12 16:57:33 by dvauthey         ###   ########.fr       */
+/*   Created: 16/06/2025 13:40:10 by akabbaj           #+#    #+#             */
+/*   Updated: 16/06/2025 14:11:20 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "utils.h"
 
@@ -83,6 +82,15 @@ double	ft_datoi(const char *nptr)
 	return (result * neg);
 }
 
+void	check_neg(char *str, int *i, int *neg)
+{
+	if (str[*i] == '-')
+	{
+		(*i)++;
+		*neg = -1;
+	}
+}
+
 double	ft_atof(char *str)
 {
 	int		i;
@@ -94,11 +102,7 @@ double	ft_atof(char *str)
 	n1 = ft_datoi(str);
 	i = 0;
 	neg = 1;
-	if (str[i] == '-')
-	{
-		neg = -1;
-		i++;
-	}
+	check_neg(str, &i, &neg);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] != '.')

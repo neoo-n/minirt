@@ -15,7 +15,8 @@ INTER	= 	intersections/cylinder.c intersections/plane.c \
 			intersections/sphere.c
 
 CAM		=	camera/camera.c camera/create_window.c \
-			camera/my_mlx_pixel_put.c camera/lighting.c
+			camera/my_mlx_pixel_put.c camera/lighting.c \
+			camera/lighting_helper.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

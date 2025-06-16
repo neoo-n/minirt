@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:26:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 17:06:49 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/16 14:16:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 14:16:42 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	creating_window(t_gen *gen)
 	creating_all(&vars);
 	vars.epsilon = 1;
 	vars.gen = gen;
-	camera(&vars);
+	camera(&vars, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);
