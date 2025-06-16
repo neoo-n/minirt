@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 11:11:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 15:04:33 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/16 11:55:20 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 12:38:34 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,11 @@ double	specular(t_vars *vars, t_inter shape)
 	t_coords	refl;
 	double		prod_RV;
 	double		spec;
-	// t_rgb		color;
 
 	refl = refl_vect(vars, shape);
 	prod_RV = dot_prod(refl, shape.ray);
 	if (prod_RV > 0)
-	{
-		spec = pow(prod_RV, vars->gen->l->bright);
-		printf("refl_v : (%f, %f, %f), prod_RV : %f, spec : %f\n", refl.x, refl.y, refl.z, prod_RV, spec);
-		if (spec > 1)
-			spec = 1;
-		//printf("\n --------------------------------------- \n");
-		//("spec : %f\n", spec);
-		// color.r = vars->gen->l->rgb.r * spec;
-		// //printf("red : %d, %d\n", vars->gen->l->rgb.r, color.r);
-		// color.g = vars->gen->l->rgb.g * spec;
-		// //printf("green: %d, %d\n", vars->gen->l->rgb.g, color.g);
-		// color.b = vars->gen->l->rgb.b * spec;
-		//printf("blue: %d, %d\n", vars->gen->l->rgb.b, color.b);
-	}
+		spec = pow(prod_RV, 25);
 	else
 		spec = 0;
 	return (spec);
@@ -146,6 +132,10 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	t_rgb	spec_light;
 	t_rgb	dif_light;
 	t_rgb	amb_light;
+    t_rgb    shape_col;
+    double    tr;
+    double    tg;
+    double    tb;
 
 	dif_int = calc_dif_int(shape, gen);
 	spec = specular(vars, shape);
@@ -157,12 +147,18 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	dif_light.r =  dif_light.r * dif_int;
 	dif_light.g =  dif_light.g * dif_int;
 	dif_light.b =  dif_light.b * dif_int;
-	spec_light.r = dif_light.r * spec;
-	spec_light.g = dif_light.g * spec;
-	spec_light.b = dif_light.b * spec;
+	spec_light = norm_rgb(gen->l->rgb);
+	spec_light.r = spec_light.r * spec * gen->l->bright;
+	spec_light.g = spec_light.g * spec * gen->l->bright;
+	spec_light.b = spec_light.b * spec * gen->l->bright;
 	amb_light = norm_rgb(gen->a->rgb);
-	amb_light.r =  amb_light.r * gen->a->light;
-	amb_light.g =  amb_light.g * gen->a->light;
-	amb_light.b =  amb_light.b * gen->a->light;
-	return ((int)(shape.shape->rgb.r * fmin(dif_light.r + amb_light.r + spec_light.r, 1)) << 16 | (int)(shape.shape->rgb.g * fmin(dif_light.g + amb_light.g + spec_light.g, 1)) << 8 | (int)(shape.shape->rgb.b * fmin(dif_light.b + amb_light.b + spec_light.b, 1)));
+	amb_light.r = amb_light.r * gen->a->light;
+	amb_light.g = amb_light.g * gen->a->light;
+	amb_light.b = amb_light.b * gen->a->light;
+	shape_col = norm_rgb(shape.shape->rgb);
+	tr = fmin(shape_col.r * (amb_light.r + dif_light.r) + spec_light.r, 1);
+	tg = fmin(shape_col.g * (amb_light.g + dif_light.g) + spec_light.g, 1);
+	tb = fmin(shape_col.b * (amb_light.b + dif_light.b) + spec_light.b, 1);
+    return ((int)(tr * 255) << 16 | (int)(tg * 255) << 8 | (int)(tb * 255));
 }
+
