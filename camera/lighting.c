@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:55:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 14:56:41 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 15:08:57 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 15:09:02 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 t_coords	calc_norm(t_inter shape, t_coords ray)
 {
 	t_coords	n;
-	t_coords	x;
-	double		dist;
 
 	if (shape.shape->shape == PLANE)
 	{
@@ -28,7 +26,7 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 	if (shape.shape->shape == SPHERE)
 		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
 	if (shape.shape->shape == CYLINDER)
-		n = cyl_n(shape, ray);
+		n = cyl_n(shape);
 	return (n);
 }
 
@@ -109,7 +107,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 		spec = specular(vars, shape);
 	}
 	dif_light = rgb_mult(norm_rgb(gen->l->rgb), dif_int);
-	spec_light = rgb_mult(norm_rgb(gen->l->rgb), gen->l->bright);
+	spec_light = rgb_mult(norm_rgb(gen->l->rgb), spec * gen->l->bright);
 	amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
 	shape_col = rgb_final(norm_rgb(shape.shape->rgb), amb_light,
 			dif_light, spec_light);

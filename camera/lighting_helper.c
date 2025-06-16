@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:54:48 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 14:54:48 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 15:08:36 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "intersections.h"
+#include "camera.h"
 
 t_rgb	norm_rgb(t_rgb rgb)
 {
@@ -20,7 +20,7 @@ t_rgb	norm_rgb(t_rgb rgb)
 	return (rgb);
 }
 
-t_coords	cyl_n(t_inter shape, t_coords ray)
+t_coords	cyl_n(t_inter shape)
 {
 	t_coords	n;
 	t_coords	x;
@@ -37,6 +37,7 @@ t_coords	cyl_n(t_inter shape, t_coords ray)
 		x = vect_add(shape.shape->coords, vect_mult(shape.shape->vector, dist));
 		n = vect_normalised(vect_sub(shape.point, x));
 	}
+	return (n);
 }
 
 t_rgb	rgb_mult(t_rgb rgb, double mult)
