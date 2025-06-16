@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:11:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 16:25:41 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:03:59 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	in_shade(t_inter shape, t_gen *gen)
 	double		dist;
 	double 		shape_dist;
 	t_coords	newpoint;
+	double		angle;
 
 	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
 	closest_shape = find_closest_shape(newray, shape.point, gen->shapes, shape.shape);
@@ -60,6 +61,12 @@ int	in_shade(t_inter shape, t_gen *gen)
 	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
 	if (dist < shape_dist - 1e-6)
 		return (1);
+	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
+	if (angle >= 1e-6)
+	{
+		printf("angle : %f\n", angle);
+		return (1);
+	}
 	return (0);
 }
 
@@ -99,7 +106,7 @@ double	specular(t_vars *vars, t_inter shape)
 	double		spec;
 	t_coords	light;
 
-	light = (vect_sub(vect_add(vars->gen->c->coords, vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
+	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords, vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
 	refl = vect_normalised(vect_sub(vect_mult(shape.normal, 2 * dot_prod(light, shape.normal)), light));
 	prod_RV = dot_prod(refl, shape.ray);
 	if (prod_RV > 0)
@@ -135,12 +142,19 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	double	tg;
 	double	tb;
 
-	dif_int = calc_dif_int(shape, gen);
-	spec = specular(vars, shape);
+	if (in_shade(shape, gen))
+	{
+		dif_int = 0;
+		spec = 0;
+	}
+	else
+	{
+		dif_int = calc_dif_int(shape, gen);
+		// printf("here\n");
+		spec = specular(vars, shape);		
+	}
 	// dif_int = 0;
 	// gen->a->light = 0;
-	if (in_shade(shape, gen))
-		dif_int = 0;
 	dif_light = norm_rgb(gen->l->rgb);
 	dif_light.r =  dif_light.r * dif_int;
 	dif_light.g =  dif_light.g * dif_int;
