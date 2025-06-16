@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 12:42:37 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 12:42:37 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/16 12:44:56 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,10 +148,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 		spec = 0;
 	}
 	else
-	{    t_rgb    shape_col;
-    double    tr;
-    double    tg;
-    double    tb;
+	{
 
 		dif_int = calc_dif_int(shape, gen);
 		// printf("here\n");
