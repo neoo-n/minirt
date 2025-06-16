@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:57 by akabbaj           #+#    #+#             */
 /*   Updated: 2025/06/16 15:09:02 by akabbaj          ###   ########.ch       */
@@ -38,6 +38,9 @@ int	in_shade(t_inter shape, t_gen *gen, double angle)
 	double		shape_dist;
 	t_coords	newpoint;
 
+	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
+	if (angle >= -1e-6)
+		return (1);
 	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
 	closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
 			shape.shape);
@@ -48,12 +51,6 @@ int	in_shade(t_inter shape, t_gen *gen, double angle)
 	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
 	if (dist < shape_dist - 1e-6)
 		return (1);
-	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
-	if (angle >= 1e-6)
-	{
-		printf("angle : %f\n", angle);
-		return (1);
-	}
 	return (0);
 }
 
