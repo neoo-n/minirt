@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:08:42 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/18 14:57:31 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/18 14:58:49 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CAMERA_H
 # include "../structures.h"
 # include "../minirt.h"
+# include "../fonts/fonts.h"
 
 void		creating_window(t_gen *gen);
 void		my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);

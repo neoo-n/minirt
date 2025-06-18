@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:58:33 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/18 16:57:49 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/18 16:57:49 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ typedef struct s_coords
 	double	z;
 	int		valid;
 }	t_coords;
+
+typedef struct t_letter
+{
+	int		i;
+	int		j;
+	int		size;
+	char	letter;
+	int		colour;
+}	t_letter;
 
 typedef struct s_rgb
 {
@@ -128,6 +137,7 @@ typedef struct s_vars
 	t_win_size	win_sizes;
 	t_gen		*gen;
 	int			epsilon;
+	int			colour;
 }	t_vars;
 
 #endif
