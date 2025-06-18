@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:08:42 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 15:36:25 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_inter		find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 t_coords	calc_norm(t_inter shape, t_coords ray);
 t_rgb		norm_rgb(t_rgb rgb);
 t_coords	cyl_n(t_inter shape);
+t_coords	co_n(t_inter shape);
 t_rgb		rgb_mult(t_rgb rgb, double mult);
 t_rgb		rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec);
 

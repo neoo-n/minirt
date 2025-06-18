@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:08:36 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 15:36:08 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,26 @@ t_coords	cyl_n(t_inter shape)
 	{
 		x = vect_add(shape.shape->coords, vect_mult(shape.shape->vector, dist));
 		n = vect_normalised(vect_sub(shape.point, x));
+	}
+	return (n);
+}
+
+t_coords	co_n(t_inter shape)
+{
+	t_coords	n;
+	t_coords	s;
+	t_coords	v;
+	double		dist;
+
+	dist = dot_prod(vect_sub(shape.point, shape.shape->coords),
+			shape.shape->vector);
+	if (dist < 1e-6)
+		n = vect_normalised(vect_mult(shape.shape->vector, -1));
+	else
+	{
+		s = vect_add(shape.point, vect_mult(shape.normal, shape.shape->height));
+		v = vect_normalised(vect_sub(shape.point, s));
+		n = vect_add(v, shape.normal);
 	}
 	return (n);
 }
