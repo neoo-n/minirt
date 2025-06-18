@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:06:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 17:10:20 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 22:39:07 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,16 @@ void	camera(t_vars *vars, int i, int rgb)
 		}
 		i++;
 	}
-	int	x = 0;
-	while (x < 26)
-	{
-		t_letter letter = {300 + x * 30, 300, 30, "abcdefghijklmnopqrstuvwxyz"[x], 0xFF0000};
-		handle_let(vars, letter);
-		x++;
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	// t_button	test;
+	// test.bx = 300;
+	// test.ex = 600;
+	// test.by = 300;
+	// test.ey = 400;
+	// test.colour = 0xB5AEAE;
+	// test.text = "voici la bite";
+	// test.type = TEXT;
+	vars->img_copy = vars->img;
+	// make_box(vars, test, 0x000000);
+	make_menu(vars, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
 }

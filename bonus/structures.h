@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:57:49 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 16:57:49 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 22:18:48 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ typedef enum e_id
 	CONE
 }	t_id;
 
+typedef enum e_type
+{
+	CLOSE,
+	MENU,
+	ARROW_L,
+	ARROW_R,
+	TEXT,
+	EMPTY,
+}	t_type;
+
+typedef enum e_mode
+{
+	HIDDEN,
+	BASIC,
+	OBJECT_SELECT,
+	OBJECT_SETTINGS,
+	GLOBAL_SETTINGS
+}	t_mode;
+
 typedef enum e_errmes
 {
 	NO_FILE,
@@ -32,6 +51,27 @@ typedef enum e_errmes
 	PARSE_ERR
 }	t_errmes;
 
+typedef struct s_button
+{
+	int		bx;
+	int		ex;
+	int		by;
+	int		ey;
+	int		colour;
+	t_type	type;
+	char	*text;
+}	t_button;
+
+typedef struct s_text
+{
+	int		size;
+	int		x;
+	int		y;
+	int		max_char;
+	char	*text;
+	int		colour;
+}	t_text;
+
 typedef struct s_coords
 {
 	double	x;
@@ -40,7 +80,7 @@ typedef struct s_coords
 	int		valid;
 }	t_coords;
 
-typedef struct t_letter
+typedef struct s_letter
 {
 	int		i;
 	int		j;
@@ -48,6 +88,14 @@ typedef struct t_letter
 	char	letter;
 	int		colour;
 }	t_letter;
+
+typedef struct s_character
+{
+	char				c;
+	int					grid[7][5];
+	struct s_character	*next;
+}	t_character;
+
 
 typedef struct s_rgb
 {
@@ -108,10 +156,11 @@ typedef struct s_inter
 
 typedef struct s_gen
 {
-	t_amb	*a;
-	t_cam	*c;
-	t_light	*l;
-	t_shape	**shapes;
+	t_amb		*a;
+	t_cam		*c;
+	t_light		*l;
+	t_shape		**shapes;
+	t_character	*character;
 }	t_gen;
 
 typedef struct s_dataimg
@@ -134,10 +183,12 @@ typedef struct s_vars
 	void		*mlx;
 	void		*win;
 	t_dataimg	img;
+	t_dataimg	img_copy;
 	t_win_size	win_sizes;
 	t_gen		*gen;
 	int			epsilon;
 	int			colour;
+	t_mode		mode;
 }	t_vars;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:06:35 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 17:06:35 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 20:54:56 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,71 +49,58 @@ void	draw_part(t_vars *vars, int i, int j, int step)
 	}
 }
 
-void	handle_let_plus_plus(t_vars *vars, t_letter letter)
+void	make_char(t_vars *vars, t_letter letter)
 {
-	if (letter.letter == 'w')
-		make_w(vars, letter);
-	else if (letter.letter == 'x')
-		make_x(vars, letter);
-	else if (letter.letter == 'y')
-		make_y(vars, letter);
-	else if (letter.letter == 'z')
-		make_z(vars, letter);
-}
+	int			x;
+	int			y;
+	int			step;
+	t_character	*character;
 
-void	handle_let_plus(t_vars *vars, t_letter letter)
-{
-	if (letter.letter == 'l')
-		make_l(vars, letter);
-	else if (letter.letter == 'm')
-		make_m(vars, letter);
-	else if (letter.letter == 'n')
-		make_n(vars, letter);
-	else if (letter.letter == 'o')
-		make_o(vars, letter);
-	else if (letter.letter == 'p')
-		make_p(vars, letter);
-	else if (letter.letter == 'q')
-		make_q(vars, letter);
-	else if (letter.letter == 'r')
-		make_r(vars, letter);
-	else if (letter.letter == 's')
-		make_s(vars, letter);
-	else if (letter.letter == 't')
-		make_t(vars, letter);
-	else if (letter.letter == 'u')
-		make_u(vars, letter);
-	else if (letter.letter == 'v')
-		make_v(vars, letter);
-	else
-		handle_let_plus_plus(vars, letter);
-}
-
-void	handle_let(t_vars *vars, t_letter letter)
-{
 	vars->colour = letter.colour;
-	if (letter.letter == 'a')
-		make_a(vars, letter);
-	else if (letter.letter == 'b')
-		make_b(vars, letter);
-	else if (letter.letter == 'c')
-		make_c(vars, letter);
-	else if (letter.letter == 'd')
-		make_d(vars, letter);
-	else if (letter.letter == 'e')
-		make_e(vars, letter);
-	else if (letter.letter == 'f')
-		make_f(vars, letter);
-	else if (letter.letter == 'g')
-		make_g(vars, letter);
-	else if (letter.letter == 'h')
-		make_h(vars, letter);
-	else if (letter.letter == 'i')
-		make_i(vars, letter);
-	else if (letter.letter == 'j')
-		make_j(vars, letter);
-	else if (letter.letter == 'k')
-		make_k(vars, letter);
-	else
-		handle_let_plus(vars, letter);
+	character = vars->gen->character;
+	while (character && character->c != letter.letter)
+		character = character->next;
+	if (!character)
+		return ;
+	step = letter.size / 7;
+	y = 0;
+	while (y < 7)
+	{
+		x = 0;
+		while (x < 5)
+		{
+			if (character->grid[y][x] == 1)
+				draw_part(vars, letter.i + x * step, letter.j + y * step, step);
+			x++;
+		}
+		y++;
+	}
+}
+
+t_character	*init_characters(void)
+{
+	int			i;
+	t_character	*res;
+	t_character	*next;
+
+	res = malloc(sizeof(t_character));
+	if (!res)
+		return (0);
+	next = res;
+	i = 0;
+	while ("abcdefghijklmnopqrstuvwxyz0123456789"[i])
+	{
+		next->c = "abcdefghijklmnopqrstuvwxyz0123456789"[i];
+		handle_let(next->grid, next->c);
+		next->next = malloc(sizeof(t_character));
+		if (!next->next)
+		{
+			free_characters(res);
+			return (0);
+		}
+		next = next->next;
+		i++;
+	}
+	next->next = 0;
+	return (res);
 }

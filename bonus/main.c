@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:57:25 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 16:56:34 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/18 20:02:00 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argc, char **argv)
 		free_gen(gen);
 		return (print_error(INCOMP_ELEM, 0, 0));
 	}
+	gen->character = init_characters();
 	creating_window(gen);
 	free_gen(gen);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:38:52 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:46:01 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 20:02:41 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,18 @@ void	free_gen(t_gen *gen)
 		}
 		free(gen->shapes);
 	}
+	free_characters(gen->character);
 	free(gen);
+}
+
+void	free_characters(t_character *character)
+{
+	t_character	*next;
+
+	while (character)
+	{
+		next = character->next;
+		free(character);
+		character = next;
+	}
 }

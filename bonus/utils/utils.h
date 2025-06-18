@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:33:56 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 14:33:56 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 19:57:04 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	free_gen(t_gen *gen);
 char	**free_strarr_char(char **tofree);
 int		free_strarr(char **tofree);
 int		free_strarr_str(char **tofree, char *strtofree, int i);
+void	free_characters(t_character *character);
 
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s);
