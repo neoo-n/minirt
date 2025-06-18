@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:16:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:00:54 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/18 23:38:47 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ void	creating_window(t_gen *gen)
 	t_vars		vars;
 
 	creating_all(&vars);
+	vars.obj = NONE;
+	vars.obj_id = 0;
+	vars.light_count = 0;
+	vars.shape_count = 0;
+	vars.page_num = 1;
 	vars.epsilon = 1;
 	vars.gen = gen;
 	camera(&vars, 0, 0);

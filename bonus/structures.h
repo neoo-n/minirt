@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:57:49 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 22:18:48 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/18 23:38:56 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,22 @@ typedef enum e_type
 	EMPTY,
 }	t_type;
 
+typedef enum e_obj
+{
+	CAM,
+	LIGHT,
+	SHAPE,
+	NONE,
+}	t_obj;
+
 typedef enum e_mode
 {
 	HIDDEN,
 	BASIC,
 	OBJECT_SELECT,
+	OBJECT_SELECT_ARROWS,
 	OBJECT_SETTINGS,
-	GLOBAL_SETTINGS
+	GLOBAL_SETTINGS,
 }	t_mode;
 
 typedef enum e_errmes
@@ -189,6 +198,11 @@ typedef struct s_vars
 	int			epsilon;
 	int			colour;
 	t_mode		mode;
+	t_obj		obj;
+	int			obj_id;
+	int			light_count;
+	int			shape_count;
+	int			page_num;
 }	t_vars;
 
 #endif

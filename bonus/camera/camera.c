@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:06:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 22:39:07 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/18 23:25:57 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,10 @@ void	camera(t_vars *vars, int i, int rgb)
 	// test.text = "voici la bite";
 	// test.type = TEXT;
 	vars->img_copy = vars->img;
+	//vars->obj = LIGHT;
 	// make_box(vars, test, 0x000000);
 	make_menu(vars, 0, 0);
+	//make_obj_button(vars);
+	display_all_objs(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
 }
