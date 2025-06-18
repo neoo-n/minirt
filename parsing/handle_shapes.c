@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_shapes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:07:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:07:36 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 14:35:13 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	handle_pl(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int	cy_helper(t_shape *shape, char *line, int i)
+int	c_helper(t_shape *shape, char *line, int i)
 {
 	i = parse_double(line, i, &shape->diam);
 	if (i == -1)
@@ -80,7 +80,7 @@ int	cy_helper(t_shape *shape, char *line, int i)
 	return (i);
 }
 
-int	handle_cy(t_gen *gen, char *line, int i)
+int	handle_cs(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -88,6 +88,8 @@ int	handle_cy(t_gen *gen, char *line, int i)
 	if (!shape)
 		return (0);
 	shape->shape = CYLINDER;
+	if (line[1] == 'o')
+		shape->shape = CONE;
 	i = parse_coords(line, next_elem(line, 0), &shape->coords);
 	if (i == -1)
 		return (free(shape), 0);
@@ -96,7 +98,7 @@ int	handle_cy(t_gen *gen, char *line, int i)
 		return (free(shape), 0);
 	if (shape->vector.valid != 1)
 		return (free(shape), 0);
-	i = cy_helper(shape, line, i);
+	i = c_helper(shape, line, i);
 	if (i == -1)
 		return (free(shape), 0);
 	if (line[i] && line[i] != '\n')

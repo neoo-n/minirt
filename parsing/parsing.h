@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:31:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 14:31:58 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 14:34:15 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		handle_l(t_gen *gen, char *line, int i);
 
 int		handle_sp(t_gen *gen, char *line, int i);
 int		handle_pl(t_gen *gen, char *line, int i);
-int		handle_cy(t_gen *gen, char *line, int i);
+int		handle_cs(t_gen *gen, char *line, int i);
 
 int		is_numeric(char *str);
 int		arr_len(char **arr);

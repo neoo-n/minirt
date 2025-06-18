@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 11:38:36 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 14:34:24 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	init_elem(t_gen *gen, char *line)
 	if (line[0] == 'p')
 		return (handle_pl(gen, line, 0));
 	if (line[0] == 'c')
-		return (handle_cy(gen, line, 0));
+		return (handle_cs(gen, line, 0));
 	return (0);
 }
 

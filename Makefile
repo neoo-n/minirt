@@ -12,7 +12,7 @@ UTILS	=	utils/atoi.c utils/errors.c \
 			utils/split.c utils/angle_calcul.c
 
 INTER	= 	intersections/cylinder.c intersections/plane.c \
-			intersections/sphere.c
+			intersections/sphere.c intersections/cone.c
 
 CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \

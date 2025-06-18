@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:06:01 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 14:41:50 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ double	get_intersection(t_coords ray, t_coords origin, t_shape *shape)
 		return (sphere_intersect(ray, origin, shape));
 	if (shape->shape == PLANE)
 		return (plane_intersect(ray, origin, shape));
+	if (shape->shape == CONE)
+		return (cone_intersect(ray, origin, shape, 0));
 	return (-1);
 }
 

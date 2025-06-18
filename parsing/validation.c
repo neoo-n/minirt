@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:04:10 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/09 16:05:05 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 14:30:37 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	valid_line(char *line)
 {
 	if (line[0] == '\n')
 		return (1);
-	if (ft_strncmp(line, "A ", 2) || ft_strncmp(line, "C ", 2)
-		|| ft_strncmp(line, "L ", 2))
+	if (!ft_strncmp(line, "A ", 2) || !ft_strncmp(line, "C ", 2)
+		|| !ft_strncmp(line, "L ", 2))
 		return (1);
-	if (ft_strncmp(line, "sp ", 3) || ft_strncmp(line, "pl ", 3)
-		|| ft_strncmp(line, "cy ", 3))
+	if (!ft_strncmp(line, "sp ", 3) || !ft_strncmp(line, "pl ", 3)
+		|| !ft_strncmp(line, "cy ", 3) || !ft_strncmp(line, "co ", 3))
 		return (1);
 	return (0);
 }
