@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 17:16:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 17:17:11 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 16:04:10 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 16:05:05 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	valid_double(char *str)
 		return (free_strarr_str(split_res, str, 1));
 	if (!split_res[0][0] || !split_res[1][0])
 		return (free_strarr_str(split_res, str, 0));
-	if (!is_numeric(split_res[0]))
+	if (!is_numeric(split_res[1]))
 		return (free_strarr_str(split_res, str, 0));
 	return (free_strarr_str(split_res, str, 1));
 }

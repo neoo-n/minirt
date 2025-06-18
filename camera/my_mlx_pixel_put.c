@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 15:49:25 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/05/29 15:49:40 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/10 13:26:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/10 13:26:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "camera.h"
 
 void	my_mlx_pixel_put(t_dataimg *img, int x, int y, int color)
 {

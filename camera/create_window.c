@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/29 14:31:10 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/05/29 16:47:30 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/16 14:16:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/16 14:16:42 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "camera.h"
 
 static int	mouse_closing(t_vars *vars)
 {
@@ -55,13 +55,13 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 3520;
-	vars->win_sizes.y_height = 1880;
+	vars->win_sizes.x_len = 1350.0;
+	vars->win_sizes.y_height = 980.0;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);
 	vars->win = mlx_new_window(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height, "FdF");
+			vars->win_sizes.y_height, "minirt");
 	if (!vars->win)
 		error_exit_vars(vars, "Error mlx win\n", 0);
 	vars->img.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
@@ -73,13 +73,14 @@ static void	creating_all(t_vars *vars)
 			&(vars->img.endian));
 }
 
-void	creating_window()
+void	creating_window(t_gen *gen)
 {
 	t_vars		vars;
 
 	creating_all(&vars);
 	vars.epsilon = 1;
-	drawing(&vars);
+	vars.gen = gen;
+	camera(&vars, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_loop(vars.mlx);

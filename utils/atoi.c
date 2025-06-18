@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:58:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 11:22:09 by akabbaj          ###   ########.ch       */
+/*   Created: 16/06/2025 13:40:10 by akabbaj           #+#    #+#             */
+/*   Updated: 16/06/2025 14:11:20 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,27 @@ double	ft_datoi(const char *nptr)
 	return (result * neg);
 }
 
+void	check_neg(char *str, int *i, int *neg)
+{
+	if (str[*i] == '-')
+	{
+		(*i)++;
+		*neg = -1;
+	}
+}
+
 double	ft_atof(char *str)
 {
 	int		i;
 	int		j;
 	double	n1;
 	double	n2;
+	int		neg;
 
 	n1 = ft_datoi(str);
 	i = 0;
-	if (str[i] == '-')
-		i++;
+	neg = 1;
+	check_neg(str, &i, &neg);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] != '.')
@@ -102,7 +112,7 @@ double	ft_atof(char *str)
 	n2 = ft_datoi(str + i);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
-	if (n1 >= 0)
+	if (neg == 1)
 		n1 = n1 + (n2 / (pow(10, i - j)));
 	else
 		n1 = n1 - (n2 / (pow(10, i - j)));

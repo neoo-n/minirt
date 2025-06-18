@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 11:49:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/29 16:29:28 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/13 14:58:33 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef struct s_coords
 
 typedef struct s_rgb
 {
-	int	r;
-	int	g;
-	int	b;
+	double	r;
+	double	g;
+	double	b;
 }	t_rgb;
 
 typedef struct s_amb
@@ -59,6 +59,17 @@ typedef struct s_cam
 	t_coords	vector;
 	double		fov;
 }	t_cam;
+
+typedef struct s_cam_screen
+{
+	t_coords	vect_x;
+	t_coords	vect_y;
+	double		len_x;
+	double		len_y;
+	double		len_pix_x;
+	double		len_pix_y;
+	t_coords	p_mid;
+}	t_cam_screen;
 
 typedef struct s_light
 {
@@ -76,6 +87,15 @@ typedef struct s_shape
 	t_coords	vector;
 	t_rgb		rgb;
 }	t_shape;
+
+typedef struct s_inter
+{
+	t_shape		*shape;
+	double		t;
+	t_coords	point;
+	t_coords	normal;
+	t_coords	ray;
+}	t_inter;
 
 typedef struct s_gen
 {
@@ -96,8 +116,8 @@ typedef struct s_dataimg
 
 typedef struct s_win_size
 {
-	int	x_len;
-	int	y_height;
+	float	x_len;
+	float	y_height;
 }	t_win_size;
 
 typedef struct s_vars

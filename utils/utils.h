@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 10:47:56 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/28 10:47:56 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/09 14:33:56 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/09 14:33:56 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define UTILS_H
 # include "gnl/get_next_line.h"
 # include "../structures.h"
+# include <math.h>
+# define PI 3.14159265358979323846
+
+double	deg_to_rad(double angle);
 
 double	ft_atof(char *str);
 double	ft_datoi(const char *nptr);
