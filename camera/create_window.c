@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:16:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 14:16:42 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/18 11:03:56 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	mouse_closing(t_vars *vars)
 	mlx_destroy_image(vars->mlx, vars->img.img);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
+	free_gen(vars->gen);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -30,6 +31,7 @@ static int	closing(int keycode, t_vars *vars)
 		mlx_destroy_image(vars->mlx, vars->img.img);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
+		free_gen(vars->gen);
 		exit(EXIT_SUCCESS);
 	}
 	return (0);
@@ -46,6 +48,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 	}
+	if (vars->gen)
+		free_gen(vars->gen);
 	if (is_perror)
 		perror(message);
 	else
