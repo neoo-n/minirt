@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:57:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 15:57:34 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/18 10:51:00 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/18 10:51:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ins_coords(char *str, t_coords *coords)
 	coords->z = ft_atof(split_coords[2]);
 	free_strarr(split_coords);
 	if (coords->x > 1 || coords->x < -1 || coords->y > 1 || coords->y < -1
-		|| coords->z > 1 || coords->z < -1)
+		|| coords->z > 1 || coords->z < -1 || (coords->x == 0 && coords->y == 0
+			&& coords->z == 0))
 		coords->valid = 2;
 	return ;
 }
