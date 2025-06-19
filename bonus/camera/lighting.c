@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:51:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:51:40 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 17:30:46 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,46 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 
 int	in_shade(t_inter shape, t_gen *gen, double angle)
 {
+	int			i;
 	t_coords	newray;
 	t_inter		closest_shape;
-	double		dist;
-	double		shape_dist;
+	double		dist[2];
 	t_coords	newpoint;
 
+	i = 0;
 	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
 	if (angle >= -1e-6)
 		return (1);
-	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
-	closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
-			shape.shape);
-	if (!closest_shape.shape || closest_shape.t == -1)
-		return (0);
-	dist = dot_prod(vect_sub(shape.point, gen->l->coords), newray);
-	newpoint = vect_add(shape.point, vect_mult(newray, closest_shape.t));
-	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
-	if (dist < shape_dist - 1e-6)
-		return (1);
+	while (gen->l[i])
+	{
+		newray = vect_normalised(vect_sub(gen->l[i]->coords, shape.point));
+		closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
+				shape.shape);
+		if (!closest_shape.shape || closest_shape.t == -1)
+			return (0);
+		dist[0] = dot_prod(vect_sub(shape.point, gen->l[i]->coords), newray);
+		newpoint = vect_add(shape.point, vect_mult(newray, closest_shape.t));
+		dist[1] = dot_prod(vect_sub(shape.point, newpoint), newray);
+		if (dist[0] < dist[1] - 1e-6)
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
-double	calc_dif_int(t_inter shape, t_gen *gen)
+double	calc_dif_int(t_inter shape, t_gen *gen, t_light	*light)
 {
 	double		angle;
 	t_coords	light_dir;
 
-	light_dir = vect_normalised(vect_sub(gen->l->coords, shape.point));
+	light_dir = vect_normalised(vect_sub(light->coords, shape.point));
 	angle = dot_prod(shape.normal, light_dir);
 	if (angle <= 1e-6)
 		return (0);
-	return (angle * gen->l->bright);
+	return (angle * light->bright);
 }
 
-double	specular(t_vars *vars, t_inter shape)
+double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 {
 	t_coords	refl;
 	double		prod_rv;
@@ -74,7 +79,7 @@ double	specular(t_vars *vars, t_inter shape)
 	t_coords	light;
 
 	light = vect_normalised(vect_sub(vect_add(vars->gen->c->coords,
-					vect_mult(shape.ray, shape.t)), vars->gen->l->coords));
+					vect_mult(shape.ray, shape.t)), light_pt->coords));
 	refl = vect_normalised(vect_sub(vect_mult(shape.normal,
 					2 * dot_prod(light, shape.normal)), light));
 	prod_rv = dot_prod(refl, shape.ray);
@@ -87,12 +92,14 @@ double	specular(t_vars *vars, t_inter shape)
 
 int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 {
+	int		i;
 	double	spec;
 	t_rgb	spec_light;
 	t_rgb	dif_light;
 	t_rgb	amb_light;
 	t_rgb	shape_col;
 
+	i = 0;
 	if (in_shade(shape, gen, 0))
 	{
 		dif_int = 0;
@@ -100,8 +107,12 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 	}
 	else
 	{
-		dif_int = calc_dif_int(shape, gen);
-		spec = specular(vars, shape);
+		while (gen->l[i])
+		{
+			dif_int += calc_dif_int(shape, gen, gen->l[i]);
+			spec += specular(vars, shape, gen->l[i]);
+			i++;
+		}
 	}
 	dif_light = rgb_mult(norm_rgb(gen->l->rgb), dif_int);
 	spec_light = rgb_mult(norm_rgb(gen->l->rgb), spec * gen->l->bright);

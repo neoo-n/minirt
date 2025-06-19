@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 15:05:34 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:10:49 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_gen	*init_gen(void)
 	}
 	res->a->light = -1;
 	res->c->fov = -1;
-	res->l[0] = 0;
+	res->l[0] = NULL;
 	res->shapes[0] = 0;
 	return (res);
 }
