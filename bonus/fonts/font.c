@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:40:17 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 14:40:21 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 20:44:59 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_char(int chr[7][5])
 	return ;
 }
 
-void	draw_part(t_vars *vars, int i, int j, int step)
+void	draw_part(t_vars *vars, int i, int j, int step, t_dataimg img)
 {
 	int	x;
 	int	y;
@@ -42,14 +42,14 @@ void	draw_part(t_vars *vars, int i, int j, int step)
 		x = i;
 		while (x < i + step)
 		{
-			my_mlx_pixel_put(&(vars->img_copy), x, y, vars->colour);
+			my_mlx_pixel_put(&(img), x, y, vars->colour);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	make_char(t_vars *vars, t_letter letter)
+void	make_char(t_vars *vars, t_letter letter, t_dataimg img)
 {
 	int			x;
 	int			y;
@@ -70,7 +70,7 @@ void	make_char(t_vars *vars, t_letter letter)
 		while (x < 5)
 		{
 			if (character->grid[y][x] == 1)
-				draw_part(vars, letter.i + x * step, letter.j + y * step, step);
+				draw_part(vars, letter.i + x * step, letter.j + y * step, step, img);
 			x++;
 		}
 		y++;

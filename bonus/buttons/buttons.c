@@ -6,13 +6,13 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:20:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 19:38:29 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/19 22:17:05 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "buttons.h"
 
-void	display_text(t_vars *vars, t_text text)
+void	display_text(t_vars *vars, t_text text, t_dataimg img)
 {
 	t_letter	letter;
 	int			x;
@@ -25,7 +25,7 @@ void	display_text(t_vars *vars, t_text text)
 	while (text.text[x] && x < text.max_char)
 	{
 		letter.letter = text.text[x];
-		make_char(vars, letter);
+		make_char(vars, letter, img);
 		letter.i += letter.size;
 		x++;
 	}
@@ -51,7 +51,7 @@ t_text	make_text(t_button button, int text_colour)
 	return (res);
 }
 
-void	make_menu(t_vars *vars, int line_colour, int i)
+void	make_menu(t_vars *vars, int line_colour, int i, t_dataimg img)
 {
 	t_button	button;
 	int			length;
@@ -63,7 +63,7 @@ void	make_menu(t_vars *vars, int line_colour, int i)
 	button.by = vars->win_sizes.y_height * 0.0035;
 	button.type = MENU;
 	button.colour = 0x9c9797;
-	make_box(vars, button, 0);
+	make_box(vars, button, 0, img);
 	length = (button.ex - button.bx) * 0.8;
 	button.by = button.ey * 0.25;
 	width = button.ey * 0.1;
@@ -73,13 +73,13 @@ void	make_menu(t_vars *vars, int line_colour, int i)
 	while (i < 3)
 	{
 		button.ey = button.by + width;
-		make_box(vars, button, 0);
+		make_box(vars, button, 0, img);
 		button.by += width * 3;
 		i++;
 	}
 }
 
-void	make_arrows(t_vars *vars, int boxlength, int arrow)
+void	make_arrows(t_vars *vars, int boxlength, int arrow, t_dataimg img)
 {
 	t_button	button;
 	int			length;
@@ -92,16 +92,16 @@ void	make_arrows(t_vars *vars, int boxlength, int arrow)
 	button.colour = 0x9c9797;
 	button.text = ">";
 	if (arrow == 1 || arrow == 0)
-		make_box(vars, button, 0);
+		make_box(vars, button, 0, img);
 	length = button.ex - button.bx;
 	button.bx += -boxlength + length;
 	button.ex += -boxlength + length;
 	button.text = "<";
 	if (arrow == -1 || arrow == 0)
-		make_box(vars, button, 0);
+		make_box(vars, button, 0, img);
 }
 
-void	display_all_objs(t_vars *vars)
+void	display_all_objs(t_vars *vars, t_dataimg img)
 {
 	t_button	button;
 	int			height;
@@ -118,7 +118,7 @@ void	display_all_objs(t_vars *vars)
 	if (vars->shape_count == 0 && vars->light_count == 0)
 	{
 		button.text = "camera";
-		make_box(vars, button, 0);
+		make_box(vars, button, 0, img);
 		button.by += height * 1.05;
 		button.ey += height * 1.05;
 	}
@@ -130,7 +130,7 @@ void	display_all_objs(t_vars *vars)
 			button.text = "sphere";
 		if (vars->gen->shapes[vars->shape_count]->shape == PLANE)
 			button.text = "plane";
-		make_box(vars, button, 0);
+		make_box(vars, button, 0, img);
 		button.by += height * 1.05;
 		button.ey += height * 1.05;
 		vars->shape_count++;
@@ -139,20 +139,20 @@ void	display_all_objs(t_vars *vars)
 	{
 		vars->mode = OBJECT_SELECT_ARROWS;
 		if (vars->page_num == 1)
-			make_arrows(vars, button.ex - button.bx, 1);
+			make_arrows(vars, button.ex - button.bx, 1, img);
 		else
-			make_arrows(vars, button.ex - button.bx, 0);
+			make_arrows(vars, button.ex - button.bx, 0, img);
 	}
 	else if (vars->page_num != 1)
 	{
-		make_arrows(vars, button.ex - button.bx, -1);
+		make_arrows(vars, button.ex - button.bx, -1, img);
 		vars->mode = OBJECT_SELECT_LASTPAGE;
 	}
 	else
 		vars->mode = OBJECT_SELECT;
 }
 
-void	make_obj_button(t_vars *vars)
+void	make_obj_button(t_vars *vars, t_dataimg img)
 {
 	t_button	button;
 
@@ -179,10 +179,10 @@ void	make_obj_button(t_vars *vars)
 		else if (vars->gen->shapes[vars->obj_id]->shape == PLANE)
 			button.text = "plane selected";
 	}
-	make_box(vars, button, 0);
+	make_box(vars, button, 0, img);
 }
 
-void	make_box(t_vars *vars, t_button button, int text_colour)
+void	make_box(t_vars *vars, t_button button, int text_colour, t_dataimg img)
 {
 	int	x;
 	int	y;
@@ -195,13 +195,13 @@ void	make_box(t_vars *vars, t_button button, int text_colour)
 		{
 			if (x == button.bx || y == button.by || x == button.ex - 1
 				|| y == button.ey - 1)
-				my_mlx_pixel_put(&(vars->img_copy), x, y, 0x000000);
+				my_mlx_pixel_put(&(img), x, y, 0x000000);
 			else
-				my_mlx_pixel_put(&(vars->img_copy), x, y, button.colour);
+				my_mlx_pixel_put(&(img), x, y, button.colour);
 			x++;
 		}
 		y++;
 	}
 	if (button.type == TEXT)
-		display_text(vars, make_text(button, text_colour));
+		display_text(vars, make_text(button, text_colour), img);
 }

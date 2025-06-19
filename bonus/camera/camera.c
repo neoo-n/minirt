@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:33:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 14:33:49 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 22:29:08 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,6 @@ void	copy_image(t_vars *vars)
 	int	y;
 	int	colour;
 
-	vars->img_copy.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->img_copy.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->img_copy.addr = mlx_get_data_addr(vars->img_copy.img,
-			&(vars->img_copy.bits_per_pixel), &(vars->img_copy.line_length),
-			&(vars->img_copy.endian));
 	y = 0;
 	while (y < vars->win_sizes.y_height)
 	{
@@ -120,6 +113,26 @@ void	copy_image(t_vars *vars)
 	}
 }
 
+void	copy_pre_image(t_vars *vars)
+{
+	int	x;
+	int	y;
+	int	colour;
+
+	y = 0;
+	while (y < vars->win_sizes.y_height)
+	{
+		x = 0;
+		while (x < vars->win_sizes.x_len)
+		{
+			colour = get_colour(&(vars->pre_img), x, y);
+			my_mlx_pixel_put(&(vars->pre_img_copy), x, y, colour);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	camera(t_vars *vars, int i, int rgb)
 {
 	int				j;
@@ -127,6 +140,7 @@ void	camera(t_vars *vars, int i, int rgb)
 	t_coords		vect;
 	t_cam_screen	screen;
 
+	vars->state = RENDER;
 	screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
 	{
@@ -138,8 +152,7 @@ void	camera(t_vars *vars, int i, int rgb)
 					vars->gen->shapes, 0);
 			if (shape.shape)
 			{
-				if (j % 1 == 0 && i % 1 == 0)
-					rgb = get_rgb(shape, vars->gen, vars, 0);
+				rgb = get_rgb(shape, vars->gen, vars, 0);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
 			j++;
@@ -147,7 +160,61 @@ void	camera(t_vars *vars, int i, int rgb)
 		i++;
 	}
 	copy_image(vars);
-	make_menu(vars, 0, 0);
+	make_menu(vars, 0, 0, vars->img_copy);
 	vars->mode = HIDDEN;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+}
+
+void	pre_camera(t_vars *vars, int i, int rgb)
+{
+	int				j;
+	t_inter			shape;
+	t_coords		vect;
+	t_cam_screen	screen;
+	t_button		button;
+	int				block;
+	int				block2;
+
+	vars->state = PRERENDER;
+	screen = screen_calcul(vars);
+	while (i < vars->win_sizes.x_len)
+	{
+		j = 0;
+		while (j < vars->win_sizes.y_height)
+		{
+			vect = camera_vect(vars, i, j, screen);
+			shape = find_closest_shape(vect, vars->gen->c->coords,
+					vars->gen->shapes, 0);
+			if (shape.shape)
+			{
+				rgb = get_rgb(shape, vars->gen, vars, 0);
+				block = 0;
+				while (block < 15)
+				{
+					block2 = 0;
+					while (block2 < 15)
+					{
+						if (i + block2 < vars->win_sizes.x_len && j + block < vars->win_sizes.y_height)
+							my_mlx_pixel_put(&(vars->pre_img), i + block2, j + block, rgb);
+						block2++;
+					}
+					block++;
+				}
+			}
+			j += 15;
+		}
+		i += 15;
+	}
+	button.colour = 0x9c9797;
+	button.text = "press enter to render";
+	button.type = TEXT;
+	button.bx = (vars->win_sizes.x_len / 2) * 0.8;
+	button.ex = (vars->win_sizes.x_len / 2) * 1.2;
+	button.ey = vars->win_sizes.y_height;
+	button.by = vars->win_sizes.y_height * 0.95;
+	make_box(vars, button, 0, vars->pre_img);
+	copy_pre_image(vars);
+	make_menu(vars, 0, 0, vars->pre_img_copy);
+	vars->mode = HIDDEN;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->pre_img_copy.img, 0, 0);
 }

@@ -23,7 +23,8 @@ FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/klmno.c fonts/pqrst.c fonts/uvwxy.c \
 			fonts/z0123.c fonts/45678.c fonts/9arrows.c
 
-BUTTONS	=	buttons/buttons.c buttons/mouse_click.c
+BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
+			buttons/key_press.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

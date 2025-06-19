@@ -6,11 +6,30 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:22:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 15:23:16 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 22:29:53 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "buttons.h"
+
+void	clear_image(t_dataimg *img, int width, int height)
+{
+	int		x, y;
+	char	*dst;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+			*(unsigned int *)dst = 0x000000; // black
+			x++;
+		}
+		y++;
+	}
+}
 
 int	count_objs(t_vars *vars)
 {
@@ -90,24 +109,27 @@ t_type	click_in_button(t_vars *vars, int x, int y)
 	return (EMPTY);
 }
 
-void	menu_click(t_vars *vars)
+void	menu_click(t_vars *vars, t_dataimg img)
 {
 	if (vars->mode == HIDDEN)
 	{
 		vars->mode = BASIC;
-		make_obj_button(vars);
+		make_obj_button(vars, img);
 	}
 	else
 	{
 		vars->mode = HIDDEN;
-		mlx_destroy_image(vars->mlx, vars->img_copy.img);
-		copy_image(vars);
+		clear_image(&img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+		if (vars->state == PRERENDER)
+			copy_pre_image(vars);
+		else
+			copy_image(vars);
 		vars->page_num = 1;
 		vars->light_count = 0;
 		vars->shape_count = 0;
-		make_menu(vars, 0, 0);
+		make_menu(vars, 0, 0, img);
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
 int	button_fit(t_vars *vars)
@@ -131,55 +153,67 @@ int	button_fit(t_vars *vars)
 	return (buttons);
 }
 
-void	select_click(t_vars *vars)
+void	select_click(t_vars *vars, t_dataimg img)
 {
 	if (count_objs(vars) > button_fit(vars))
 		vars->mode = OBJECT_SELECT_ARROWS;
 	else
 		vars->mode = OBJECT_SELECT;
-	mlx_destroy_image(vars->mlx, vars->img_copy.img);
-	copy_image(vars);
+	clear_image(&img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+	if (vars->state == PRERENDER)
+		copy_pre_image(vars);
+	else
+		copy_image(vars);
 	vars->page_num = 1;
 	vars->light_count = 0;
 	vars->shape_count = 0;
-	display_all_objs(vars);
-	make_menu(vars, 0, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	display_all_objs(vars, img);
+	make_menu(vars, 0, 0, img);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
-void	right_arrow_click(t_vars *vars)
+void	right_arrow_click(t_vars *vars, t_dataimg img)
 {
 	vars->page_num++;
-	mlx_destroy_image(vars->mlx, vars->img_copy.img);
-	copy_image(vars);
-	make_menu(vars, 0, 0);
-	display_all_objs(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	clear_image(&img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+	if (vars->state == PRERENDER)
+		copy_pre_image(vars);
+	else
+		copy_image(vars);
+	make_menu(vars, 0, 0, img);
+	display_all_objs(vars, img);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
-void	left_arrow_click(t_vars *vars)
+void	left_arrow_click(t_vars *vars, t_dataimg img)
 {
 	int	i;
 
 	vars->page_num--;
-	mlx_destroy_image(vars->mlx, vars->img_copy.img);
-	copy_image(vars);
+	clear_image(&img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+	if (vars->state == PRERENDER)
+		copy_pre_image(vars);
+	else
+		copy_image(vars);
 	vars->light_count = 0;
 	vars->shape_count = 0;
-	make_menu(vars, 0, 0);
+	make_menu(vars, 0, 0, img);
 	i = 0;
 	while (i < vars->page_num)
 	{
-		display_all_objs(vars);
+		display_all_objs(vars, img);
 		i++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
-void	select_obj(t_vars *vars)
+void	select_obj(t_vars *vars, t_dataimg img)
 {
-	mlx_destroy_image(vars->mlx, vars->img_copy.img);
-	copy_image(vars);
+	clear_image(&img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+	if (vars->state == PRERENDER)
+		copy_pre_image(vars);
+	else
+		copy_image(vars);
 	vars->light_count = 0;
 	vars->shape_count = 0;
 	vars->page_num = 1;
@@ -191,22 +225,30 @@ void	select_obj(t_vars *vars)
 		vars->obj_id -= 1;
 	}
 	vars->mode = BASIC;
-	make_obj_button(vars);
-	make_menu(vars, 0, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	make_obj_button(vars, img);
+	make_menu(vars, 0, 0, img);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
 int	mouse_click(int button, int x, int y, t_vars *vars)
 {
+	t_dataimg	img;
+
+	if (vars->state == PRERENDER)
+		img = vars->pre_img_copy;
+	else
+		img = vars->img_copy;
+	if (vars->state == RENDERING)
+		return (0);
 	if (click_in_button(vars, x, y) == TEXT && button == 1 && vars->mode == BASIC)
-		select_click(vars);
+		select_click(vars, img);
 	else if (click_in_button(vars, x, y) == TEXT && button == 1 && (vars->mode == OBJECT_SELECT || vars->mode == OBJECT_SELECT_ARROWS || vars->mode == OBJECT_SELECT_LASTPAGE))
-		select_obj(vars);
+		select_obj(vars, img);
 	else if (click_in_button(vars, x, y) == MENU && button == 1)
-		menu_click(vars);
+		menu_click(vars, img);
 	else if (click_in_button(vars, x, y) == ARROW_L && button == 1)
-		left_arrow_click(vars);
+		left_arrow_click(vars, img);
 	else if (click_in_button(vars, x, y) == ARROW_R && button == 1)
-		right_arrow_click(vars);
+		right_arrow_click(vars, img);
 	return (0);
 }

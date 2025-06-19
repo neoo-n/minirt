@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_window.c                                    :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:14:15 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 14:14:15 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 21:34:40 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 # include <math.h>
 # include <fcntl.h>
 
+typedef enum e_state
+{
+	RENDER,
+	PRERENDER,
+	RENDERING,
+}	t_state;
 typedef enum e_id
 {
 	SPHERE,
@@ -194,6 +200,9 @@ typedef struct s_vars
 	void		*win;
 	t_dataimg	img;
 	t_dataimg	img_copy;
+	t_dataimg	pre_img;
+	t_dataimg	pre_img_copy;
+	t_dataimg	loading_image;
 	t_win_size	win_sizes;
 	t_gen		*gen;
 	int			epsilon;
@@ -204,6 +213,7 @@ typedef struct s_vars
 	int			light_count;
 	int			shape_count;
 	int			page_num;
+	t_state		state;
 }	t_vars;
 
 #endif
