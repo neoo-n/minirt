@@ -21,9 +21,9 @@ CAM		=	camera/camera.c camera/create_window.c \
 FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/abcde.c fonts/fghij.c \
 			fonts/klmno.c fonts/pqrst.c fonts/uvwxy.c \
-			fonts/z0123.c fonts/45678.c fonts/9.c
+			fonts/z0123.c fonts/45678.c fonts/9arrows.c
 
-BUTTONS	=	buttons/buttons.c
+BUTTONS	=	buttons/buttons.c buttons/mouse_click.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

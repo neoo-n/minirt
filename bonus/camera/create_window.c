@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:16:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 23:38:47 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 14:33:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 14:34:25 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	mouse_closing(t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->img_copy.img)
+		mlx_destroy_image(vars->mlx, vars->img_copy.img);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 	free_gen(vars->gen);
@@ -29,6 +31,8 @@ static int	closing(int keycode, t_vars *vars)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_image(vars->mlx, vars->img.img);
+		if (vars->img_copy.img)
+			mlx_destroy_image(vars->mlx, vars->img_copy.img);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 		free_gen(vars->gen);
@@ -43,6 +47,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->img.img)
 		mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->img_copy.img)
+		mlx_destroy_image(vars->mlx, vars->img_copy.img);
 	if (vars->mlx)
 	{
 		mlx_destroy_display(vars->mlx);
@@ -59,8 +65,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 1350.0;
-	vars->win_sizes.y_height = 980.0;
+	vars->win_sizes.x_len = 1600.0;
+	vars->win_sizes.y_height = 1200.0;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);
@@ -92,5 +98,6 @@ void	creating_window(t_gen *gen)
 	camera(&vars, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
+	mlx_mouse_hook(vars.win, &mouse_click, &vars);
 	mlx_loop(vars.mlx);
 }

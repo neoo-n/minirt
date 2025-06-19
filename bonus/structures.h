@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 16:57:49 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 23:38:56 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 14:14:15 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 14:14:15 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef enum e_mode
 	BASIC,
 	OBJECT_SELECT,
 	OBJECT_SELECT_ARROWS,
+	OBJECT_SELECT_LASTPAGE,
 	OBJECT_SETTINGS,
 	GLOBAL_SETTINGS,
 }	t_mode;

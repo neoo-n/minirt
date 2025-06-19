@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 17:06:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 09:27:42 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 14:33:28 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 14:33:49 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,41 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 	return (result);
 }
 
+int	get_colour(t_dataimg *img, int x, int y)
+{
+	char	*dst;
+
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
+
+void	copy_image(t_vars *vars)
+{
+	int	x;
+	int	y;
+	int	colour;
+
+	vars->img_copy.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
+			vars->win_sizes.y_height);
+	if (!vars->img_copy.img)
+		error_exit_vars(vars, "Error mlx img\n", 0);
+	vars->img_copy.addr = mlx_get_data_addr(vars->img_copy.img,
+			&(vars->img_copy.bits_per_pixel), &(vars->img_copy.line_length),
+			&(vars->img_copy.endian));
+	y = 0;
+	while (y < vars->win_sizes.y_height)
+	{
+		x = 0;
+		while (x < vars->win_sizes.x_len)
+		{
+			colour = get_colour(&(vars->img), x, y);
+			my_mlx_pixel_put(&(vars->img_copy), x, y, colour);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	camera(t_vars *vars, int i, int rgb)
 {
 	int				j;
@@ -111,19 +146,8 @@ void	camera(t_vars *vars, int i, int rgb)
 		}
 		i++;
 	}
-	// t_button	test;
-	// test.bx = 300;
-	// test.ex = 600;
-	// test.by = 300;
-	// test.ey = 400;
-	// test.colour = 0xB5AEAE;
-	// test.text = "voici la bite";
-	// test.type = TEXT;
-	vars->img_copy = vars->img;
-	//vars->obj = LIGHT;
-	// make_box(vars, test, 0x000000);
+	copy_image(vars);
 	make_menu(vars, 0, 0);
-	//make_obj_button(vars);
-	display_all_objs(vars);
+	vars->mode = HIDDEN;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
 }
