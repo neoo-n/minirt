@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 17:06:35 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:54:56 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 14:40:17 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 14:40:21 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	draw_part(t_vars *vars, int i, int j, int step)
 		x = i;
 		while (x < i + step)
 		{
-			my_mlx_pixel_put(&(vars->img), x, y, vars->colour);
+			my_mlx_pixel_put(&(vars->img_copy), x, y, vars->colour);
 			x++;
 		}
 		y++;
@@ -88,9 +88,9 @@ t_character	*init_characters(void)
 		return (0);
 	next = res;
 	i = 0;
-	while ("abcdefghijklmnopqrstuvwxyz0123456789"[i])
+	while ("abcdefghijklmnopqrstuvwxyz0123456789<>"[i])
 	{
-		next->c = "abcdefghijklmnopqrstuvwxyz0123456789"[i];
+		next->c = "abcdefghijklmnopqrstuvwxyz0123456789<>"[i];
 		handle_let(next->grid, next->c);
 		next->next = malloc(sizeof(t_character));
 		if (!next->next)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 20:10:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:57:02 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 09:42:26 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 09:42:26 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	handle_let_plus_plus_plus(int grid[7][5], char c)
 		init_8(grid);
 	else if (c == '9')
 		init_9(grid);
+	else if (c == '<')
+		init_l_arrow(grid);
+	else if (c == '>')
+		init_r_arrow(grid);
 }
 
 void	handle_let_plus_plus(int grid[7][5], char c)

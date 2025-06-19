@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 16:51:41 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:51:57 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 09:42:01 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 09:42:01 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,8 @@ void		init_6(int grid[7][5]);
 void		init_7(int grid[7][5]);
 void		init_8(int grid[7][5]);
 void		init_9(int grid[7][5]);
+
+void		init_l_arrow(int larrow[7][5]);
+void		init_r_arrow(int rarrow[7][5]);
 
 #endif

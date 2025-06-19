@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   9.c                                                :+:      :+:    :+:   */
+/*   9<>.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 20:50:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:51:23 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 09:42:08 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 09:42:08 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,35 @@ void	init_9(int nine[7][5])
 	nine[6][2] = 1;
 	nine[6][3] = 1;
 	nine[6][4] = 1;
+	return ;
+}
+
+void	init_l_arrow(int larrow[7][5])
+{
+	init_char(larrow);
+	larrow[1][2] = 1;
+	larrow[2][1] = 1;
+	larrow[3][0] = 1;
+	larrow[3][1] = 1;
+	larrow[3][2] = 1;
+	larrow[3][3] = 1;
+	larrow[3][4] = 1;
+	larrow[4][1] = 1;
+	larrow[5][2] = 1;
+	return ;
+}
+
+void	init_r_arrow(int rarrow[7][5])
+{
+	init_char(rarrow);
+	rarrow[1][2] = 1;
+	rarrow[2][3] = 1;
+	rarrow[3][0] = 1;
+	rarrow[3][1] = 1;
+	rarrow[3][2] = 1;
+	rarrow[3][3] = 1;
+	rarrow[3][4] = 1;
+	rarrow[4][3] = 1;
+	rarrow[5][2] = 1;
 	return ;
 }

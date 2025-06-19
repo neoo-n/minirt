@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 14:57:31 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 21:05:29 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/19 14:33:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/19 14:33:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ t_rgb		norm_rgb(t_rgb rgb);
 t_coords	cyl_n(t_inter shape);
 t_rgb		rgb_mult(t_rgb rgb, double mult);
 t_rgb		rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec);
+void		copy_image(t_vars *vars);
+void		error_exit_vars(t_vars *vars, char *message, int is_perror);
 
 #endif
