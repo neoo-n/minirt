@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 17:06:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 09:26:24 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 09:27:42 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,19 @@ void	camera(t_vars *vars, int i, int rgb)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	// t_button	test;
+	// test.bx = 300;
+	// test.ex = 600;
+	// test.by = 300;
+	// test.ey = 400;
+	// test.colour = 0xB5AEAE;
+	// test.text = "voici la bite";
+	// test.type = TEXT;
+	vars->img_copy = vars->img;
+	//vars->obj = LIGHT;
+	// make_box(vars, test, 0x000000);
+	make_menu(vars, 0, 0);
+	//make_obj_button(vars);
+	display_all_objs(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
 }

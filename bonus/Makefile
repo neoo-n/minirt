@@ -18,17 +18,16 @@ CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \
 			camera/lighting_helper.c
 
-FONTS	=	fonts/font.c fonts/a.c fonts/b.c fonts/c.c \
-			fonts/d.c fonts/e.c fonts/f.c fonts/g.c \
-			fonts/h.c fonts/i.c fonts/j.c fonts/k.c \
-			fonts/l.c fonts/m.c fonts/n.c fonts/o.c \
-			fonts/p.c fonts/q.c fonts/r.c fonts/s.c \
-			fonts/t.c fonts/u.c fonts/v.c fonts/w.c \
-			fonts/x.c fonts/y.c fonts/z.c
+FONTS	=	fonts/font.c fonts/handle_letters.c \
+			fonts/abcde.c fonts/fghij.c \
+			fonts/klmno.c fonts/pqrst.c fonts/uvwxy.c \
+			fonts/z0123.c fonts/45678.c fonts/9.c
+
+BUTTONS	=	buttons/buttons.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 
-SRCS	=	main.c $(GNL) $(PARSING) $(UTILS) $(INTER) $(CAM) $(VECT) $(FONTS)
+SRCS	=	main.c $(GNL) $(PARSING) $(UTILS) $(INTER) $(CAM) $(VECT) $(FONTS) $(BUTTONS)
 OBJS	=	${SRCS:.c=.o}
 CC		=	cc
 CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
