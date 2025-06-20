@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:28:16 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 15:29:57 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/20 20:54:59 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,95 +99,6 @@ void	make_arrows(t_vars *vars, int boxlength, int arrow, t_dataimg img)
 	button.text = "<";
 	if (arrow == -1 || arrow == 0)
 		make_box(vars, button, 0, img);
-}
-
-void	display_all_objs(t_vars *vars, t_dataimg img)
-{
-	t_button	button;
-	int			height;
-
-	button.ex = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.04;
-	button.bx = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.3;
-	button.type = TEXT;
-	button.colour = 0x9c9797;
-	button.ey = (button.ex - button.bx) / 5;
-	if (button.ey > vars->win_sizes.y_height)
-		button.ey = vars->win_sizes.y_height;
-	button.by = vars->win_sizes.y_height * 0.0035;
-	height = button.ey - button.by;
-	if (vars->shape_count == 0 && vars->light_count == 0)
-	{
-		button.text = "camera";
-		make_box(vars, button, 0, img);
-		button.by += height * 1.05;
-		button.ey += height * 1.05;
-	}
-	while (vars->gen->l[vars->light_count] && button.ey + height * 1.05 < vars->win_sizes.y_height - vars->win_sizes.y_height * 0.035)
-	{
-		button.text = "light";
-		make_box(vars, button, 0, img);
-		button.by += height * 1.05;
-		button.ey += height * 1.05;
-		vars->light_count++;
-	}
-	while (vars->gen->shapes[vars->shape_count] && button.ey + height * 1.05 < vars->win_sizes.y_height - vars->win_sizes.y_height * 0.035)
-	{
-		if (vars->gen->shapes[vars->shape_count]->shape == CYLINDER)
-			button.text = "cylinder";
-		if (vars->gen->shapes[vars->shape_count]->shape == SPHERE)
-			button.text = "sphere";
-		if (vars->gen->shapes[vars->shape_count]->shape == PLANE)
-			button.text = "plane";
-		make_box(vars, button, 0, img);
-		button.by += height * 1.05;
-		button.ey += height * 1.05;
-		vars->shape_count++;
-	}
-	if (vars->gen->shapes[vars->shape_count])
-	{
-		vars->mode = OBJECT_SELECT_ARROWS;
-		if (vars->page_num == 1)
-			make_arrows(vars, button.ex - button.bx, 1, img);
-		else
-			make_arrows(vars, button.ex - button.bx, 0, img);
-	}
-	else if (vars->page_num != 1)
-	{
-		make_arrows(vars, button.ex - button.bx, -1, img);
-		vars->mode = OBJECT_SELECT_LASTPAGE;
-	}
-	else
-		vars->mode = OBJECT_SELECT;
-}
-
-void	make_obj_button(t_vars *vars, t_dataimg img)
-{
-	t_button	button;
-
-	button.ex = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.04;
-	button.bx = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.3;
-	button.ey = (button.ex - button.bx) / 5;
-	button.by = vars->win_sizes.y_height * 0.0035;
-	if (button.ey > vars->win_sizes.y_height)
-		button.ey = vars->win_sizes.y_height;
-	button.type = TEXT;
-	button.colour = 0x9c9797;
-	if (vars->obj == NONE)
-		button.text = "no obj selected";
-	else if (vars->obj == CAM)
-		button.text = "cam selected";
-	else if (vars->obj == LIGHT)
-		button.text = "light selected";
-	else if (vars->obj == SHAPE)
-	{
-		if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == CYLINDER)
-			button.text = "cylinder selected";
-		else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == SPHERE)
-			button.text = "sphere selected";
-		else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == PLANE)
-			button.text = "plane selected";
-	}
-	make_box(vars, button, 0, img);
 }
 
 void	make_box(t_vars *vars, t_button button, int text_colour, t_dataimg img)

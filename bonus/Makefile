@@ -24,7 +24,11 @@ FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/z0123.c fonts/45678.c fonts/9arrows.c
 
 BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
-			buttons/key_press.c
+			buttons/key_press.c buttons/button_click.c \
+			buttons/check_click.c buttons/hjkl.c \
+			buttons/menu_helper.c buttons/mod.c \
+			buttons/mouse_click_helper.c buttons/obj_menu.c \
+			buttons/wasd.c buttons/zaxis.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 
