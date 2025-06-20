@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 22:32:21 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 22:59:21 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 00:14:15 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,32 @@ void	h_press(t_vars *vars)
 {
 	if (vars->ambient == ON)
 		vars->ambient = OFF;
-	vars->ambient = ON;
+	else
+		vars->ambient = ON;
 }
 
 void	j_press(t_vars *vars)
 {
 	if (vars->diffuse == ON)
 		vars->diffuse = OFF;
-	vars->diffuse = ON;
+	else
+		vars->diffuse = ON;
 }
 
 void	k_press(t_vars *vars)
 {
 	if (vars->specular == ON)
 		vars->specular = OFF;
-	vars->specular = ON;
+	else
+		vars->specular = ON;
 }
 
 void	l_press(t_vars *vars)
 {
 	if (vars->shadow == ON)
 		vars->shadow = OFF;
-	vars->shadow = ON;
+	else
+		vars->shadow = ON;
 }
 
 void	hjkl_handler(t_vars *vars, int button)
