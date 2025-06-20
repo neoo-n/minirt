@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:42:46 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/20 14:52:23 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 14:52:27 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	camera(t_vars *vars, int i, int rgb)
 					vars->gen->shapes, 0);
 			if (shape.shape)
 			{
-				rgb = get_rgb(shape, vars->gen, vars, 0);
+				rgb = get_rgb(shape, vars->gen, vars);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
 			j++;
@@ -171,7 +171,9 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 	t_button		button;
 	int				block;
 	int				block2;
+	int				pixels;
 
+	pixels = 20;
 	vars->state = PRERENDER;
 	vars->screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
@@ -184,12 +186,12 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 					vars->gen->shapes, 0);
 			if (shape.shape)
 			{
-				rgb = get_rgb(shape, vars->gen, vars, 0);
+				rgb = get_rgb(shape, vars->gen, vars);
 				block = 0;
-				while (block < 10)
+				while (block < pixels)
 				{
 					block2 = 0;
-					while (block2 < 10)
+					while (block2 < pixels)
 					{
 						if (i + block2 < vars->win_sizes.x_len && j + block < vars->win_sizes.y_height)
 							my_mlx_pixel_put(&(vars->pre_img), i + block2, j + block, rgb);
@@ -198,9 +200,9 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 					block++;
 				}
 			}
-			j += 10;
+			j += pixels;
 		}
-		i += 10;
+		i += pixels;
 	}
 	button.colour = 0x9c9797;
 	button.text = "press enter to render";

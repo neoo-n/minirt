@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 14:26:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:44:40 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/20 14:59:05 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 15:06:55 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 	return (spec);
 }
 
+void	turn_off_rgb(t_rgb *rgb)
+{
+	rgb->r = 0;
+	rgb->g = 0;
+	rgb->b = 0;
+}
+
 int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 {
 	int		i;
@@ -81,7 +88,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	amb_light = init_rgb();
 	while (gen->l[i])
 	{
-		if (!in_shade(shape, gen, 0, i))
+		if (!in_shade(shape, gen, 0, i) || vars->shadow == OFF)
 		{
 			light[0] = calc_dif_int(shape, gen->l[i]);
 			light[1] = specular(vars, shape, gen->l[i]);

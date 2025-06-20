@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 15:20:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 22:17:05 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 15:28:16 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 15:29:57 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,14 @@ void	display_all_objs(t_vars *vars, t_dataimg img)
 		button.by += height * 1.05;
 		button.ey += height * 1.05;
 	}
+	while (vars->gen->l[vars->light_count] && button.ey + height * 1.05 < vars->win_sizes.y_height - vars->win_sizes.y_height * 0.035)
+	{
+		button.text = "light";
+		make_box(vars, button, 0, img);
+		button.by += height * 1.05;
+		button.ey += height * 1.05;
+		vars->light_count++;
+	}
 	while (vars->gen->shapes[vars->shape_count] && button.ey + height * 1.05 < vars->win_sizes.y_height - vars->win_sizes.y_height * 0.035)
 	{
 		if (vars->gen->shapes[vars->shape_count]->shape == CYLINDER)
@@ -172,11 +180,11 @@ void	make_obj_button(t_vars *vars, t_dataimg img)
 		button.text = "light selected";
 	else if (vars->obj == SHAPE)
 	{
-		if (vars->gen->shapes[vars->obj_id]->shape == CYLINDER)
+		if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == CYLINDER)
 			button.text = "cylinder selected";
-		else if (vars->gen->shapes[vars->obj_id]->shape == SPHERE)
+		else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == SPHERE)
 			button.text = "sphere selected";
-		else if (vars->gen->shapes[vars->obj_id]->shape == PLANE)
+		else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape == PLANE)
 			button.text = "plane selected";
 	}
 	make_box(vars, button, 0, img);

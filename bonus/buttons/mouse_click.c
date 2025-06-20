@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 15:22:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 22:29:53 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 15:30:11 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 15:30:11 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	clear_image(t_dataimg *img, int width, int height)
 		while (x < width)
 		{
 			dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-			*(unsigned int *)dst = 0x000000; // black
+			*(unsigned int *)dst = 0x000000;
 			x++;
 		}
 		y++;
@@ -41,12 +41,22 @@ int	count_objs(t_vars *vars)
 	return (i + 2);
 }
 
+int	count_lights(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (vars->gen->l[i])
+		i++;
+	return (i);
+}
+
 int	max_for_page(t_vars *vars, int buttons)
 {
 	int	objs;
 	int	max_pages;
 
-	objs = count_objs(vars);
+	objs = count_objs(vars) + count_lights(vars);
 	max_pages = ceil((double) objs / (double) buttons);
 	if (vars->page_num < max_pages)
 		return (buttons);
@@ -219,11 +229,10 @@ void	select_obj(t_vars *vars, t_dataimg img)
 	vars->page_num = 1;
 	if (vars->obj_id == 0)
 		vars->obj = CAM;
+	else if (vars->obj_id <= count_lights(vars))
+		vars->obj = LIGHT;
 	else
-	{
 		vars->obj = SHAPE;
-		vars->obj_id -= 1;
-	}
 	vars->mode = BASIC;
 	make_obj_button(vars, img);
 	make_menu(vars, 0, 0, img);

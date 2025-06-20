@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 10:07:47 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 10:07:47 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/20 15:20:50 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 15:20:50 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		key_press(int button, t_vars *vars);
 int 	render_next_frame(t_vars *vars);
 void	clear_image(t_dataimg *img, int width, int height);
 long	current_time(void);
+int		count_lights(t_vars *vars);
 
 #endif
