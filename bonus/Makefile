@@ -3,9 +3,9 @@ NAME	=	minirt
 GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
 
 PARSING =	parsing/handle_shapes.c parsing/handling.c \
-			parsing/helper.c parsing/initialization.c \
-			parsing/insert.c parsing/validation.c \
-			parsing/handle_helper.c
+			parsing/helper.c parsing/helper2.c \
+			parsing/initialization.c parsing/insert.c \
+			parsing/validation.c parsing/handle_helper.c
 
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
@@ -16,7 +16,7 @@ INTER	= 	intersections/cylinder.c intersections/plane.c \
 
 CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \
-			camera/lighting_helper.c
+			camera/lighting_helper.c camera/rgb_utils.c
 
 FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/abcde.c fonts/fghij.c \

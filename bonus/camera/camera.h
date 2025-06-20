@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:33:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 21:53:42 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 14:43:47 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ void		creating_window(t_gen *gen);
 void		my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 void		camera(t_vars *vars, int i, int rgb);
 void		pre_camera(t_vars *vars, int i, int rgb);
-int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double angle);
+int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars);
 t_inter		find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 				t_shape *check_shape);
-t_coords	calc_norm(t_inter shape, t_coords ray);
-t_rgb		norm_rgb(t_rgb rgb);
+
 t_coords	cyl_n(t_inter shape);
+t_coords	calc_norm(t_inter shape, t_coords ray);
+
+t_rgb		init_rgb(void);
+t_rgb		rgb_sum(t_rgb l1, t_rgb l2);
+t_rgb		norm_rgb(t_rgb rgb);
 t_rgb		rgb_mult(t_rgb rgb, double mult);
 t_rgb		rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec);
 void		copy_image(t_vars *vars);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 16:38:52 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 20:02:41 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 14:45:23 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 14:45:23 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,15 @@ void	free_gen(t_gen *gen)
 	if (gen->c)
 		free(gen->c);
 	if (gen->l)
+	{
+		i = 0;
+		while (gen->l[i])
+		{
+			free(gen->l[i]);
+			i++;
+		}
 		free(gen->l);
+	}
 	if (gen->shapes)
 	{
 		i = 0;

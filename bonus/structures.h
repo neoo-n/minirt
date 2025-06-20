@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:20:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 11:27:34 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/20 14:46:41 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ typedef struct s_gen
 {
 	t_amb		*a;
 	t_cam		*c;
-	t_light		*l;
+	t_light		**l;
 	t_shape		**shapes;
 	t_character	*character;
 }	t_gen;
