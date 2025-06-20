@@ -6,29 +6,11 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:51:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 17:30:46 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/20 11:59:12 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-
-t_coords	calc_norm(t_inter shape, t_coords ray)
-{
-	t_coords	n;
-
-	if (shape.shape->shape == PLANE)
-	{
-		n = shape.shape->vector;
-		return (n);
-	}
-	else if (shape.shape->shape == SPHERE)
-		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
-	else if (shape.shape->shape == CYLINDER)
-		n = cyl_n(shape);
-	if (dot_prod(n, ray) > 0)
-		n = vect_mult(n, -1);
-	return (n);
-}
 
 int	in_shade(t_inter shape, t_gen *gen, double angle)
 {
@@ -90,33 +72,35 @@ double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 	return (spec);
 }
 
-int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
+
+
+int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 {
 	int		i;
-	double	spec;
+	double	light[2];
 	t_rgb	spec_light;
 	t_rgb	dif_light;
 	t_rgb	amb_light;
 	t_rgb	shape_col;
 
 	i = 0;
-	if (in_shade(shape, gen, 0))
+	while (gen->l[i])
 	{
-		dif_int = 0;
-		spec = 0;
-	}
-	else
-	{
-		while (gen->l[i])
+		if (in_shade(shape, gen, 0))
 		{
-			dif_int += calc_dif_int(shape, gen, gen->l[i]);
-			spec += specular(vars, shape, gen->l[i]);
-			i++;
+			light[0] = 0;
+			light[1] = 0;
 		}
+		else
+		{
+			light[0] += calc_dif_int(shape, gen, gen->l[i]);
+			light[1] += specular(vars, shape, gen->l[i]);
+		}
+		dif_light = rgb_mult(norm_rgb(gen->l[i]->rgb), light[0]);
+		spec_light = rgb_mult(norm_rgb(gen->l[i]->rgb), light[1] * gen->l[i]->bright);
+		amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
+		i++;
 	}
-	dif_light = rgb_mult(norm_rgb(gen->l->rgb), dif_int);
-	spec_light = rgb_mult(norm_rgb(gen->l->rgb), spec * gen->l->bright);
-	amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
 	shape_col = rgb_final(norm_rgb(shape.shape->rgb), amb_light,
 			dif_light, spec_light);
 	return ((int)(shape_col.r * 255) << 16 | (int)(shape_col.g * 255) << 8

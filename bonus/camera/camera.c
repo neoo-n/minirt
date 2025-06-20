@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:06:01 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/20 11:54:53 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	camera(t_vars *vars, int i, int rgb)
 			if (shape.shape)
 			{
 				if (j % 1 == 0 && i % 1 == 0)
-					rgb = get_rgb(shape, vars->gen, vars, 0);
+					rgb = get_rgb(shape, vars->gen, vars);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
 			j++;

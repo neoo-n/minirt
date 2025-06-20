@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:08:42 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/20 11:55:04 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void		creating_window(t_gen *gen);
 void		my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 void		camera(t_vars *vars, int i, int rgb);
-int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double angle);
+int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars);
 t_inter		find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 				t_shape *check_shape);
 t_coords	calc_norm(t_inter shape, t_coords ray);

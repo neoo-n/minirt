@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:08:36 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/20 11:58:53 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-
-t_rgb	norm_rgb(t_rgb rgb)
-{
-	rgb.r = rgb.r / 255;
-	rgb.g = rgb.g / 255;
-	rgb.b = rgb.b / 255;
-	return (rgb);
-}
 
 t_coords	cyl_n(t_inter shape)
 {
@@ -38,6 +30,32 @@ t_coords	cyl_n(t_inter shape)
 		n = vect_normalised(vect_sub(shape.point, x));
 	}
 	return (n);
+}
+
+t_coords	calc_norm(t_inter shape, t_coords ray)
+{
+	t_coords	n;
+
+	if (shape.shape->shape == PLANE)
+	{
+		n = shape.shape->vector;
+		return (n);
+	}
+	else if (shape.shape->shape == SPHERE)
+		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
+	else if (shape.shape->shape == CYLINDER)
+		n = cyl_n(shape);
+	if (dot_prod(n, ray) > 0)
+		n = vect_mult(n, -1);
+	return (n);
+}
+
+t_rgb	norm_rgb(t_rgb rgb)
+{
+	rgb.r = rgb.r / 255;
+	rgb.g = rgb.g / 255;
+	rgb.b = rgb.b / 255;
+	return (rgb);
 }
 
 t_rgb	rgb_mult(t_rgb rgb, double mult)
