@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:33:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 22:29:08 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 11:36:52 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 11:36:52 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,16 +138,14 @@ void	camera(t_vars *vars, int i, int rgb)
 	int				j;
 	t_inter			shape;
 	t_coords		vect;
-	t_cam_screen	screen;
 
 	vars->state = RENDER;
-	screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
 	{
 		j = 0;
 		while (j < vars->win_sizes.y_height)
 		{
-			vect = camera_vect(vars, i, j, screen);
+			vect = camera_vect(vars, i, j, vars->screen);
 			shape = find_closest_shape(vect, vars->gen->c->coords,
 					vars->gen->shapes, 0);
 			if (shape.shape)
@@ -170,29 +168,28 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 	int				j;
 	t_inter			shape;
 	t_coords		vect;
-	t_cam_screen	screen;
 	t_button		button;
 	int				block;
 	int				block2;
 
 	vars->state = PRERENDER;
-	screen = screen_calcul(vars);
+	vars->screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
 	{
 		j = 0;
 		while (j < vars->win_sizes.y_height)
 		{
-			vect = camera_vect(vars, i, j, screen);
+			vect = camera_vect(vars, i, j, vars->screen);
 			shape = find_closest_shape(vect, vars->gen->c->coords,
 					vars->gen->shapes, 0);
 			if (shape.shape)
 			{
 				rgb = get_rgb(shape, vars->gen, vars, 0);
 				block = 0;
-				while (block < 15)
+				while (block < 10)
 				{
 					block2 = 0;
-					while (block2 < 15)
+					while (block2 < 10)
 					{
 						if (i + block2 < vars->win_sizes.x_len && j + block < vars->win_sizes.y_height)
 							my_mlx_pixel_put(&(vars->pre_img), i + block2, j + block, rgb);
@@ -201,9 +198,9 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 					block++;
 				}
 			}
-			j += 15;
+			j += 10;
 		}
-		i += 15;
+		i += 10;
 	}
 	button.colour = 0x9c9797;
 	button.text = "press enter to render";

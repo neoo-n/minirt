@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 15:51:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:51:40 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/20 10:38:18 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 10:38:18 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ double	specular(t_vars *vars, t_inter shape)
 	return (spec);
 }
 
+void	turn_off_rgb(t_rgb *rgb)
+{
+	rgb->r = 0;
+	rgb->g = 0;
+	rgb->b = 0;
+}
+
 int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 {
 	double	spec;
@@ -93,7 +100,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 	t_rgb	amb_light;
 	t_rgb	shape_col;
 
-	if (in_shade(shape, gen, 0))
+	if (in_shade(shape, gen, 0) && vars->shadow == ON)
 	{
 		dif_int = 0;
 		spec = 0;
@@ -106,6 +113,12 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double dif_int)
 	dif_light = rgb_mult(norm_rgb(gen->l->rgb), dif_int);
 	spec_light = rgb_mult(norm_rgb(gen->l->rgb), spec * gen->l->bright);
 	amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
+	if (vars->ambient == OFF)
+		turn_off_rgb(&amb_light);
+	if (vars->specular == OFF)
+		turn_off_rgb(&spec_light);
+	if (vars->diffuse == OFF)
+		turn_off_rgb(&dif_light);
 	shape_col = rgb_final(norm_rgb(shape.shape->rgb), amb_light,
 			dif_light, spec_light);
 	return ((int)(shape_col.r * 255) << 16 | (int)(shape_col.g * 255) << 8

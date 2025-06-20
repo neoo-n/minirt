@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:14:15 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 21:34:40 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 11:20:40 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 11:27:34 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,33 @@
 # define STRUCTURES_H
 # include <math.h>
 # include <fcntl.h>
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define Q 113
+# define E 101
+# define ZERO 48
+# define NINE 57
+# define X 120
+# define Z 122
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65364
+# define PLUS 61
+# define MINUS 45
+# define ENTER 65293
+# define H 104
+# define J 106
+# define K 107
+# define L 108
+
+typedef enum e_toggle
+{
+	ON,
+	OFF,
+}	t_toggle;
 
 typedef enum e_state
 {
@@ -21,6 +48,7 @@ typedef enum e_state
 	PRERENDER,
 	RENDERING,
 }	t_state;
+
 typedef enum e_id
 {
 	SPHERE,
@@ -196,24 +224,30 @@ typedef struct s_win_size
 
 typedef struct s_vars
 {
-	void		*mlx;
-	void		*win;
-	t_dataimg	img;
-	t_dataimg	img_copy;
-	t_dataimg	pre_img;
-	t_dataimg	pre_img_copy;
-	t_dataimg	loading_image;
-	t_win_size	win_sizes;
-	t_gen		*gen;
-	int			epsilon;
-	int			colour;
-	t_mode		mode;
-	t_obj		obj;
-	int			obj_id;
-	int			light_count;
-	int			shape_count;
-	int			page_num;
-	t_state		state;
+	void			*mlx;
+	void			*win;
+	t_dataimg		img;
+	t_dataimg		img_copy;
+	t_dataimg		pre_img;
+	t_dataimg		pre_img_copy;
+	t_dataimg		loading_image;
+	t_win_size		win_sizes;
+	t_gen			*gen;
+	int				epsilon;
+	int				colour;
+	t_mode			mode;
+	t_obj			obj;
+	int				obj_id;
+	int				light_count;
+	int				shape_count;
+	int				page_num;
+	t_state			state;
+	long			starttime;
+	t_toggle		shadow;
+	t_toggle		specular;
+	t_toggle		ambient;
+	t_toggle		diffuse;
+	t_cam_screen	screen;
 }	t_vars;
 
 #endif

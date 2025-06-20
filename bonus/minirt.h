@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:26:30 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 09:43:28 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 09:52:05 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 09:52:05 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "fonts/fonts.h"
 # include "buttons/buttons.h"
 # include <math.h>
+# include <unistd.h>
 # include <stdio.h>
 
 #endif

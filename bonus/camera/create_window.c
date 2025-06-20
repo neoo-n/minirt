@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:33:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 22:27:09 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/20 10:30:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/20 10:30:42 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,11 @@ void	creating_window(t_gen *gen)
 	vars.page_num = 1;
 	vars.epsilon = 1;
 	vars.gen = gen;
+	vars.ambient = ON;
+	vars.specular = ON;
+	vars.diffuse = ON;
+	vars.shadow = ON;
+	vars.starttime = current_time();
 	button.colour = 0x9c9797;
 	button.text = "rendering";
 	button.type = TEXT;
