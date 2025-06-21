@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane2.c                                           :+:      :+:    :+:   */
+/*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:09:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 14:09:28 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
 	double		t;
 
 	denom = dot_prod(plane->vector, ray);
-	if (fabs(denom) < 1e-6)
+	if (fabs(denom) < 1e-8)
 		return (-1);
 	diff = vect_sub(plane->coords, origin);
 	numerator = dot_prod(diff, plane->vector);
 	t = numerator / denom;
-	if (t < 1e-6)
+	if (t < 1e-8)
 		return (-1);
 	return (t);
 }

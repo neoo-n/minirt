@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:59:05 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 15:06:55 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 	t_coords	newpoint;
 
 	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
-	if (angle >= -1e-6)
+	if (angle >= -1e-8)
 		return (1);
 	newray = vect_normalised(vect_sub(gen->l[i]->coords, shape.point));
 	closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
@@ -30,7 +30,7 @@ int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 	dist[0] = dot_prod(vect_sub(shape.point, gen->l[i]->coords), newray);
 	newpoint = vect_add(shape.point, vect_mult(newray, closest_shape.t));
 	dist[1] = dot_prod(vect_sub(shape.point, newpoint), newray);
-	if (dist[0] < dist[1] - 1e-6)
+	if (dist[0] < dist[1] - 1e-8)
 		return (1);
 	return (0);
 }
@@ -42,7 +42,7 @@ double	calc_dif_int(t_inter shape, t_light	*light)
 
 	light_dir = vect_normalised(vect_sub(light->coords, shape.point));
 	angle = dot_prod(shape.normal, light_dir);
-	if (angle <= 1e-6)
+	if (angle <= 1e-8)
 		return (0);
 	return (angle * light->bright);
 }

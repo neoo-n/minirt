@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 11:37:01 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:30:26 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double	check_caps(t_coords ray, t_coords origin, t_shape *cyl, double t)
 	cap.coords = vect_add(cyl->coords, vect_mult(cyl->vector, cyl->height / 2));
 	cap.vector = cyl->vector;
 	intersect = plane_intersect(ray, origin, &cap);
-	if (intersect > 1e-6)
+	if (intersect > 1e-8)
 		if (inter_dist(ray, origin, cap) <= pow(cyl->diam / 2, 2))
 			if (intersect < t || t == -1)
 				t = intersect;
@@ -44,7 +44,7 @@ double	check_caps(t_coords ray, t_coords origin, t_shape *cyl, double t)
 			vect_mult(cyl->vector, cyl->height / 2));
 	cap.vector = cyl->vector;
 	intersect = plane_intersect(ray, origin, &cap);
-	if (intersect > 1e-6)
+	if (intersect > 1e-8)
 		if (inter_dist(ray, origin, cap) <= pow(cyl->diam / 2, 2))
 			if (intersect < t || t == -1)
 				t = intersect;

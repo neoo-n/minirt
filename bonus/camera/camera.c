@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:52:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 15:42:33 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 			continue ;
 		temp.shape = shapes[i];
 		temp.t = get_intersection(ray, origin, temp.shape);
-		if (temp.t > 1e-6 && (result.t == -1 || temp.t < result.t))
+		if (temp.t > 1e-8 && (result.t == -1 || temp.t < result.t))
 			result = temp;
 	}
 	if (result.shape)

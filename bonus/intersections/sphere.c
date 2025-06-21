@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:33:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/16 15:35:12 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	check_in_sphere(t_coords ray, t_coords origin,
 
 	point = vect_add(origin, vect_mult(ray, t));
 	dist = vect_dist(point, sphere->coords);
-	if (fabs(dist - sphere->diam / 2) > 1e-6)
+	if (fabs(dist - sphere->diam / 2) > 1e-8)
 		return (-1);
 	return (t);
 }
