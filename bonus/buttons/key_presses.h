@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 22:02:35 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 22:34:15 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:28:49 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	wasd_handler(int button, t_vars *vars, int light_count);
 void	mod_handler(int button, t_vars *vars, int light_count);
 void	zaxis_handler(int button, t_vars *vars, int light_count);
 void	hjkl_handler(t_vars *vars, int button);
+void	arrow_handler(int button, t_vars *vars, int light_count);
 
 #endif

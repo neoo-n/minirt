@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:20:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:46:41 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/21 15:39:35 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ typedef struct s_character
 	struct s_character	*next;
 }	t_character;
 
-
 typedef struct s_rgb
 {
 	double	r;
@@ -158,6 +157,8 @@ typedef struct s_cam
 {
 	t_coords	coords;
 	t_coords	vector;
+	t_coords	up;
+	t_coords	right;
 	double		fov;
 }	t_cam;
 

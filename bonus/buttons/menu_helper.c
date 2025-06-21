@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 20:50:47 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 00:15:06 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:15:07 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void	make_obj_button(t_vars *vars, t_dataimg img)
 	else if (vars->obj == SHAPE)
 		shape_text(vars, &button, &num);
 	make_box(vars, button, 0, img);
-	if (vars->obj == CAM || vars->obj == SHAPE)
+	if (vars->obj == LIGHT || vars->obj == SHAPE)
 		free(num);
 }

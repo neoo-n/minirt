@@ -28,7 +28,7 @@ BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
 			buttons/check_click.c buttons/hjkl.c \
 			buttons/menu_helper.c buttons/mod.c \
 			buttons/mouse_click_helper.c buttons/obj_menu.c \
-			buttons/wasd.c buttons/zaxis.c
+			buttons/wasd.c buttons/zaxis.c buttons/arrows.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 
@@ -92,7 +92,7 @@ header:
 
 ${NAME}:	${OBJS} ${MLX}
 	@echo -n "${BLUE}"
-	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME} ${MLX_FLAGS}
+	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME} ${MLX_FLAGS} -g
 	@echo -n "${END}"
 
 %.o: %.c

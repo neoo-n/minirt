@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:33:08 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 23:29:42 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:29:22 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	key_press(int button, t_vars *vars)
 			mod_handler(button, vars, light_count);
 		else if (button == E || button == Q || button == Z || button == X)
 			zaxis_handler(button, vars, light_count);
+		else if (button == UP || button == DOWN || button == LEFT || button == RIGHT)
+			arrow_handler(button, vars, light_count);
 	}
 	return (0);
 }

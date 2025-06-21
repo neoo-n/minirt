@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:40:17 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 20:44:59 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:01:40 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,15 @@ t_character	*init_characters(void)
 	{
 		next->c = "abcdefghijklmnopqrstuvwxyz0123456789<>"[i];
 		handle_let(next->grid, next->c);
-		next->next = malloc(sizeof(t_character));
-		if (!next->next)
+		if (i < 37)
+			next->next = malloc(sizeof(t_character));
+		if (i < 37 && !next->next)
 		{
 			free_characters(res);
 			return (0);
 		}
-		next = next->next;
+		if (i < 37)
+			next = next->next;
 		i++;
 	}
 	next->next = 0;
