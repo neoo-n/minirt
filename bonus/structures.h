@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/13 14:58:33 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:54:37 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef enum e_id
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	CONE
+	CONE,
+	TORUS
 }	t_id;
 
 typedef enum e_errmes

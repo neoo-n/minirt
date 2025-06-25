@@ -6,13 +6,13 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:07:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 14:35:13 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:02:29 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	handle_sp(t_gen *gen, char *line, int i)
+int		handle_sp(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -38,7 +38,7 @@ int	handle_sp(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int	handle_pl(t_gen *gen, char *line, int i)
+int		handle_pl(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -66,7 +66,7 @@ int	handle_pl(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int	c_helper(t_shape *shape, char *line, int i)
+int		c_helper(t_shape *shape, char *line, int i)
 {
 	i = parse_double(line, i, &shape->diam);
 	if (i == -1)
@@ -80,16 +80,27 @@ int	c_helper(t_shape *shape, char *line, int i)
 	return (i);
 }
 
-int	handle_cs(t_gen *gen, char *line, int i)
+static t_id	which_type_ct(char *line)
+{
+	if (line[0] == 'c')
+	{
+		if (line[1] == 'y')
+			return (CYLINDER);
+		else
+			return (CONE);
+	}
+	else
+		return (TORUS);
+}
+
+int		handle_cts(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
 	shape = malloc(sizeof(t_shape));
 	if (!shape)
 		return (0);
-	shape->shape = CYLINDER;
-	if (line[1] == 'o')
-		shape->shape = CONE;
+	shape->shape = which_type_ct(line);
 	i = parse_coords(line, next_elem(line, 0), &shape->coords);
 	if (i == -1)
 		return (free(shape), 0);

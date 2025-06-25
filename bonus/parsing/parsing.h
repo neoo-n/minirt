@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:31:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 14:34:15 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:02:05 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		handle_l(t_gen *gen, char *line, int i);
 
 int		handle_sp(t_gen *gen, char *line, int i);
 int		handle_pl(t_gen *gen, char *line, int i);
-int		handle_cs(t_gen *gen, char *line, int i);
+int		handle_cts(t_gen *gen, char *line, int i);
 
 int		is_numeric(char *str);
 int		arr_len(char **arr);
