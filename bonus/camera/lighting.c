@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 14:59:05 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/25 15:04:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/25 15:16:41 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 					2 * dot_prod(light, shape.normal)), light));
 	prod_rv = dot_prod(refl, shape.ray);
 	if (prod_rv > 0)
-		spec = pow(prod_rv, 25);
+		spec = pow(prod_rv, SHINY);
 	else
 		spec = 0;
 	return (spec);
@@ -81,6 +81,7 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 	t_rgb	dif_light;
 	t_rgb	amb_light;
 	t_rgb	shape_col;
+	double	fog;
 
 	i = 0;
 	spec_light = init_rgb();
@@ -103,7 +104,13 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 				light[1] * gen->l[i]->bright));
 		i++;
 	}
+	fog = (shape.t - 30) / (100 - 30);
+	if (fog > 1)
+		fog = 1;
+	else if (fog < 0)
+		fog = 0;
 	amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
+	amb_light = rgb_mult(amb_light, 1 - fog);
 	if (vars->ambient == OFF)
 		turn_off_rgb(&amb_light);
 	if (vars->specular == OFF)

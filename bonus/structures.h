@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 11:20:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 15:39:35 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/25 15:00:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/25 15:04:00 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@
 # define J 106
 # define K 107
 # define L 108
+# ifndef X_LEN
+#  define X_LEN 1920.0
+# endif
+# ifndef Y_HEIGHT
+#  define Y_HEIGHT 1080.0
+# endif
+# ifndef SHINY
+#  define SHINY 25
+# endif
+# ifndef ROUGH
+#  define ROUGH 0.9
+# endif
+
 
 typedef enum e_toggle
 {

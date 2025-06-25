@@ -39,6 +39,11 @@ CFLAGS	=	-Werror -Wextra -Wall -I. -I./minilibx-linux
 MLX_FLAGS = -lmlx -lXext -lX11 -L./minilibx-linux -lm
 MLX 	= minilibx-linux/libmlx_Linux.a
 
+X_LEN    ?= 1920
+Y_HEIGHT ?= 1080
+
+CFLAGS += -DX_LEN=$(X_LEN) -DY_HEIGHT=$(Y_HEIGHT)
+
 # Colors and style
 END		:= \033[0m
 WHITE	:= \033[1;37m
@@ -92,7 +97,7 @@ header:
 
 ${NAME}:	${OBJS} ${MLX}
 	@echo -n "${BLUE}"
-	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME} ${MLX_FLAGS} -g
+	${CC} ${CFLAGS} ${OBJS} -lm -o ${NAME} ${MLX_FLAGS}
 	@echo -n "${END}"
 
 %.o: %.c
