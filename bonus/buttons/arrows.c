@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 15:25:12 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 15:49:20 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/24 15:10:09 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/24 15:15:50 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	up_press(t_vars *vars, int light_count)
 
 	shape_id = vars->obj_id - light_count - 1;
 	(void) shape_id;
-	if (vars->obj == CAM)
+	if (vars->obj == CAM && vars->gen->c->vector.y > -0.999)
 	{
 		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x + vars->screen.vect_y.x * 0.05;
 		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y + vars->screen.vect_y.y * 0.05;
@@ -47,7 +47,7 @@ void	down_press(t_vars *vars, int light_count)
 
 	shape_id = vars->obj_id - light_count - 1;
 	(void) shape_id;
-	if (vars->obj == CAM)
+	if (vars->obj == CAM && vars->gen->c->vector.y < 0.999)
 	{
 		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x - vars->screen.vect_y.x * 0.05;
 		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y - vars->screen.vect_y.y * 0.05;

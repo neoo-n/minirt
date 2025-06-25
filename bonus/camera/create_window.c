@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 10:30:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 16:17:44 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/24 14:23:57 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/24 14:32:41 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 
 static void	creating_all(t_vars *vars)
 {
-	vars->win_sizes.x_len = 1600.0;
-	vars->win_sizes.y_height = 1200.0;
+	vars->win_sizes.x_len = 1000.0;
+	vars->win_sizes.y_height = 600.0;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit_vars(vars, "Error mlx_init\n", 0);

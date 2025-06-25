@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 21:35:08 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 21:35:23 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/24 15:02:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/24 15:06:20 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	max_for_page(t_vars *vars, int buttons)
 	max_pages = ceil((double) objs / (double) buttons);
 	if (vars->page_num < max_pages)
 		return (buttons);
+	if (objs % buttons == 0)
+		return  (buttons - 1);
 	return ((objs % buttons) - 1);
 }
 

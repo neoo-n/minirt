@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 09:52:39 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:45:45 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/24 15:21:57 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/24 21:12:04 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	main(int argc, char **argv)
 		return (print_error(INCOMP_ELEM, 0, 0));
 	}
 	gen->character = init_characters();
+	gen->c->vector = vect_normalised(gen->c->vector);
 	creating_window(gen);
 	free_gen(gen);
 	return (0);
