@@ -12,11 +12,12 @@ UTILS	=	utils/atoi.c utils/errors.c \
 			utils/split.c utils/angle_calcul.c
 
 INTER	= 	intersections/cylinder.c intersections/plane.c \
-			intersections/sphere.c intersections/cone.c
+			intersections/sphere.c intersections/cone.c \
+			intersections/torus.c
 
 CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \
-			camera/lighting_helper.c
+			camera/lighting_helper.c camera/rgb_utils.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

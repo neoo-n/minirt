@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:29:43 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 14:44:25 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:44:13 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane);
 double	cyl_intersect(t_coords ray, t_coords origin,
 				t_shape *cyl, double t);
 double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t);
+double	torus_intersect(t_coords ray, t_coords origin, t_shape *torus,
+				t_inter *shape);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 14:41:50 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/26 16:43:58 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static t_coords	camera_vect(t_vars *vars, int i, int j, t_cam_screen screen)
 	return (vect_ij);
 }
 
-double	get_intersection(t_coords ray, t_coords origin, t_shape *shape)
+double	get_intersection(t_coords ray, t_coords origin, t_shape *shape,
+	t_inter *temp)
 {
 	if (shape->shape == CYLINDER)
 		return (cyl_intersect(ray, origin, shape, 0));
@@ -56,6 +57,8 @@ double	get_intersection(t_coords ray, t_coords origin, t_shape *shape)
 		return (plane_intersect(ray, origin, shape));
 	if (shape->shape == CONE)
 		return (cone_intersect(ray, origin, shape, 0));
+	if (shape->shape == TORUS)
+		return (torus_intersect(ray, origin, shape, temp));
 	return (-1);
 }
 
@@ -74,7 +77,7 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 		if (shapes[i] == check_shape)
 			continue ;
 		temp.shape = shapes[i];
-		temp.t = get_intersection(ray, origin, temp.shape);
+		temp.t = get_intersection(ray, origin, temp.shape, &temp);
 		if (temp.t > 1e-6 && (result.t == -1 || temp.t < result.t))
 			result = temp;
 	}
