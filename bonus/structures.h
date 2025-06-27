@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 10:37:53 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 17:21:57 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 11:22:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 11:22:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ typedef enum e_type
 	ARROW_R,
 	TEXT,
 	EMPTY,
+	PRINT,
+	SETTINGS,
+	RESET,
 }	t_type;
 
 typedef enum e_obj

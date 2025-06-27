@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 15:30:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 23:08:14 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/27 11:48:24 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 11:48:24 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ void	select_obj(t_vars *vars, t_dataimg img)
 	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 }
 
+void	reset_gen(t_vars *vars)
+{
+	t_gen *gen;
+
+	gen = copy_gen(vars->gen->saved_gen);
+	free_gen(vars->gen);
+	vars->gen = gen;
+	vars->gen->character = init_characters();
+	vars->gen->saved_gen = copy_gen(vars->gen);
+	vars->state = RENDERING;
+	mlx_put_image_to_window(vars->mlx, vars->win,
+		vars->loading_image.img, 0, 0);
+}
+
 int	mouse_click(int button, int x, int y, t_vars *vars)
 {
 	t_dataimg	img;
@@ -46,6 +60,12 @@ int	mouse_click(int button, int x, int y, t_vars *vars)
 		return (0);
 	if (click_in_button(vars, x, y) == TEXT && vars->mode == BASIC)
 		select_click(vars, img);
+	else if (click_in_button(vars, x, y) == SETTINGS && vars->mode == BASIC)
+		printf("SETTINGS\n");
+	else if (click_in_button(vars, x, y) == PRINT && vars->mode == BASIC)
+		print_gen(vars->gen);
+	else if (click_in_button(vars, x, y) == RESET && vars->mode == BASIC)
+		reset_gen(vars);
 	else if (click_in_button(vars, x, y) == TEXT && (check_select_mode(vars)))
 		select_obj(vars, img);
 	else if (click_in_button(vars, x, y) == MENU)
