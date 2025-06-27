@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:32:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 11:32:11 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 13:29:26 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 14:49:19 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	render_next_frame(t_vars *vars)
 		vars->light_count = 0;
 		vars->shape_count = 0;
 		vars->page_num = 1;
-		vars->obj = NONE;
 		camera(vars, 0, 0);
 	}
 	return (0);

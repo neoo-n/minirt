@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:22:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 11:22:07 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 14:11:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 14:11:58 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ typedef enum e_type
 	PRINT,
 	SETTINGS,
 	RESET,
+	ADD_OBJ,
+	LIGHT_ADD,
+	CYL_ADD,
+	PLANE_ADD,
+	SPHERE_ADD,
 }	t_type;
 
 typedef enum e_obj
@@ -105,6 +110,7 @@ typedef enum e_mode
 	OBJECT_SELECT_LASTPAGE,
 	OBJECT_SETTINGS,
 	GLOBAL_SETTINGS,
+	OBJ_ADD,
 }	t_mode;
 
 typedef enum e_errmes

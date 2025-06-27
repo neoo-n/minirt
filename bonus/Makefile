@@ -27,6 +27,7 @@ BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
 			buttons/button_click.c \
 			buttons/check_click.c buttons/menu_helper.c \
 			buttons/mouse_click_helper.c buttons/obj_menu.c \
+			buttons/new_shape.c
 
 KEYS	=	keys/arrows.c keys/hjkl.c keys/key_press.c \
 			keys/mod.c keys/wasd.c keys/zaxis.c

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 10:18:14 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 10:18:14 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 14:16:46 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 14:16:46 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,8 @@ void	right_arrow_click(t_vars *vars, t_dataimg img);
 void	left_arrow_click(t_vars *vars, t_dataimg img);
 t_bool	check_select_mode(t_vars *vars);
 void	make_arrows(t_vars *vars, int boxlength, int arrow, t_dataimg img);
+
+void	add_obj(t_vars *vars, t_dataimg img);
+void	new_obj(t_vars *vars, t_type obj);
 
 #endif

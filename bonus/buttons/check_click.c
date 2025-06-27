@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:21:57 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 11:21:57 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 14:11:13 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 14:11:13 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,21 @@ t_type	click_in_button(t_vars *vars, int x, int y)
 	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
 		&& y >= but_sy + (but_height * 3.15) && y <= (but_sy + but_height + (but_height * 3.15)))
 		return (RESET);
+	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 4.2) && y <= (but_sy + but_height + (but_height * 4.2)))
+		return (ADD_OBJ);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy && y <= but_sy + but_height)
+		return (LIGHT_ADD);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 1.05) && y <= (but_sy + but_height + (but_height * 1.05)))
+		return (SPHERE_ADD);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 2.1) && y <= (but_sy + but_height + (but_height * 2.1)))
+		return (PLANE_ADD);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 3.15) && y <= (but_sy + but_height + (but_height * 3.15)))
+		return (CYL_ADD);
 	else if (check_select_mode(vars))
 	{
 		if (vars->mode != OBJECT_SELECT && (check_arrow_click(vars, x, y, b_len)
