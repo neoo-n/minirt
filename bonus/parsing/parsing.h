@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   key_presses.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 14:31:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 15:15:48 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/26 09:53:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/26 09:53:58 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../structures.h"
 # include "../gnl/get_next_line.h"
 # include "../utils/utils.h"
+# include "../buttons/buttons.h"
 
 int		parse_coords(char *line, int i, t_coords *coords);
 int		parse_double(char *line, int i, double *value);
@@ -39,6 +40,7 @@ t_gen	*parse_file(int fd, int i);
 
 void	ins_coords(char *str, t_coords *coords);
 void	ins_rgb(char *str, t_rgb *rgb);
+t_gen	*copy_gen(t_gen *o_gen);
 
 int		valid_line(char *line);
 int		valid_ratio(char *str);

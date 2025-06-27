@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 15:00:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/25 15:04:00 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/26 10:37:53 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/26 17:21:57 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@
 #  define ROUGH 0.9
 # endif
 
+typedef	enum e_bool
+{
+	TRUE = 1,
+	FALSE = 0,
+}	t_bool;
 
 typedef enum e_toggle
 {
@@ -170,8 +175,8 @@ typedef struct s_cam
 {
 	t_coords	coords;
 	t_coords	vector;
-	t_coords	up;
-	t_coords	right;
+	// t_coords	up;
+	// t_coords	right;
 	double		fov;
 }	t_cam;
 
@@ -219,6 +224,7 @@ typedef struct s_gen
 	t_light		**l;
 	t_shape		**shapes;
 	t_character	*character;
+	struct s_gen	*saved_gen;
 }	t_gen;
 
 typedef struct s_dataimg

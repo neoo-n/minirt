@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:43:47 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 10:28:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 10:29:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CAMERA_H
 # include "../structures.h"
 # include "../minirt.h"
+# include "../parsing/parsing.h"
+# include "../features/features.h"
 
 void		creating_window(t_gen *gen);
 void		my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
@@ -34,5 +36,7 @@ t_rgb		rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec);
 void		copy_image(t_vars *vars);
 void		copy_pre_image(t_vars *vars);
 void		error_exit_vars(t_vars *vars, char *message, int is_perror);
+
+t_cam_screen	screen_calcul(t_vars *vars);
 
 #endif

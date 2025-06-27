@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 14:52:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/27 10:40:02 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 10:42:38 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static t_cam_screen	screen_calcul(t_vars *vars)
+t_cam_screen	screen_calcul(t_vars *vars)
 {
 	t_cam_screen	screen;
 
@@ -140,6 +140,7 @@ void	camera(t_vars *vars, int i, int rgb)
 	t_coords		vect;
 
 	vars->state = RENDER;
+	vars->screen = screen_calcul(vars);
 	while (i < vars->win_sizes.x_len)
 	{
 		j = 0;

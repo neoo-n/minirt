@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 09:52:05 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 09:52:05 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 10:15:46 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 10:15:46 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "minilibx-linux/mlx_int.h"
 # include "fonts/fonts.h"
 # include "buttons/buttons.h"
+# include "keys/key_presses.h"
+# include "structures.h"
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>

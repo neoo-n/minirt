@@ -12,7 +12,7 @@
 
 #include "buttons.h"
 
-Bool	check_menu_button(t_vars *vars, int x, int y)
+t_bool	check_menu_button(t_vars *vars, int x, int y)
 {
 	double	x_min;
 	double	x_max;
@@ -28,7 +28,7 @@ Bool	check_menu_button(t_vars *vars, int x, int y)
 	return (False);
 }
 
-Bool	check_select_mode(t_vars *vars)
+t_bool	check_select_mode(t_vars *vars)
 {
 	if (vars->mode == OBJECT_SELECT || vars->mode == OBJECT_SELECT_ARROWS
 		|| vars->mode == OBJECT_SELECT_LASTPAGE)
@@ -59,7 +59,7 @@ t_type	check_arrow_click(t_vars *vars, int x, int y, int button_len)
 	return (EMPTY);
 }
 
-Bool	obj_click(t_vars *vars, int x, int y, int buttons)
+t_bool	obj_click(t_vars *vars, int x, int y, int buttons)
 {
 	int		but_len;
 	int		but_height;

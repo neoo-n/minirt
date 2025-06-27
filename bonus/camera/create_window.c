@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 14:26:15 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/25 14:28:34 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/27 10:34:02 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/27 10:35:09 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,8 @@ void	creating_window(t_gen *gen)
 	button.by = vars.win_sizes.y_height / 2 * 0.9;
 	button.ey = vars.win_sizes.y_height / 2 * 1.1;
 	make_box(&vars, button, 0, vars.loading_image);
-	pre_camera(&vars, 0, 0);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.loading_image.img, 0, 0);
+	camera(&vars, 0, 0);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_mouse_hook(vars.win, &mouse_click, &vars);
