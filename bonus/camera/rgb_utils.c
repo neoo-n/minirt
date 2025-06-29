@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 13:33:26 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/20 13:39:46 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/29 15:50:27 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:50:41 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_rgb	init_rgb(void)
 {
 	t_rgb	res;
+
 	res.r = 0;
 	res.g = 0;
 	res.b = 0;
@@ -23,7 +24,7 @@ t_rgb	init_rgb(void)
 
 t_rgb	rgb_sum(t_rgb l1, t_rgb l2)
 {
-	t_rgb res;
+	t_rgb	res;
 
 	res.r = l1.r + l2.r;
 	res.g = l1.g + l2.g;

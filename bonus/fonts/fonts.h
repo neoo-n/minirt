@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 09:42:01 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 20:49:17 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/29 15:56:06 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:56:06 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../camera/camera.h"
 
 void		init_char(int chr[7][5]);
-void		draw_part(t_vars *vars, int i, int j, int step, t_dataimg img);
+void		draw_part(int i, int j, int step, t_dataimg img);
 void		handle_let(int grid[7][5], char c);
 void		make_char(t_vars *vars, t_letter letter, t_dataimg img);
 t_character	*init_characters(void);

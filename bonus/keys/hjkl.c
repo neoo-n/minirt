@@ -57,5 +57,5 @@ void	hjkl_handler(t_vars *vars, int button)
 		k_press(vars);
 	if (button == L)
 		l_press(vars);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

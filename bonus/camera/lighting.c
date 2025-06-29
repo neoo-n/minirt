@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 15:04:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/25 15:16:41 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 15:33:54 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:49:59 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,57 +66,61 @@ double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 	return (spec);
 }
 
-void	turn_off_rgb(t_rgb *rgb)
+double	calc_fog(double t)
 {
-	rgb->r = 0;
-	rgb->g = 0;
-	rgb->b = 0;
+	double	fog;
+
+	fog = (t - 30) / (100 - 30);
+	if (fog > 1)
+		fog = 1;
+	else if (fog < 0)
+		fog = 0;
+	return (fog);
+}
+
+t_rgb	calc_lights(t_vars *vars, t_inter shape, t_rgb *spec_light, int i)
+{
+	t_rgb	dif_light;
+	double	light[2];
+
+	dif_light = init_rgb();
+	if (!in_shade(shape, vars->gen, 0, i) || vars->shadow == OFF)
+	{
+		light[0] = calc_dif_int(shape, vars->gen->l[i]);
+		light[1] = specular(vars, shape, vars->gen->l[i]);
+	}
+	else
+	{
+		light[0] = 0;
+		light[1] = 0;
+	}
+	if (vars->diffuse == ON)
+		dif_light = rgb_mult(norm_rgb(vars->gen->l[i]->rgb), light[0]);
+	if (vars->specular == ON)
+		*spec_light = rgb_sum(*spec_light,
+				rgb_mult(norm_rgb(vars->gen->l[i]->rgb),
+					light[1] * vars->gen->l[i]->bright));
+	return (dif_light);
 }
 
 int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 {
 	int		i;
-	double	light[2];
 	t_rgb	spec_light;
 	t_rgb	dif_light;
 	t_rgb	amb_light;
 	t_rgb	shape_col;
-	double	fog;
 
 	i = 0;
 	spec_light = init_rgb();
-	dif_light = init_rgb();
 	amb_light = init_rgb();
+	dif_light = init_rgb();
 	while (gen->l[i])
-	{
-		if (!in_shade(shape, gen, 0, i) || vars->shadow == OFF)
-		{
-			light[0] = calc_dif_int(shape, gen->l[i]);
-			light[1] = specular(vars, shape, gen->l[i]);
-		}
-		else
-		{
-			light[0] = 0;
-			light[1] = 0;
-		}
-		dif_light = rgb_sum(dif_light, rgb_mult(norm_rgb(gen->l[i]->rgb), light[0]));
-		spec_light = rgb_sum(spec_light, rgb_mult(norm_rgb(gen->l[i]->rgb),
-				light[1] * gen->l[i]->bright));
-		i++;
-	}
-	fog = (shape.t - 30) / (100 - 30);
-	if (fog > 1)
-		fog = 1;
-	else if (fog < 0)
-		fog = 0;
-	amb_light = rgb_mult(norm_rgb(gen->a->rgb), gen->a->light);
-	amb_light = rgb_mult(amb_light, 1 - fog);
-	if (vars->ambient == OFF)
-		turn_off_rgb(&amb_light);
-	if (vars->specular == OFF)
-		turn_off_rgb(&spec_light);
-	if (vars->diffuse == OFF)
-		turn_off_rgb(&dif_light);
+		dif_light = rgb_sum(dif_light,
+				calc_lights(vars, shape, &spec_light, i++));
+	if (vars->ambient == ON)
+		amb_light = rgb_mult(rgb_mult(norm_rgb(gen->a->rgb),
+					gen->a->light), 1 - calc_fog(shape.t));
 	shape_col = rgb_final(norm_rgb(shape.shape->rgb), amb_light,
 			dif_light, spec_light);
 	return ((int)(shape_col.r * 255) << 16 | (int)(shape_col.g * 255) << 8

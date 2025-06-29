@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:43:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 11:44:03 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 15:56:48 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:58:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_char(int chr[7][5])
 	return ;
 }
 
-void	draw_part(t_vars *vars, int i, int j, int step, t_dataimg img)
+void	draw_part(int i, int j, int step, t_dataimg img)
 {
 	int	x;
 	int	y;
@@ -42,7 +42,7 @@ void	draw_part(t_vars *vars, int i, int j, int step, t_dataimg img)
 		x = i;
 		while (x < i + step)
 		{
-			my_mlx_pixel_put(&(img), x, y, vars->colour);
+			my_mlx_pixel_put(&(img), x, y, 0);
 			x++;
 		}
 		y++;
@@ -70,7 +70,8 @@ void	make_char(t_vars *vars, t_letter letter, t_dataimg img)
 		while (x < 5)
 		{
 			if (character->grid[y][x] == 1)
-				draw_part(vars, letter.i + x * step, letter.j + y * step, step, img);
+				draw_part(letter.i + x * step,
+					letter.j + y * step, step, img);
 			x++;
 		}
 		y++;
@@ -87,8 +88,8 @@ t_character	*init_characters(void)
 	if (!res)
 		return (0);
 	next = res;
-	i = 0;
-	while ("abcdefghijklmnopqrstuvwxyz0123456789<>"[i])
+	i = -1;
+	while ("abcdefghijklmnopqrstuvwxyz0123456789<>"[++i])
 	{
 		next->c = "abcdefghijklmnopqrstuvwxyz0123456789<>"[i];
 		handle_let(next->grid, next->c);
@@ -101,7 +102,6 @@ t_character	*init_characters(void)
 		}
 		if (i < 37)
 			next = next->next;
-		i++;
 	}
 	next->next = 0;
 	return (res);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 10:44:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 12:45:06 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 15:58:49 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:59:17 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ void	up_press(t_vars *vars, int light_count)
 	(void) shape_id;
 	if (vars->obj == CAM && vars->gen->c->vector.y > -0.999)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x + vars->screen.vect_y.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y + vars->screen.vect_y.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z + vars->screen.vect_y.z * 0.05;
+		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
+			+ vars->screen.vect_y.x * 0.05;
+		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
+			+ vars->screen.vect_y.y * 0.05;
+		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
+			+ vars->screen.vect_y.z * 0.05;
 		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
 		vars->gen->c->vector.x = simul.x;
 		vars->gen->c->vector.y = simul.y;
@@ -49,9 +52,12 @@ void	down_press(t_vars *vars, int light_count)
 	(void) shape_id;
 	if (vars->obj == CAM && vars->gen->c->vector.y < 0.999)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x - vars->screen.vect_y.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y - vars->screen.vect_y.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z - vars->screen.vect_y.z * 0.05;
+		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
+			- vars->screen.vect_y.x * 0.05;
+		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
+			- vars->screen.vect_y.y * 0.05;
+		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
+			- vars->screen.vect_y.z * 0.05;
 		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
 		vars->gen->c->vector.x = simul.x;
 		vars->gen->c->vector.y = simul.y;
@@ -131,5 +137,5 @@ void	arrow_handler(int button, t_vars *vars, int light_count)
 	// 	left_press(vars, light_count);
 	// if (button == RIGHT)
 	// 	right_press(vars, light_count);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

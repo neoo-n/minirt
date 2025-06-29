@@ -133,5 +133,5 @@ void	wasd_handler(int button, t_vars *vars, int light_count)
 		s_press(vars, light_count);
 	if (button == D)
 		d_press(vars, light_count);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

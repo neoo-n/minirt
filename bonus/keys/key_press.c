@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   mod.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:21:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:53:14 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:03:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:03:51 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@ long	current_time(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	key_press_obj(int button, t_vars *vars, int light_count)
+{
+	if (button == W || button == A || button == S || button == D)
+		wasd_handler(button, vars, light_count);
+	else if ((button == PLUS || button == MINUS || button == ZERO
+			|| button == NINE) && (vars->obj == SHAPE
+			|| vars->obj == LIGHT))
+		mod_handler(button, vars, light_count);
+	else if (button == E || button == Q || button == Z || button == X)
+		zaxis_handler(button, vars, light_count);
+	else if (button == UP || button == DOWN
+		|| button == LEFT || button == RIGHT)
+		arrow_handler(button, vars, light_count);
+	else if (button == R || button == G || button == B)
+		rgb_handler(button, vars);
 }
 
 int	key_press(int button, t_vars *vars)
@@ -36,20 +53,7 @@ int	key_press(int button, t_vars *vars)
 	if (button == H || button == J || button == K || button == L)
 		hjkl_handler(vars, button);
 	else if (vars->obj != NONE)
-	{
-		if (button == W || button == A || button == S || button == D)
-			wasd_handler(button, vars, light_count);
-		else if ((button == PLUS || button == MINUS || button == ZERO
-				|| button == NINE) && (vars->obj == SHAPE
-				|| vars->obj == LIGHT))
-			mod_handler(button, vars, light_count);
-		else if (button == E || button == Q || button == Z || button == X)
-			zaxis_handler(button, vars, light_count);
-		else if (button == UP || button == DOWN || button == LEFT || button == RIGHT)
-			arrow_handler(button, vars, light_count);
-		else if (button == R || button == G || button == B)
-			rgb_handler(button, vars);
-	}
+		key_press_obj(button, vars, light_count);
 	return (0);
 }
 
@@ -62,7 +66,7 @@ int	render_next_frame(t_vars *vars)
 		vars->light_count = 0;
 		vars->shape_count = 0;
 		vars->page_num = 1;
-		camera(vars, 0, 0);
+		camera(vars, -1, 0);
 	}
 	return (0);
 }

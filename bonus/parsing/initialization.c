@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 10:59:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 11:02:18 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:14:44 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:15:33 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,17 @@ t_light	**copy_lights(t_light **o_light)
 	return (new_light);
 }
 
-t_shape	**copy_shapes(t_shape **o_shape)
+t_shape	**copy_shapes(t_shape **o_shape, int i)
 {
 	t_shape	**new_shape;
-	int		i;
 
-	i = 0;
 	while (o_shape[i])
 		i++;
 	new_shape = malloc(sizeof(t_shape *) * (i + 1));
 	if (!new_shape)
 		return (0);
-	i = 0;
-	while (o_shape[i])
+	i = -1;
+	while (o_shape[++i])
 	{
 		new_shape[i] = malloc(sizeof(t_shape));
 		if (!new_shape[i])
@@ -98,7 +96,6 @@ t_shape	**copy_shapes(t_shape **o_shape)
 			new_shape[i]->height = o_shape[i]->height;
 		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE)
 			new_shape[i]->vector = o_shape[i]->vector;
-		i++;
 	}
 	new_shape[i] = 0;
 	return (new_shape);
@@ -123,7 +120,7 @@ t_gen	*copy_gen(t_gen *o_gen)
 		free_gen(new_gen);
 		return (0);
 	}
-	new_gen->shapes = copy_shapes(o_gen->shapes);
+	new_gen->shapes = copy_shapes(o_gen->shapes, 0);
 	if (!new_gen->shapes)
 	{
 		free_gen(new_gen);

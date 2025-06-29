@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:48:46 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:48:46 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 15:17:28 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:53:48 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,67 @@ void	copy_pre_image(t_vars *vars)
 	}
 }
 
+// void	*camera_thread(void *data)
+// {
+// 	t_data		*info;
+// 	int			j;
+// 	int			i;
+// 	t_coords	vect;
+// 	int			rgb;
+// 	t_inter		shape;
+
+// 	info = data;
+// 	i = info->sx;
+// 	while (i < info->ex)
+// 	{
+// 		j = 0;
+// 		while (j < info->vars->win_sizes.y_height)
+// 		{
+// 			vect = camera_vect(info->vars, i, j, info->vars->screen);
+// 			shape = find_closest_shape(vect, info->vars->gen->c->coords,
+// 					info->vars->gen->shapes, 0);
+// 			if (shape.shape)
+// 			{
+// 				rgb = get_rgb(shape, info->vars->gen, info->vars);
+// 				my_mlx_pixel_put(&(info->vars->img), i, j, rgb);
+// 			}
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// void	camera(t_vars *vars, int i, int rgb)
+// {
+// 	t_data			tdata[8];
+// 	pthread_t		threads[8];
+// 	int				step;
+
+// 	(void) rgb;
+// 	vars->state = RENDER;
+// 	vars->screen = screen_calcul(vars);
+// 	step = vars->win_sizes.x_len / 8;
+// 	while (i < 8)
+// 	{
+// 		tdata[i].vars = vars;
+// 		tdata[i].sx = i * step;
+// 		if (i == 7)
+// 			tdata[i].ex = vars->win_sizes.x_len;
+// 		else
+// 			tdata[i].ex = (i + 1) * step;
+// 		pthread_create(&threads[i], NULL, camera_thread, &tdata[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < 8)
+// 		pthread_join(threads[i++], NULL);
+// 	copy_image(vars);
+// 	make_menu(vars, 0, 0, vars->img_copy);
+// 	vars->mode = HIDDEN;
+// 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+// }
+
 void	camera(t_vars *vars, int i, int rgb)
 {
 	int				j;
@@ -141,10 +202,10 @@ void	camera(t_vars *vars, int i, int rgb)
 
 	vars->state = RENDER;
 	vars->screen = screen_calcul(vars);
-	while (i < vars->win_sizes.x_len)
+	while (++i < vars->win_sizes.x_len)
 	{
-		j = 0;
-		while (j < vars->win_sizes.y_height)
+		j = -1;
+		while (++j < vars->win_sizes.y_height)
 		{
 			vect = camera_vect(vars, i, j, vars->screen);
 			shape = find_closest_shape(vect, vars->gen->c->coords,
@@ -154,9 +215,7 @@ void	camera(t_vars *vars, int i, int rgb)
 				rgb = get_rgb(shape, vars->gen, vars);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
-			j++;
 		}
-		i++;
 	}
 	copy_image(vars);
 	make_menu(vars, 0, 0, vars->img_copy);
@@ -164,47 +223,10 @@ void	camera(t_vars *vars, int i, int rgb)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
 }
 
-void	pre_camera(t_vars *vars, int i, int rgb)
+void	info_box(t_vars *vars)
 {
-	int				j;
-	t_inter			shape;
-	t_coords		vect;
-	t_button		button;
-	int				block;
-	int				block2;
-	int				pixels;
+	t_button	button;
 
-	pixels = 20;
-	vars->state = PRERENDER;
-	vars->screen = screen_calcul(vars);
-	while (i < vars->win_sizes.x_len)
-	{
-		j = 0;
-		while (j < vars->win_sizes.y_height)
-		{
-			vect = camera_vect(vars, i, j, vars->screen);
-			shape = find_closest_shape(vect, vars->gen->c->coords,
-					vars->gen->shapes, 0);
-			if (shape.shape)
-			{
-				rgb = get_rgb(shape, vars->gen, vars);
-				block = 0;
-				while (block < pixels)
-				{
-					block2 = 0;
-					while (block2 < pixels)
-					{
-						if (i + block2 < vars->win_sizes.x_len && j + block < vars->win_sizes.y_height)
-							my_mlx_pixel_put(&(vars->pre_img), i + block2, j + block, rgb);
-						block2++;
-					}
-					block++;
-				}
-			}
-			j += pixels;
-		}
-		i += pixels;
-	}
 	button.colour = 0x9c9797;
 	if (vars->mode == RED)
 		button.text = "press r or menu to exit rgb mode";
@@ -224,5 +246,52 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 	make_menu(vars, 0, 0, vars->pre_img_copy);
 	if (vars->mode != RED && vars->mode != GREEN && vars->mode != BLUE)
 		vars->mode = HIDDEN;
+}
+
+void	draw_pixel_block(t_vars *vars, t_inter shape, int i, int j)
+{
+	int	block;
+	int	block2;
+	int	rgb;
+
+	rgb = get_rgb(shape, vars->gen, vars);
+	block = 0;
+	while (block < PIXELS)
+	{
+		block2 = 0;
+		while (block2 < PIXELS)
+		{
+			if (i + block2 < vars->win_sizes.x_len && j + block
+				< vars->win_sizes.y_height)
+				my_mlx_pixel_put(&(vars->pre_img), i + block2, j + block, rgb);
+			block2++;
+		}
+		block++;
+	}
+}
+
+void	pre_camera(t_vars *vars, int i)
+{
+	int				j;
+	t_inter			shape;
+	t_coords		vect;
+
+	vars->state = PRERENDER;
+	vars->screen = screen_calcul(vars);
+	while (i < vars->win_sizes.x_len)
+	{
+		j = 0;
+		while (j < vars->win_sizes.y_height)
+		{
+			vect = camera_vect(vars, i, j, vars->screen);
+			shape = find_closest_shape(vect, vars->gen->c->coords,
+					vars->gen->shapes, 0);
+			if (shape.shape)
+				draw_pixel_block(vars, shape, i, j);
+			j += PIXELS;
+		}
+		i += PIXELS;
+	}
+	info_box(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->pre_img_copy.img, 0, 0);
 }

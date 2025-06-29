@@ -205,5 +205,5 @@ void	new_obj(t_vars *vars, t_type obj)
 		add_plane(vars);
 	else if (obj == CYL_ADD)
 		add_cyl(vars);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

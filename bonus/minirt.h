@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 10:15:46 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 10:15:46 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 14:06:43 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 14:09:35 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <pthread.h>
 
 #endif

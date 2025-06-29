@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:08:14 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 10:43:04 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/29 16:09:22 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	e_press(t_vars *vars, int light_count)
 }
 
 void	z_press(t_vars *vars, int light_count)
-
 {
 	int			shape_id;
 	t_coords	simul;
@@ -75,9 +74,12 @@ void	z_press(t_vars *vars, int light_count)
 	shape_id = vars->obj_id - light_count - 1;
 	if (vars->obj == CAM)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x - vars->screen.vect_x.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y - vars->screen.vect_x.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z - vars->screen.vect_x.z * 0.05;
+		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
+			- vars->screen.vect_x.x * 0.05;
+		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
+			- vars->screen.vect_x.y * 0.05;
+		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
+			- vars->screen.vect_x.z * 0.05;
 		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
 		vars->gen->c->vector.x = simul.x;
 		vars->gen->c->vector.y = simul.y;
@@ -100,9 +102,12 @@ void	x_press(t_vars *vars, int light_count)
 	shape_id = vars->obj_id - light_count - 1;
 	if (vars->obj == CAM)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x + vars->screen.vect_x.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y + vars->screen.vect_x.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z + vars->screen.vect_x.z * 0.05;
+		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
+			+ vars->screen.vect_x.x * 0.05;
+		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
+			+ vars->screen.vect_x.y * 0.05;
+		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
+			+ vars->screen.vect_x.z * 0.05;
 		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
 		vars->gen->c->vector.x = simul.x;
 		vars->gen->c->vector.y = simul.y;
@@ -130,5 +135,5 @@ void	zaxis_handler(int button, t_vars *vars, int light_count)
 		z_press(vars, light_count);
 	if (button == X)
 		x_press(vars, light_count);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

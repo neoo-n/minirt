@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:25:53 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 11:25:53 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:16:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:17:08 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,9 @@ void	free_gen_saved(t_gen *gen)
 	}
 	if (gen->shapes)
 	{
-		i = 0;
-		while (gen->shapes[i])
-		{
+		i = -1;
+		while (gen->shapes[++i])
 			free(gen->shapes[i]);
-			i++;
-		}
 		free(gen->shapes);
 	}
 	free(gen);
@@ -94,22 +91,16 @@ void	free_gen(t_gen *gen)
 		free(gen->c);
 	if (gen->l)
 	{
-		i = 0;
-		while (gen->l[i])
-		{
+		i = -1;
+		while (gen->l[++i])
 			free(gen->l[i]);
-			i++;
-		}
 		free(gen->l);
 	}
 	if (gen->shapes)
 	{
-		i = 0;
-		while (gen->shapes[i])
-		{
+		i = -1;
+		while (gen->shapes[++i])
 			free(gen->shapes[i]);
-			i++;
-		}
 		free(gen->shapes);
 	}
 	free_characters(gen->character);

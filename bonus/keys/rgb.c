@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:42:52 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:42:59 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:07:02 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:07:53 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	minus_rgb(t_vars *vars, int light_id, int shape_id)
 {
+	t_rgb	rgb;
+
 	if (vars->obj == LIGHT)
 	{
 		if (vars->mode == RED && vars->gen->l[light_id]->rgb.r > 0)
@@ -22,7 +24,8 @@ void	minus_rgb(t_vars *vars, int light_id, int shape_id)
 			vars->gen->l[light_id]->rgb.g--;
 		else if (vars->mode == BLUE && vars->gen->l[light_id]->rgb.b > 0)
 			vars->gen->l[light_id]->rgb.b--;
-		printf("RGB: %.f,%.f,%.f\n", vars->gen->l[light_id]->rgb.r, vars->gen->l[light_id]->rgb.g, vars->gen->l[light_id]->rgb.b);
+		rgb = vars->gen->l[light_id]->rgb;
+		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
 	else if (vars->obj == SHAPE)
 	{
@@ -32,13 +35,15 @@ void	minus_rgb(t_vars *vars, int light_id, int shape_id)
 			vars->gen->shapes[shape_id]->rgb.g--;
 		else if (vars->mode == BLUE && vars->gen->shapes[shape_id]->rgb.b > 0)
 			vars->gen->shapes[shape_id]->rgb.b--;
-		printf("RGB: %.f,%.f,%.f\n", vars->gen->shapes[shape_id]->rgb.r, vars->gen->shapes[shape_id]->rgb.g, vars->gen->shapes[shape_id]->rgb.b);
+		rgb = vars->gen->l[light_id]->rgb;
+		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
-
 }
 
 void	plus_rgb(t_vars *vars, int light_id, int shape_id)
 {
+	t_rgb	rgb;
+
 	if (vars->obj == LIGHT)
 	{
 		if (vars->mode == RED && vars->gen->l[light_id]->rgb.r < 255)
@@ -47,19 +52,21 @@ void	plus_rgb(t_vars *vars, int light_id, int shape_id)
 			vars->gen->l[light_id]->rgb.g++;
 		else if (vars->mode == BLUE && vars->gen->l[light_id]->rgb.b < 255)
 			vars->gen->l[light_id]->rgb.b++;
-		printf("RGB: %.f,%.f,%.f\n", vars->gen->l[light_id]->rgb.r, vars->gen->l[light_id]->rgb.g, vars->gen->l[light_id]->rgb.b);
+		rgb = vars->gen->l[light_id]->rgb;
+		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
 	else if (vars->obj == SHAPE)
 	{
 		if (vars->mode == RED && vars->gen->shapes[shape_id]->rgb.r < 255)
 			vars->gen->shapes[shape_id]->rgb.r++;
-		else if (vars->mode == GREEN && vars->gen->shapes[shape_id]->rgb.g < 255)
+		else if (vars->mode == GREEN
+			&& vars->gen->shapes[shape_id]->rgb.g < 255)
 			vars->gen->shapes[shape_id]->rgb.g++;
 		else if (vars->mode == BLUE && vars->gen->shapes[shape_id]->rgb.b < 255)
 			vars->gen->shapes[shape_id]->rgb.b++;
-		printf("RGB: %.f,%.f,%.f\n", vars->gen->shapes[shape_id]->rgb.r, vars->gen->shapes[shape_id]->rgb.g, vars->gen->shapes[shape_id]->rgb.b);
+		rgb = vars->gen->l[light_id]->rgb;
+		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
-
 }
 
 void	rgb_handler(int button, t_vars *vars)
@@ -78,6 +85,6 @@ void	rgb_handler(int button, t_vars *vars)
 			vars->mode = BLUE;
 		else
 			vars->mode = HIDDEN;
-		pre_camera(vars, 0, 0);
+		pre_camera(vars, 0);
 	}
 }

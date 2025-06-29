@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:53:37 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:53:45 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:04:19 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:04:48 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	mod_handler(int button, t_vars *vars, int light_count)
 	vars->state = PRERENDER;
 	clear_image(&(vars->pre_img), vars->win_sizes.x_len,
 		vars->win_sizes.y_height);
-	if (button == PLUS)
+	if (button == PLUS && vars->obj != CAM)
 		plus_press(vars, light_count);
-	else if (button == MINUS)
+	else if (button == MINUS && vars->obj != CAM)
 		minus_press(vars, light_count);
 	else if (button == ZERO && vars->obj != LIGHT)
 		zero_press(vars, light_count);
 	else if (button == NINE && vars->obj != LIGHT)
 		nine_press(vars, light_count);
-	pre_camera(vars, 0, 0);
+	pre_camera(vars, 0);
 }

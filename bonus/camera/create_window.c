@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 14:10:31 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 14:10:31 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 15:21:54 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 15:33:00 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ void	error_exit_vars(t_vars *vars, char *message, int is_perror)
 	exit(EXIT_FAILURE);
 }
 
+void	init_img(t_vars *vars, t_dataimg *img)
+{
+	img->img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
+			vars->win_sizes.y_height);
+	if (!img->img)
+		error_exit_vars(vars, "Error mlx img\n", 0);
+	img->addr = mlx_get_data_addr(img->img,
+			&(img->bits_per_pixel), &(img->line_length),
+			&(img->endian));
+}
+
 static void	creating_all(t_vars *vars)
 {
 	vars->win_sizes.x_len = X_LEN;
@@ -92,41 +103,27 @@ static void	creating_all(t_vars *vars)
 			vars->win_sizes.y_height, "minirt");
 	if (!vars->win)
 		error_exit_vars(vars, "Error mlx win\n", 0);
-	vars->img.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->img.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->img.addr = mlx_get_data_addr(vars->img.img,
-			&(vars->img.bits_per_pixel), &(vars->img.line_length),
-			&(vars->img.endian));
-	vars->img_copy.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->img_copy.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->img_copy.addr = mlx_get_data_addr(vars->img_copy.img,
-			&(vars->img_copy.bits_per_pixel), &(vars->img_copy.line_length),
-			&(vars->img_copy.endian));
-	vars->pre_img.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->pre_img.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->pre_img.addr = mlx_get_data_addr(vars->pre_img.img,
-			&(vars->pre_img.bits_per_pixel), &(vars->pre_img.line_length),
-			&(vars->pre_img.endian));
-	vars->pre_img_copy.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->pre_img_copy.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->pre_img_copy.addr = mlx_get_data_addr(vars->pre_img_copy.img,
-			&(vars->pre_img_copy.bits_per_pixel), &(vars->pre_img_copy.line_length),
-			&(vars->pre_img_copy.endian));
-	vars->loading_image.img = mlx_new_image(vars->mlx, vars->win_sizes.x_len,
-			vars->win_sizes.y_height);
-	if (!vars->loading_image.img)
-		error_exit_vars(vars, "Error mlx img\n", 0);
-	vars->loading_image.addr = mlx_get_data_addr(vars->loading_image.img,
-			&(vars->loading_image.bits_per_pixel), &(vars->loading_image.line_length),
-			&(vars->loading_image.endian));
+	init_img(vars, &(vars->img));
+	init_img(vars, &(vars->img_copy));
+	init_img(vars, &(vars->pre_img));
+	init_img(vars, &(vars->pre_img_copy));
+	init_img(vars, &(vars->loading_image));
+}
+
+void	init_vars(t_vars *vars, t_gen *gen)
+{
+	vars->obj = NONE;
+	vars->obj_id = 0;
+	vars->light_count = 0;
+	vars->shape_count = 0;
+	vars->page_num = 1;
+	vars->epsilon = 1;
+	vars->gen = gen;
+	vars->ambient = ON;
+	vars->specular = ON;
+	vars->diffuse = ON;
+	vars->shadow = ON;
+	vars->starttime = current_time();
 }
 
 void	creating_window(t_gen *gen)
@@ -135,18 +132,7 @@ void	creating_window(t_gen *gen)
 	t_button	button;
 
 	creating_all(&vars);
-	vars.obj = NONE;
-	vars.obj_id = 0;
-	vars.light_count = 0;
-	vars.shape_count = 0;
-	vars.page_num = 1;
-	vars.epsilon = 1;
-	vars.gen = gen;
-	vars.ambient = ON;
-	vars.specular = ON;
-	vars.diffuse = ON;
-	vars.shadow = ON;
-	vars.starttime = current_time();
+	init_vars(&vars, gen);
 	button.colour = 0x9c9797;
 	button.text = "rendering";
 	button.type = TEXT;
@@ -156,7 +142,7 @@ void	creating_window(t_gen *gen)
 	button.ey = vars.win_sizes.y_height / 2 * 1.1;
 	make_box(&vars, button, 0, vars.loading_image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.loading_image.img, 0, 0);
-	camera(&vars, 0, 0);
+	camera(&vars, -1, 0);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_mouse_hook(vars.win, &mouse_click, &vars);

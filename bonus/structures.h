@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:10:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:10:07 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 16:17:39 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 16:18:13 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define R 114
 # define G 103
 # define B 98
+# define PIXELS 20
 # ifndef X_LEN
 #  define X_LEN 1920.0
 # endif
@@ -51,7 +52,7 @@
 #  define ROUGH 0.9
 # endif
 
-typedef	enum e_bool
+typedef enum e_bool
 {
 	TRUE = 1,
 	FALSE = 0,
@@ -234,11 +235,11 @@ typedef struct s_inter
 
 typedef struct s_gen
 {
-	t_amb		*a;
-	t_cam		*c;
-	t_light		**l;
-	t_shape		**shapes;
-	t_character	*character;
+	t_amb			*a;
+	t_cam			*c;
+	t_light			**l;
+	t_shape			**shapes;
+	t_character		*character;
 	struct s_gen	*saved_gen;
 }	t_gen;
 
@@ -284,5 +285,12 @@ typedef struct s_vars
 	t_toggle		diffuse;
 	t_cam_screen	screen;
 }	t_vars;
+
+typedef struct s_data
+{
+	t_vars	*vars;
+	int		sx;
+	int		ex;
+}	t_data;
 
 #endif
