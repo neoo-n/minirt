@@ -1,3 +1,5 @@
 Global settings
 Reflectivity
 Multi-threading
+Proper rotations
+
