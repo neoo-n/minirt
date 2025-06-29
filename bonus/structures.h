@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 14:11:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 14:11:58 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 13:10:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 13:10:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # define J 106
 # define K 107
 # define L 108
+# define R 114
+# define G 103
+# define B 98
 # ifndef X_LEN
 #  define X_LEN 1920.0
 # endif
@@ -111,6 +114,9 @@ typedef enum e_mode
 	OBJECT_SETTINGS,
 	GLOBAL_SETTINGS,
 	OBJ_ADD,
+	RED,
+	GREEN,
+	BLUE,
 }	t_mode;
 
 typedef enum e_errmes

@@ -30,7 +30,8 @@ BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
 			buttons/new_shape.c
 
 KEYS	=	keys/arrows.c keys/hjkl.c keys/key_press.c \
-			keys/mod.c keys/wasd.c keys/zaxis.c
+			keys/mod.c keys/wasd.c keys/zaxis.c \
+			keys/rgb.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

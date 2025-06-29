@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 13:48:50 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 13:48:50 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 13:49:22 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 13:52:26 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,21 @@
 
 void	menu_click(t_vars *vars, t_dataimg img)
 {
-	if (vars->mode == HIDDEN)
+	t_button button;
+	if (vars->mode == HIDDEN || vars->mode == RED || vars->mode == GREEN
+		|| vars->mode == BLUE)
 	{
+		if (vars->state == PRERENDER)
+		{
+			button.colour = 0x9c9797;
+			button.type = TEXT;
+			button.text = "press enter to render";
+			button.bx = (vars->win_sizes.x_len / 2) * 0.8;
+			button.ex = (vars->win_sizes.x_len / 2) * 1.2;
+			button.ey = vars->win_sizes.y_height;
+			button.by = vars->win_sizes.y_height * 0.95;
+			make_box(vars, button, 0, img);
+		}
 		vars->mode = BASIC;
 		make_obj_button(vars, img);
 	}

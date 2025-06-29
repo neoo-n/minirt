@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 13:29:26 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 14:49:19 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 13:21:44 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 13:53:14 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	key_press(int button, t_vars *vars)
 			zaxis_handler(button, vars, light_count);
 		else if (button == UP || button == DOWN || button == LEFT || button == RIGHT)
 			arrow_handler(button, vars, light_count);
+		else if (button == R || button == G || button == B)
+			rgb_handler(button, vars);
 	}
 	return (0);
 }

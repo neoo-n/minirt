@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 22:18:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 23:34:30 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/06/29 13:53:37 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 13:53:45 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	plus_press(t_vars *vars, int light_count)
 
 	light_id = vars->obj_id - 1;
 	shape_id = vars->obj_id - light_count - 1;
-	if (vars->obj == SHAPE)
+	if (vars->mode == RED || vars->mode == GREEN || vars->mode == BLUE)
+		plus_rgb(vars, light_id, shape_id);
+	else if (vars->obj == SHAPE)
 		vars->gen->shapes[shape_id]->diam += 0.2;
 	else if (vars->gen->l[light_id]->bright <= 0.95)
 		vars->gen->l[light_id]->bright += 0.05;
@@ -32,7 +34,9 @@ void	minus_press(t_vars *vars, int light_count)
 
 	light_id = vars->obj_id - 1;
 	shape_id = vars->obj_id - light_count - 1;
-	if (vars->obj == SHAPE
+	if (vars->mode == RED || vars->mode == GREEN || vars->mode == BLUE)
+		minus_rgb(vars, light_id, shape_id);
+	else if (vars->obj == SHAPE
 		&& vars->gen->shapes[shape_id]->diam > 0.2)
 		vars->gen->shapes[shape_id]->diam -= 0.2;
 	else if (vars->gen->l[light_id]->bright >= 0.05)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 10:40:02 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 10:42:38 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/29 13:48:46 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/29 13:48:46 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,14 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 		i += pixels;
 	}
 	button.colour = 0x9c9797;
-	button.text = "press enter to render";
+	if (vars->mode == RED)
+		button.text = "press r or menu to exit rgb mode";
+	else if (vars->mode == GREEN)
+		button.text = "press g or menu to exit rgb mode";
+	else if (vars->mode == BLUE)
+		button.text = "press b or menu to exit rgb mode";
+	else
+		button.text = "press enter to render";
 	button.type = TEXT;
 	button.bx = (vars->win_sizes.x_len / 2) * 0.8;
 	button.ex = (vars->win_sizes.x_len / 2) * 1.2;
@@ -215,6 +222,7 @@ void	pre_camera(t_vars *vars, int i, int rgb)
 	make_box(vars, button, 0, vars->pre_img);
 	copy_pre_image(vars);
 	make_menu(vars, 0, 0, vars->pre_img_copy);
-	vars->mode = HIDDEN;
+	if (vars->mode != RED && vars->mode != GREEN && vars->mode != BLUE)
+		vars->mode = HIDDEN;
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->pre_img_copy.img, 0, 0);
 }
