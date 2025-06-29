@@ -6,33 +6,33 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:56:28 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/26 11:54:28 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:11:10 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "intersections.h"
 
-// double	torus_quadratic(t_coors a, t_coors b, t_shape *torus)
-// {
-// 	double	t1;
-// 	double	r;
-// 	double	a_dot;
-// 	double	ab_dot;
-// 	double	b_dot;
+double	torus_quadratic(t_coords a, t_coords b, t_shape *torus)
+{
+	double	t1;
+	double	r;
+	double	a_dot;
+	double	ab_dot;
+	double	b_dot;
 
-// 	r = torus->diam / 2;
-// 	a_dot = dot_prod(a, a);
-// 	ab_dot = dot_prod(a, b);
-// 	b_dot = dot_prod(b, b);
-// 	t1 = quadratic(a_dot, 2 * ab_dot, b_dot - (torus->height + r)
-// 		* (torus->height + r));
-// 	if (t1 == -1)
-// 	{
-// 		t1 = quadratic(a_dot, 2 * ab_dot, b_dot - (torus->height - r)
-// 			* (torus->height - r));
-// 	}
-// 	return (t1);
-// }
+	r = torus->diam / 2;
+	a_dot = dot_prod(a, a);
+	ab_dot = dot_prod(a, b);
+	b_dot = dot_prod(b, b);
+	t1 = quadratic(a_dot, 2 * ab_dot, b_dot - ((torus->height + r)
+		* (torus->height + r)));
+	if (t1 == -1)
+	{
+		t1 = quadratic(b_dot, 2 * ab_dot, a_dot - (torus->height + r)
+			* (torus->height + r));
+	}
+	return (t1);
+}
 
 static double	dist_p_ct(t_coords p, t_coords ct, double h, t_inter *shape)
 {

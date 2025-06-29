@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 16:54:54 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/29 16:39:56 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "camera.h"
 
@@ -43,6 +43,8 @@ t_coords	co_n(t_inter shape)
 			shape.shape->vector);
 	if (dist < 1e-6)
 		n = vect_normalised(vect_mult(shape.shape->vector, -1));
+	else if (fabs(dist - shape.shape->height) < 1e-6)
+		n = vect_normalised(shape.shape->vector);
 	else
 	{
 		s = vect_add(shape.point, vect_mult(shape.normal, shape.shape->height));
