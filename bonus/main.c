@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 14:57:25 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 16:56:34 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:11:56 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 // {
 // 	int	i;
 
-// 	printf("Ambient Lighting\nLighting Ratio: %f\nRGB: %d,%d,%d\n\n", gen->a->light, gen->a->rgb.r, gen->a->rgb.g, gen->a->rgb.b);
+// 	printf("Ambient Lighting\nLighting Ratio: %f\nRGB: %f,%f,%f\n\n", gen->a->light, gen->a->rgb.r, gen->a->rgb.g, gen->a->rgb.b);
 // 	printf("Camera\nCoords: %f,%f,%f\nVector: %f,%f,%f\nFOV: %f\n\n", gen->c->coords.x, gen->c->coords.y, gen->c->coords.z, gen->c->vector.x, gen->c->vector.y, gen->c->vector.z, gen->c->fov);
-// 	printf("Light\nCoords: %f,%f,%f\nBrightness: %f\n", gen->l->coords.x, gen->l->coords.y, gen->l->coords.z, gen->l->bright);
-// 	if (gen->l->rgb.r != -1)
-// 		printf("RGB: %i,%i,%i\n",gen->l->rgb.r, gen->l->rgb.g, gen->l->rgb.b);
-// 	printf("\n");
+// 	i = 0;
+// 	while (gen->l[i])
+// 	{
+// 		printf("Light %i\nCoords: %f,%f,%f\nBrightness: %f\n", i, gen->l[i]->coords.x, gen->l[i]->coords.y, gen->l[i]->coords.z, gen->l[i]->bright);
+// 		if (gen->l[i]->rgb.r != -1)
+// 			printf("RGB: %f,%f,%f\n",gen->l[i]->rgb.r, gen->l[i]->rgb.g, gen->l[i]->rgb.b);
+// 		i++;
+// 	}
+// 		printf("\n");
 // 	i = 0;
 // 	while (gen->shapes[i])
 // 	{
@@ -32,7 +37,7 @@
 // 			printf("Height: %f\n", gen->shapes[i]->height);
 // 		if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == PLANE)
 // 			printf("Vector: %f,%f,%f\n", gen->shapes[i]->vector.x, gen->shapes[i]->vector.y, gen->shapes[i]->vector.z);
-// 		printf("RGB: %d,%d,%d\n\n", gen->shapes[i]->rgb.r, gen->shapes[i]->rgb.g, gen->shapes[i]->rgb.b);
+// 		printf("RGB: %f,%f,%f\n\n", gen->shapes[i]->rgb.r, gen->shapes[i]->rgb.g, gen->shapes[i]->rgb.b);
 // 		i++;
 // 	}	
 // }
@@ -67,7 +72,7 @@ int	main(int argc, char **argv)
 	close(fd);
 	if (!gen)
 		return (-1);
-	if (gen->a->light == -1 || gen->c->fov == -1 || gen->l->bright == -1)
+	if (gen->a->light == -1 || gen->c->fov == -1 || gen->l[0] == NULL)
 	{
 		free_gen(gen);
 		return (print_error(INCOMP_ELEM, 0, 0));

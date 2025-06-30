@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:38:52 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/05/27 16:46:01 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/19 16:09:03 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,15 @@ void	free_gen(t_gen *gen)
 	if (gen->c)
 		free(gen->c);
 	if (gen->l)
+	{
+		i = 0;
+		while (gen->l[i])
+		{
+			free(gen->l[i]);
+			i++;
+		}
 		free(gen->l);
+	}
 	if (gen->shapes)
 	{
 		i = 0;

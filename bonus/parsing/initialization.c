@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 15:02:55 by dvauthey         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/30 16:53:15 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parsing.h"
 
@@ -21,7 +22,7 @@ t_gen	*init_gen(void)
 		return (0);
 	res->a = malloc(sizeof(t_amb));
 	res->c = malloc(sizeof(t_cam));
-	res->l = malloc(sizeof(t_light));
+	res->l = malloc(sizeof(t_light *));
 	res->shapes = malloc(sizeof(t_shape *));
 	if (!res->shapes || !res->a || !res->c || !res->l)
 	{
@@ -30,7 +31,7 @@ t_gen	*init_gen(void)
 	}
 	res->a->light = -1;
 	res->c->fov = -1;
-	res->l->bright = -1;
+	res->l[0] = NULL;
 	res->shapes[0] = 0;
 	return (res);
 }

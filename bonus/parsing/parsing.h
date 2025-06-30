@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 14:31:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 15:02:05 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:53:29 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		arr_len(char **arr);
 int		find_end(char *str);
 int		next_elem(char *line, int i);
 t_shape	**realloc_shape(t_shape **shapes, t_shape *new_shape);
+t_light	**realloc_light(t_light	**lights, t_light *new_light);
 
 t_gen	*parse_file(int fd, int i);
 

@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 16:42:34 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:48:15 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_gen
 {
 	t_amb	*a;
 	t_cam	*c;
-	t_light	*l;
+	t_light	**l;
 	t_shape	**shapes;
 }	t_gen;
 

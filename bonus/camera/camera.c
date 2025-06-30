@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:55:38 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 16:43:58 by dvauthey         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/30 16:48:41 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "camera.h"
 
@@ -109,7 +110,7 @@ void	camera(t_vars *vars, int i, int rgb)
 			if (shape.shape)
 			{
 				if (j % 1 == 0 && i % 1 == 0)
-					rgb = get_rgb(shape, vars->gen, vars, 0);
+					rgb = get_rgb(shape, vars->gen, vars);
 				my_mlx_pixel_put(&(vars->img), i, j, rgb);
 			}
 			j++;

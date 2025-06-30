@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 15:36:25 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:49:30 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@
 void		creating_window(t_gen *gen);
 void		my_mlx_pixel_put(t_dataimg *img, int x, int y, int color);
 void		camera(t_vars *vars, int i, int rgb);
-int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars, double angle);
+int			get_rgb(t_inter shape, t_gen *gen, t_vars *vars);
 t_inter		find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 				t_shape *check_shape);
+
+t_coords	cyl_n(t_inter shape);
 t_coords	calc_norm(t_inter shape, t_coords ray);
+
+t_rgb		init_rgb(void);
+t_rgb		rgb_sum(t_rgb l1, t_rgb l2);
 t_rgb		norm_rgb(t_rgb rgb);
 t_coords	cyl_n(t_inter shape);
 t_coords	co_n(t_inter shape);

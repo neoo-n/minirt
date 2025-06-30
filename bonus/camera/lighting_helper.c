@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 16:26:06 by dvauthey         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/06/30 16:51:14 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "camera.h"
 
