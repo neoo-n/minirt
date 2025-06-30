@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 16:05:37 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 16:26:06 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ t_coords	co_n(t_inter shape)
 		n = vect_normalised(shape.shape->vector);
 	else
 	{
-		s = vect_add(shape.point, vect_mult(shape.normal, shape.shape->height));
+		s = vect_add(shape.shape->coords, vect_mult(shape.shape->vector, shape.shape->height));
 		dist_ps = vect_dist(shape.point, s);
-		pc = vect_sub(s, vect_mult(shape.normal, dist_ps / cos(atan((shape.shape->diam / 2) / shape.shape->height))));
+		pc = vect_sub(s, vect_mult(shape.shape->vector, dist_ps / cos(atan((shape.shape->diam / 2) / shape.shape->height))));
 		n = vect_normalised(vect_sub(shape.point, pc));
 	}
 	return (n);
