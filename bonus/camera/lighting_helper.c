@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:28:22 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/30 20:37:00 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,4 @@ t_coords	co_n(t_inter shape)
 		n = vect_normalised(vect_sub(shape.point, pc));
 	}
 	return (n);
-}
-
-t_rgb	rgb_mult(t_rgb rgb, double mult)
-{
-	t_rgb	res;
-
-	res.r = rgb.r * mult;
-	res.g = rgb.g * mult;
-	res.b = rgb.b * mult;
-	return (res);
-}
-
-t_rgb	rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec)
-{
-	rgb.r = fmin(rgb.r * (amb.r + dif.r) + spec.r, 1);
-	rgb.g = fmin(rgb.g * (amb.g + dif.g) + spec.g, 1);
-	rgb.b = fmin(rgb.b * (amb.b + dif.b) + spec.b, 1);
-	return (rgb);
 }

@@ -6,11 +6,50 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:57:45 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 15:11:06 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 21:56:57 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "buttons.h"
+
+void	make_cone_button(t_vars *vars, t_dataimg img, int height)
+{
+	t_button	button;
+
+	button.ex = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.04;
+	button.bx = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.3;
+	button.ey = (button.ex - button.bx) / 5;
+	button.by = vars->win_sizes.y_height * 0.0035;
+	button.by += height * 5.25;
+	button.ey += height * 5.25;
+	if (button.by > vars->win_sizes.y_height
+		|| button.ey > vars->win_sizes.y_height)
+		return ;
+	button.type = TEXT;
+	button.colour = 0x9c9797;
+	button.text = "cone";
+	make_box(vars, button, 0, img);
+}
+
+void	make_tor_button(t_vars *vars, t_dataimg img, int height)
+{
+	t_button	button;
+
+	button.ex = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.04;
+	button.bx = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.3;
+	button.ey = (button.ex - button.bx) / 5;
+	button.by = vars->win_sizes.y_height * 0.0035;
+	button.by += height * 4.2;
+	button.ey += height * 4.2;
+	if (button.by > vars->win_sizes.y_height
+		|| button.ey > vars->win_sizes.y_height)
+		return ;
+	button.type = TEXT;
+	button.colour = 0x9c9797;
+	button.text = "torus";
+	make_box(vars, button, 0, img);
+	make_cone_button(vars, img, height);
+}
 
 void	make_cyl_button(t_vars *vars, t_dataimg img, int height)
 {
@@ -29,6 +68,7 @@ void	make_cyl_button(t_vars *vars, t_dataimg img, int height)
 	button.colour = 0x9c9797;
 	button.text = "cylinder";
 	make_box(vars, button, 0, img);
+	make_tor_button(vars, img, height);
 }
 
 void	make_plane_button(t_vars *vars, t_dataimg img, int height)
@@ -170,6 +210,60 @@ void	add_cyl(t_vars *vars)
 		error_exit_vars(vars, "fuck", 0);
 }
 
+void	add_tor(t_vars *vars)
+{
+	t_shape	*cyl;
+	t_rgb	rgb;
+
+	cyl = malloc(sizeof(t_shape));
+	if (!cyl)
+		return ;
+	cyl->shape = TORUS;
+	cyl->diam = 2;
+	cyl->height = 2;
+	cyl->vector.x = 0;
+	cyl->vector.y = 1;
+	cyl->vector.z = 0;
+	cyl->vector = vect_normalised(cyl->vector);
+	cyl->coords = vect_add(vars->gen->c->coords, vect_mult(vars->gen->c->vector, 5));
+	rgb.r = 255;
+	rgb.g = 255;
+	rgb.b = 255;
+	cyl->rgb = rgb;
+	vars->obj = SHAPE;
+	vars->obj_id = count_lights(vars) + count_objs(vars) - 1;
+	vars->gen->shapes = realloc_shape(vars->gen->shapes, cyl);
+	if (!vars->gen->shapes)
+		error_exit_vars(vars, "fuck", 0);
+}
+
+void	add_cone(t_vars *vars)
+{
+	t_shape	*cyl;
+	t_rgb	rgb;
+
+	cyl = malloc(sizeof(t_shape));
+	if (!cyl)
+		return ;
+	cyl->shape = CONE;
+	cyl->diam = 2;
+	cyl->height = 2;
+	cyl->vector.x = 0;
+	cyl->vector.y = 1;
+	cyl->vector.z = 0;
+	cyl->vector = vect_normalised(cyl->vector);
+	cyl->coords = vect_add(vars->gen->c->coords, vect_mult(vars->gen->c->vector, 5));
+	rgb.r = 255;
+	rgb.g = 255;
+	rgb.b = 255;
+	cyl->rgb = rgb;
+	vars->obj = SHAPE;
+	vars->obj_id = count_lights(vars) + count_objs(vars) - 1;
+	vars->gen->shapes = realloc_shape(vars->gen->shapes, cyl);
+	if (!vars->gen->shapes)
+		error_exit_vars(vars, "fuck", 0);
+}
+
 void	add_plane(t_vars *vars)
 {
 	t_shape	*plane;
@@ -205,5 +299,9 @@ void	new_obj(t_vars *vars, t_type obj)
 		add_plane(vars);
 	else if (obj == CYL_ADD)
 		add_cyl(vars);
+	else if (obj == TOR_ADD)
+		add_tor(vars);
+	else if (obj == CONE_ADD)
+		add_cone(vars);
 	pre_camera(vars, 0);
 }

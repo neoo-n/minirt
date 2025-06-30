@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:16:07 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:25:59 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/30 20:36:36 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_coords		calc_norm(t_inter shape, t_coords ray);
 t_rgb			init_rgb(void);
 t_rgb			rgb_sum(t_rgb l1, t_rgb l2);
 t_rgb			norm_rgb(t_rgb rgb);
-t_coords	co_n(t_inter shape);
+t_coords		co_n(t_inter shape);
 t_rgb			rgb_mult(t_rgb rgb, double mult);
 t_rgb			rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif, t_rgb spec);
 void			copy_image(t_vars *vars);

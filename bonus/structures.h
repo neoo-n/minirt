@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:17:39 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:32:18 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/30 21:52:52 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef enum e_type
 	CYL_ADD,
 	PLANE_ADD,
 	SPHERE_ADD,
+	CONE_ADD,
+	TOR_ADD,
 }	t_type;
 
 typedef enum e_obj

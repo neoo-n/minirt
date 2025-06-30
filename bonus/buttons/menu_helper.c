@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   obj_menu.c                                         :+:      :+:    :+:   */
+/*   menu_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 13:44:39 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:45:40 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 21:46:08 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ void	shape_text(t_vars *vars, t_button *button, char **num)
 	else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape
 		== PLANE)
 		text = ft_strjoin("plane ", (*num));
+	else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape
+		== CONE)
+		text = ft_strjoin("cone ", (*num));
+	else if (vars->gen->shapes[vars->obj_id - count_lights(vars) - 1]->shape
+		== TORUS)
+		text = ft_strjoin("torus ", (*num));
 	free((*num));
 	(*num) = ft_strjoin(text, " selected");
 	(*button).text = (*num);

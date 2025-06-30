@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:33:54 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:28:52 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/30 20:35:38 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 	return (n);
 }
 
-int	in_shade(t_inter shape, t_gen *gen, double angle)
 int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 {
 	t_coords	newray;

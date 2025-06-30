@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:31:01 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/06/30 23:02:14 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ t_shape	**copy_shapes(t_shape **o_shape, int i)
 		new_shape[i]->shape = o_shape[i]->shape;
 		new_shape[i]->coords = o_shape[i]->coords;
 		new_shape[i]->rgb = o_shape[i]->rgb;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE || new_shape[i]->shape == CONE || new_shape[i]->shape == TORUS)
 			new_shape[i]->diam = o_shape[i]->diam;
-		if (new_shape[i]->shape == CYLINDER)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == CONE || new_shape[i]->shape == TORUS)
 			new_shape[i]->height = o_shape[i]->height;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE || new_shape[i]->shape == CONE || new_shape[i]->shape == TORUS)
 			new_shape[i]->vector = o_shape[i]->vector;
 	}
 	new_shape[i] = 0;

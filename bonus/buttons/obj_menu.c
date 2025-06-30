@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 11:20:20 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 13:44:30 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 21:48:13 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ void	shape_buttons(t_vars *vars, t_dataimg img, t_button *button, int height)
 					vars->gen->shapes[vars->shape_count]->shape, 1));
 		if (vars->gen->shapes[vars->shape_count]->shape == CYLINDER)
 			text = "cylinder ";
-		if (vars->gen->shapes[vars->shape_count]->shape == SPHERE)
+		else if (vars->gen->shapes[vars->shape_count]->shape == SPHERE)
 			text = "sphere ";
-		if (vars->gen->shapes[vars->shape_count]->shape == PLANE)
+		else if (vars->gen->shapes[vars->shape_count]->shape == PLANE)
 			text = "plane ";
+		else if (vars->gen->shapes[vars->shape_count]->shape == TORUS)
+			text = "torus ";
+		else if (vars->gen->shapes[vars->shape_count]->shape == CONE)
+			text = "cone ";
 		text = ft_strjoin(text, num);
 		(*button).text = text;
 		make_box(vars, (*button), 0, img);

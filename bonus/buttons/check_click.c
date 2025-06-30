@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 14:11:13 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 14:11:13 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 21:57:36 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,12 @@ t_type	click_in_button(t_vars *vars, int x, int y)
 	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
 		&& y >= but_sy + (but_height * 3.15) && y <= (but_sy + but_height + (but_height * 3.15)))
 		return (CYL_ADD);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 4.2) && y <= (but_sy + but_height + (but_height * 4.2)))
+		return (TOR_ADD);
+	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
+		&& y >= but_sy + (but_height * 5.25) && y <= (but_sy + but_height + (but_height * 5.25)))
+		return (CONE_ADD);
 	else if (check_select_mode(vars))
 	{
 		if (vars->mode != OBJECT_SELECT && (check_arrow_click(vars, x, y, b_len)

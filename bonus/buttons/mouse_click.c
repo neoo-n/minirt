@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu_helper.c                                      :+:      :+:    :+:   */
+/*   mouse_click.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 13:45:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 13:45:44 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 21:51:46 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,9 @@ int	mouse_click(int button, int x, int y, t_vars *vars)
 		new_obj(vars, PLANE_ADD);
 	else if (click_in_button(vars, x, y) == SPHERE_ADD && vars->mode == OBJ_ADD)
 		new_obj(vars, SPHERE_ADD);
+	else if (click_in_button(vars, x, y) == CONE_ADD && vars->mode == OBJ_ADD)
+		new_obj(vars, CONE_ADD);
+	else if (click_in_button(vars, x, y) == TOR_ADD && vars->mode == OBJ_ADD)
+		new_obj(vars, TOR_ADD);
 	return (0);
 }
