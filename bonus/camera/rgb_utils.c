@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:33:26 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/30 16:52:53 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:01:21 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_rgb	init_rgb(void)
 {
 	t_rgb	res;
+
 	res.r = 0;
 	res.g = 0;
 	res.b = 0;
@@ -23,7 +24,7 @@ t_rgb	init_rgb(void)
 
 t_rgb	rgb_sum(t_rgb l1, t_rgb l2)
 {
-	t_rgb res;
+	t_rgb	res;
 
 	res.r = l1.r + l2.r;
 	res.g = l1.g + l2.g;

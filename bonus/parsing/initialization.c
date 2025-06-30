@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 16:53:15 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/30 17:04:58 by dvauthey          #+#    #+#             */
+/*   Updated: 2025/06/30 17:05:02 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "parsing.h"
 

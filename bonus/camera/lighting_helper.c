@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 16:51:14 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/30 16:59:03 by dvauthey          #+#    #+#             */
+/*   Updated: 2025/06/30 17:00:46 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "camera.h"
 
-t_coords	cyl_n(t_inter shape)
+static t_coords	cyl_n(t_inter shape)
 {
 	t_coords	n;
 	t_coords	x;
@@ -33,12 +32,12 @@ t_coords	cyl_n(t_inter shape)
 	return (n);
 }
 
-t_coords	co_n(t_inter shape)
+static t_coords	co_n(t_inter shape)
 {
 	t_coords	n;
 	t_coords	s;
 	t_coords	pc;
-	double		dist_ps;
+	double		d_ps;
 	double		dist;
 
 	dist = dot_prod(vect_sub(shape.point, shape.shape->coords),
@@ -49,10 +48,34 @@ t_coords	co_n(t_inter shape)
 		n = vect_normalised(shape.shape->vector);
 	else
 	{
-		s = vect_add(shape.shape->coords, vect_mult(shape.shape->vector, shape.shape->height));
-		dist_ps = vect_dist(shape.point, s);
-		pc = vect_sub(s, vect_mult(shape.shape->vector, dist_ps / cos(atan((shape.shape->diam / 2) / shape.shape->height))));
+		s = vect_add(shape.shape->coords, vect_mult(shape.shape->vector,
+					shape.shape->height));
+		d_ps = vect_dist(shape.point, s);
+		pc = vect_sub(s, vect_mult(shape.shape->vector, d_ps / cos(
+						atan((shape.shape->diam / 2) / shape.shape->height))));
 		n = vect_normalised(vect_sub(shape.point, pc));
 	}
+	return (n);
+}
+
+t_coords	calc_norm(t_inter shape, t_coords ray)
+{
+	t_coords	n;
+
+	if (shape.shape->shape == PLANE)
+	{
+		n = shape.shape->vector;
+		return (n);
+	}
+	else if (shape.shape->shape == SPHERE)
+		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
+	else if (shape.shape->shape == CYLINDER)
+		n = cyl_n(shape);
+	else if (shape.shape->shape == CONE)
+		n = co_n(shape);
+	else if (shape.shape->shape == TORUS)
+		n = vect_normalised(vect_sub(shape.point, shape.center_t));
+	if (dot_prod(n, ray) > 0)
+		n = vect_mult(n, -1);
 	return (n);
 }

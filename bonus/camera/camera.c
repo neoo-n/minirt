@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/06/30 16:48:41 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/06/30 16:56:02 by dvauthey          #+#    #+#             */
+/*   Updated: 2025/06/30 17:18:51 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "camera.h"
 
@@ -87,6 +86,8 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 		result.point = vect_add(origin, vect_mult(ray, result.t));
 		result.normal = calc_norm(result, ray);
 		result.ray = ray;
+		result.reflect_v = vect_add(result.normal, result.ray);
+		result.reflect_v = vect_normalised(vect_add(result.reflect_v, vect_mult(result.normal, dot_prod(result.normal, vect_mult(result.ray, -1)))));
 	}
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:54:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/19 15:18:43 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:04:50 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	handle_c(t_gen *gen, char *line)
 int	handle_l(t_gen *gen, char *line, int i)
 {
 	t_light	*light;
-	// if (gen->l->bright != -1)
-	// 	return (0);
+
 	light = malloc(sizeof(t_light));
 	if (!light)
 		return (0);

@@ -6,13 +6,13 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:07:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 15:02:29 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:04:01 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int		handle_sp(t_gen *gen, char *line, int i)
+int	handle_sp(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -38,7 +38,7 @@ int		handle_sp(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int		handle_pl(t_gen *gen, char *line, int i)
+int	handle_pl(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -66,7 +66,7 @@ int		handle_pl(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int		c_helper(t_shape *shape, char *line, int i)
+int	c_helper(t_shape *shape, char *line, int i)
 {
 	i = parse_double(line, i, &shape->diam);
 	if (i == -1)
@@ -93,7 +93,7 @@ static t_id	which_type_ct(char *line)
 		return (TORUS);
 }
 
-int		handle_cts(t_gen *gen, char *line, int i)
+int	handle_cts(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 

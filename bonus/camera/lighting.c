@@ -6,33 +6,11 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:51:34 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 16:52:00 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 17:15:14 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
-
-t_coords	calc_norm(t_inter shape, t_coords ray)
-{
-	t_coords	n;
-
-	if (shape.shape->shape == PLANE)
-	{
-		n = shape.shape->vector;
-		return (n);
-	}
-	else if (shape.shape->shape == SPHERE)
-		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
-	else if (shape.shape->shape == CYLINDER)
-		n = cyl_n(shape);
-	else if (shape.shape->shape == CONE)
-		n = co_n(shape);
-	else if (shape.shape->shape == TORUS)
-		n = vect_normalised(vect_sub(shape.point, shape.center_t));
-	if (dot_prod(n, ray) > 0)
-		n = vect_mult(n, -1);
-	return (n);
-}
 
 int	in_shade(t_inter shape, t_gen *gen, double angle)
 {
@@ -119,7 +97,8 @@ int	get_rgb(t_inter shape, t_gen *gen, t_vars *vars)
 			light[0] = 0;
 			light[1] = 0;
 		}
-		dif_light = rgb_sum(dif_light, rgb_mult(norm_rgb(gen->l[i]->rgb), light[0]));
+		dif_light = rgb_sum(dif_light, rgb_mult(norm_rgb(gen->l[i]->rgb),
+				light[0]));
 		spec_light = rgb_sum(spec_light, rgb_mult(norm_rgb(gen->l[i]->rgb),
 				light[1] * gen->l[i]->bright));
 		i++;
