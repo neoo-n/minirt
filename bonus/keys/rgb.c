@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 16:07:02 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 16:07:53 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/30 13:53:54 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/30 13:57:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	minus_rgb(t_vars *vars, int light_id, int shape_id)
 			vars->gen->shapes[shape_id]->rgb.g--;
 		else if (vars->mode == BLUE && vars->gen->shapes[shape_id]->rgb.b > 0)
 			vars->gen->shapes[shape_id]->rgb.b--;
-		rgb = vars->gen->l[light_id]->rgb;
+		rgb = vars->gen->shapes[shape_id]->rgb;
 		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
 }
@@ -64,7 +64,7 @@ void	plus_rgb(t_vars *vars, int light_id, int shape_id)
 			vars->gen->shapes[shape_id]->rgb.g++;
 		else if (vars->mode == BLUE && vars->gen->shapes[shape_id]->rgb.b < 255)
 			vars->gen->shapes[shape_id]->rgb.b++;
-		rgb = vars->gen->l[light_id]->rgb;
+		rgb = vars->gen->shapes[shape_id]->rgb;
 		printf("RGB: %.f,%.f,%.f\n", rgb.r, rgb.g, rgb.b);
 	}
 }
