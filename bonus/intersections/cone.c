@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:13:31 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/06/29 17:31:35 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/06/30 11:22:58 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "intersections.h"
 
@@ -57,7 +57,7 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 	cone->vector = vect_normalised(cone->vector);
 	cam_edge = vect_sub(origin, vect_add(cone->coords, vect_mult(cone->vector, cone->height)));
 	// alpha = atan((cone->diam / 2) / cone->height);
-	ratio = ((cone->diam / 2) / cone->height) + 1;
+	ratio = ((cone->diam * cone->diam / 4) / (cone->height * cone->height)) + 1;
 	// m = vect_sub(origin, cone->coords);
 	// b = vect_sub(m, vect_mult(cone->vector, dot_prod(m, cone->vector)));
 	// a = vect_sub(ray, vect_mult(cone->vector, dot_prod(ray, cone->vector)));
