@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 15:08:14 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 16:09:22 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/30 14:20:48 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/30 14:23:02 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	z_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.y = simul.y;
 		vars->gen->c->vector.z = simul.z;
 	}
-	else if (vars->gen->shapes[shape_id]->shape == PLANE
-		|| vars->gen->shapes[shape_id]->shape == CYLINDER)
+	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER))
 	{
 		vars->gen->shapes[shape_id]->vector.x += vars->gen->c->vector.x * 0.2;
 		vars->gen->shapes[shape_id]->vector.y += vars->gen->c->vector.y * 0.2;

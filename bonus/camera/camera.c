@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press.c                                        :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 15:17:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 15:53:48 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/06/30 14:05:42 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/30 14:16:23 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	copy_pre_image(t_vars *vars)
 // 	vars->state = RENDER;
 // 	vars->screen = screen_calcul(vars);
 // 	step = vars->win_sizes.x_len / 8;
-// 	while (i < 8)
+// 	while (++i < 8)
 // 	{
 // 		tdata[i].vars = vars;
 // 		tdata[i].sx = i * step;
@@ -183,7 +183,6 @@ void	copy_pre_image(t_vars *vars)
 // 		else
 // 			tdata[i].ex = (i + 1) * step;
 // 		pthread_create(&threads[i], NULL, camera_thread, &tdata[i]);
-// 		i++;
 // 	}
 // 	i = 0;
 // 	while (i < 8)
