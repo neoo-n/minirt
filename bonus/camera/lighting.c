@@ -6,12 +6,35 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:33:54 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 15:49:59 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 20:28:52 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
+t_coords	calc_norm(t_inter shape, t_coords ray)
+{
+	t_coords	n;
+
+	if (shape.shape->shape == PLANE)
+	{
+		n = shape.shape->vector;
+		return (n);
+	}
+	else if (shape.shape->shape == SPHERE)
+		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
+	else if (shape.shape->shape == CYLINDER)
+		n = cyl_n(shape);
+	else if (shape.shape->shape == CONE)
+		n = co_n(shape);
+	else if (shape.shape->shape == TORUS)
+		n = vect_normalised(vect_sub(shape.point, shape.center_t));
+	if (dot_prod(n, ray) > 0)
+		n = vect_mult(n, -1);
+	return (n);
+}
+
+int	in_shade(t_inter shape, t_gen *gen, double angle)
 int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 {
 	t_coords	newray;

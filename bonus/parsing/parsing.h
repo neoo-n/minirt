@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_presses.h                                      :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 09:53:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 09:53:58 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 20:31:33 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		handle_l(t_gen *gen, char *line, int i);
 
 int		handle_sp(t_gen *gen, char *line, int i);
 int		handle_pl(t_gen *gen, char *line, int i);
-int		handle_cy(t_gen *gen, char *line, int i);
+int		handle_cts(t_gen *gen, char *line, int i);
 
 int		is_numeric(char *str);
 int		arr_len(char **arr);

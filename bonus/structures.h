@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:17:39 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 16:18:13 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/06/30 20:32:18 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef enum e_id
 	SPHERE,
 	PLANE,
 	CYLINDER,
-	CONE
+	CONE,
+	TORUS
 }	t_id;
 
 typedef enum e_type
@@ -231,6 +232,7 @@ typedef struct s_inter
 	t_coords	point;
 	t_coords	normal;
 	t_coords	ray;
+	t_coords	center_t;
 }	t_inter;
 
 typedef struct s_gen

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 16:14:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 16:15:33 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/05/28 11:38:36 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/06/30 20:31:01 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ int	init_elem(t_gen *gen, char *line)
 		return (handle_sp(gen, line, 0));
 	if (line[0] == 'p')
 		return (handle_pl(gen, line, 0));
-	if (line[0] == 'c')
-		return (handle_cy(gen, line, 0));
+	if (line[0] == 'c' || line[0] == 't')
+		return (handle_cts(gen, line, 0));
 	return (0);
 }
 
