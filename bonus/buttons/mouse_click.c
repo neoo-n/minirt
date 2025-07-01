@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 13:45:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 21:51:46 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/01 12:45:22 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/01 13:16:44 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	reset_gen(t_vars *vars)
 	vars->gen = gen;
 	vars->gen->character = init_characters();
 	vars->gen->saved_gen = copy_gen(vars->gen);
+	vars->obj = NONE;
+	vars->obj_id = 0;
 	vars->state = RENDERING;
+	clear_image(&vars->img, vars->win_sizes.x_len, vars->win_sizes.y_height);
+	clear_image(&vars->pre_img, vars->win_sizes.x_len, vars->win_sizes.y_height);
 	mlx_put_image_to_window(vars->mlx, vars->win,
 		vars->loading_image.img, 0, 0);
 }

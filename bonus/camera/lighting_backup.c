@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:48:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 14:57:05 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/01 14:05:26 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/01 14:19:59 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 {
 	t_coords	n;
 
+	(void) ray;
 	if (shape.shape->shape == PLANE)
 	{
 		n = shape.shape->vector;
@@ -29,7 +30,7 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 		n = co_n(shape);
 	else if (shape.shape->shape == TORUS)
 		n = vect_normalised(vect_sub(shape.point, shape.center_t));
-	if (dot_prod(vect_normalised(n), vect_normalised(ray)) > 0)
+	if (dot_prod(n, ray) > 0)
 		n = vect_mult(n, -1);
 	return (n);
 }
@@ -40,26 +41,28 @@ int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 	t_inter		closest_shape;
 	double		dist[2];
 	t_coords	newpoint;
-	t_coords	offset_point;
 
+	// angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
+	// if (angle >= -1e-8)
+	// 	return (1);
 	(void) angle;
 	newray = vect_normalised(vect_sub(gen->l[i]->coords, shape.point));
-	offset_point = vect_add(shape.point, vect_mult(shape.normal, 1e-6));
-	closest_shape = find_closest_shape(newray, offset_point, gen->shapes, NULL);
+	closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
+			shape.shape);
 	if (!closest_shape.shape || closest_shape.t == -1)
 		return (0);
-	dist[0] = dot_prod(vect_sub(gen->l[i]->coords, offset_point), newray);
-	newpoint = vect_add(offset_point, vect_mult(newray, closest_shape.t));
-	dist[1] = dot_prod(vect_sub(newpoint, offset_point), newray);
-	if (dist[1] < dist[0] - 1e-6)
+	dist[0] = dot_prod(vect_sub(shape.point, gen->l[i]->coords), newray);
+	newpoint = vect_add(shape.point, vect_mult(newray, closest_shape.t));
+	dist[1] = dot_prod(vect_sub(shape.point, newpoint), newray);
+	if (dist[0] < dist[1] - 1e-8)
 		return (1);
 	return (0);
 }
 
-double	calc_dif_int(t_inter shape, t_light	*light)
+double	calc_dif_int(t_inter shape, t_light *light)
 {
-	double		angle;
 	t_coords	light_dir;
+	double		angle;
 
 	light_dir = vect_normalised(vect_sub(light->coords, shape.point));
 	angle = dot_prod(shape.normal, light_dir);

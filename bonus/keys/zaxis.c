@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/30 14:20:48 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 14:23:02 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/01 12:30:31 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/01 12:30:38 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,20 @@ void	z_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
 	{
-		vars->gen->shapes[shape_id]->vector.x += vars->gen->c->vector.x * 0.2;
-		vars->gen->shapes[shape_id]->vector.y += vars->gen->c->vector.y * 0.2;
-		vars->gen->shapes[shape_id]->vector.z += vars->gen->c->vector.z * 0.2;
+		double cost;
+		double sint;
+		t_coords final;
+		cost = cos(5 * PI / 180);
+		sint = sin(5 * PI / 180);
+		final.x = vars->gen->shapes[shape_id]->vector.x * cost - vars->gen->shapes[shape_id]->vector.y * sint;
+		final.y = vars->gen->shapes[shape_id]->vector.x * sint + vars->gen->shapes[shape_id]->vector.y * cost;
+		final.z = vars->gen->shapes[shape_id]->vector.z;
+		final = vect_normalised(final);
+		vars->gen->shapes[shape_id]->vector.x = final.x;
+		vars->gen->shapes[shape_id]->vector.y = final.y;
+		vars->gen->shapes[shape_id]->vector.z = final.z;
 	}
 }
 
@@ -113,12 +122,21 @@ void	x_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.y = simul.y;
 		vars->gen->c->vector.z = simul.z;
 	}
-	else if (vars->gen->shapes[shape_id]->shape == PLANE
-		|| vars->gen->shapes[shape_id]->shape == CYLINDER)
+	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
 	{
-		vars->gen->shapes[shape_id]->vector.x += vars->gen->c->vector.x * 0.2;
-		vars->gen->shapes[shape_id]->vector.y += vars->gen->c->vector.y * 0.2;
-		vars->gen->shapes[shape_id]->vector.z += vars->gen->c->vector.z * 0.2;
+		double cost;
+		double sint;
+		t_coords final;
+		cost = cos(-5 * PI / 180);
+		sint = sin(-5 * PI / 180);
+		final.x = vars->gen->shapes[shape_id]->vector.x * cost - vars->gen->shapes[shape_id]->vector.y * sint;
+		final.y = vars->gen->shapes[shape_id]->vector.x * sint + vars->gen->shapes[shape_id]->vector.y * cost;
+		final.z = vars->gen->shapes[shape_id]->vector.z;
+		final = vect_normalised(final);
+		vars->gen->shapes[shape_id]->vector.x = final.x;
+		vars->gen->shapes[shape_id]->vector.y = final.y;
+		vars->gen->shapes[shape_id]->vector.z = final.z;
 	}
 }
 

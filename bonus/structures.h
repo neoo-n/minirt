@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 16:17:39 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 21:52:52 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/01 12:32:44 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/01 12:43:30 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define UP 65362
 # define DOWN 65364
 # define LEFT 65361
-# define RIGHT 65364
+# define RIGHT 65363
 # define PLUS 61
 # define MINUS 45
 # define ENTER 65293
@@ -38,7 +38,7 @@
 # define R 114
 # define G 103
 # define B 98
-# define PIXELS 20
+# define PIXELS 10
 # ifndef X_LEN
 #  define X_LEN 1920.0
 # endif
