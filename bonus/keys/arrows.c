@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 11:51:57 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 12:28:39 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/01 15:06:22 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	up_press(t_vars *vars, int light_count)
 	t_coords	simul;
 
 	shape_id = vars->obj_id - light_count - 1;
-	(void) shape_id;
 	if (vars->obj == CAM && vars->gen->c->vector.y > -0.999)
 	{
 		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
@@ -58,7 +57,6 @@ void	down_press(t_vars *vars, int light_count)
 	t_coords	simul;
 
 	shape_id = vars->obj_id - light_count - 1;
-	(void) shape_id;
 	if (vars->obj == CAM && vars->gen->c->vector.y < 0.999)
 	{
 		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
