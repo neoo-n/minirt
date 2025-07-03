@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 16:07:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:29:57 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/03 14:58:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:58:51 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,10 @@ int		c_helper(t_shape *shape, char *line, int i)
 
 static t_id	which_type_ct(char *line)
 {
-	if (line[0] == 'c')
-	{
-		if (line[1] == 'y')
-			return (CYLINDER);
-		else
-			return (CONE);
-	}
+	if (line[1] == 'y')
+		return (CYLINDER);
 	else
-		return (TORUS);
+		return (CONE);
 }
 
 int		handle_cts(t_gen *gen, char *line, int i)

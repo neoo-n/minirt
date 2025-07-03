@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lighting.c                                         :+:      :+:    :+:   */
+/*   lighting_backup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:05:26 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 14:19:59 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 14:54:07 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:54:07 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 		n = cyl_n(shape);
 	else if (shape.shape->shape == CONE)
 		n = co_n(shape);
-	else if (shape.shape->shape == TORUS)
-		n = vect_normalised(vect_sub(shape.point, shape.center_t));
 	if (dot_prod(n, ray) > 0)
 		n = vect_mult(n, -1);
 	return (n);

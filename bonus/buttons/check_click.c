@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 14:11:13 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 21:57:36 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/03 15:01:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 15:01:08 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,6 @@ t_type	click_in_button(t_vars *vars, int x, int y)
 		return (CYL_ADD);
 	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
 		&& y >= but_sy + (but_height * 4.2) && y <= (but_sy + but_height + (but_height * 4.2)))
-		return (TOR_ADD);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 5.25) && y <= (but_sy + but_height + (but_height * 5.25)))
 		return (CONE_ADD);
 	else if (check_select_mode(vars))
 	{

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 11:51:57 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 15:06:22 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 14:54:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:55:19 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	up_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;
@@ -71,7 +71,7 @@ void	down_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;
@@ -106,7 +106,7 @@ void	left_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;
@@ -141,7 +141,7 @@ void	right_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;

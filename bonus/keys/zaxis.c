@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 12:30:31 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 12:30:38 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 14:55:25 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:55:30 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	z_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;
@@ -123,7 +123,7 @@ void	x_press(t_vars *vars, int light_count)
 		vars->gen->c->vector.z = simul.z;
 	}
 	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE || vars->gen->shapes[shape_id]->shape == TORUS))
+			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
 		double sint;

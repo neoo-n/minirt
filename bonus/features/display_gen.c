@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 15:52:16 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 22:03:35 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/03 15:02:24 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 15:02:29 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	print_shape_info(t_gen *gen, int i)
 		printf("cy ");
 	else if (gen->shapes[i]->shape == CONE)
 		printf("co ");
-	else if (gen->shapes[i]->shape == TORUS)
-		printf("to ");
 	printf("%.2f,%.2f,%.2f ", gen->shapes[i]->coords.x,
 		gen->shapes[i]->coords.y, gen->shapes[i]->coords.z);
-	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == PLANE || gen->shapes[i]->shape == CONE || gen->shapes[i]->shape == TORUS)
+	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == PLANE
+		|| gen->shapes[i]->shape == CONE)
 		printf("%.2f,%.2f,%.2f ", gen->shapes[i]->vector.x,
 			gen->shapes[i]->vector.y, gen->shapes[i]->vector.z);
-	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == SPHERE || gen->shapes[i]->shape == CONE || gen->shapes[i]->shape == TORUS)
+	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == SPHERE
+		|| gen->shapes[i]->shape == CONE)
 		printf("%.2f ", gen->shapes[i]->diam);
-	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == CONE || gen->shapes[i]->shape == TORUS)
+	if (gen->shapes[i]->shape == CYLINDER || gen->shapes[i]->shape == CONE)
 		printf("%.2f ", gen->shapes[i]->height);
 	printf("%.0f,%.0f,%.0f\n", gen->shapes[i]->rgb.r, gen->shapes[i]->rgb.g,
 		gen->shapes[i]->rgb.b);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 11:20:20 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 21:48:13 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/03 14:53:58 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:53:58 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	shape_buttons(t_vars *vars, t_dataimg img, t_button *button, int height)
 			text = "sphere ";
 		else if (vars->gen->shapes[vars->shape_count]->shape == PLANE)
 			text = "plane ";
-		else if (vars->gen->shapes[vars->shape_count]->shape == TORUS)
-			text = "torus ";
 		else if (vars->gen->shapes[vars->shape_count]->shape == CONE)
 			text = "cone ";
 		text = ft_strjoin(text, num);

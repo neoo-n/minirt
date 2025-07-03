@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 12:32:44 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 12:43:30 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 14:52:27 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:52:27 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef enum e_id
 	PLANE,
 	CYLINDER,
 	CONE,
-	TORUS
 }	t_id;
 
 typedef enum e_type

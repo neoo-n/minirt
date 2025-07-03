@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:29:43 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/26 16:44:13 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/07/03 14:54:11 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:54:11 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane);
 double	cyl_intersect(t_coords ray, t_coords origin,
 				t_shape *cyl, double t);
 double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t);
-double	torus_intersect(t_coords ray, t_coords origin, t_shape *torus,
-				t_inter *shape);
 
 #endif
