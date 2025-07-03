@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_click.c                                      :+:      :+:    :+:   */
+/*   Makefile                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 15:01:03 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 15:01:08 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 15:31:47 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 15:31:47 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,59 +86,4 @@ t_bool	obj_click(t_vars *vars, int x, int y, int buttons)
 		i++;
 	}
 	return (False);
-}
-
-t_type	click_in_button(t_vars *vars, int x, int y)
-{
-	int		b_len;
-	int		but_height;
-	int		but_sx;
-	int		but_sy;
-
-	but_sx = vars->win_sizes.x_len - vars->win_sizes.x_len * 0.3;
-	b_len = (vars->win_sizes.x_len - vars->win_sizes.x_len * 0.04) - (but_sx);
-	but_sy = vars->win_sizes.y_height * 0.0035;
-	but_height = b_len / 5 - but_sy;
-	but_sy = vars->win_sizes.y_height * 0.0035;
-	if (check_menu_button(vars, x, y))
-		return (MENU);
-	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy && y <= but_sy + but_height)
-		return (TEXT);
-	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 1.05) && y <= (but_sy + but_height + (but_height * 1.05)))
-		return (SETTINGS);
-	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 2.1) && y <= (but_sy + but_height + (but_height * 2.1)))
-		return (PRINT);
-	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 3.15) && y <= (but_sy + but_height + (but_height * 3.15)))
-		return (RESET);
-	else if (vars->mode == BASIC && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 4.2) && y <= (but_sy + but_height + (but_height * 4.2)))
-		return (ADD_OBJ);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy && y <= but_sy + but_height)
-		return (LIGHT_ADD);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 1.05) && y <= (but_sy + but_height + (but_height * 1.05)))
-		return (SPHERE_ADD);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 2.1) && y <= (but_sy + but_height + (but_height * 2.1)))
-		return (PLANE_ADD);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 3.15) && y <= (but_sy + but_height + (but_height * 3.15)))
-		return (CYL_ADD);
-	else if (vars->mode == OBJ_ADD && x >= but_sx && x <= but_sx + b_len
-		&& y >= but_sy + (but_height * 4.2) && y <= (but_sy + but_height + (but_height * 4.2)))
-		return (CONE_ADD);
-	else if (check_select_mode(vars))
-	{
-		if (vars->mode != OBJECT_SELECT && (check_arrow_click(vars, x, y, b_len)
-				== ARROW_L || check_arrow_click(vars, x, y, b_len) == ARROW_R))
-			return (check_arrow_click(vars, x, y, b_len));
-		if (obj_click(vars, x, y, count_buttons(vars, but_sy, but_height)))
-			return (TEXT);
-	}
-	return (EMPTY);
 }

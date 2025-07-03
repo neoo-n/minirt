@@ -6,7 +6,7 @@ PARSING =	parsing/handle_shapes.c parsing/handling.c \
 			parsing/helper.c parsing/helper2.c \
 			parsing/initialization.c parsing/insert.c \
 			parsing/validation.c parsing/handle_helper.c \
-			parsing/handling_light.c
+			parsing/handling_light.c parsing/init_helper.c
 
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
@@ -31,7 +31,9 @@ BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
 			buttons/button_click.c \
 			buttons/check_click.c buttons/menu_helper.c \
 			buttons/mouse_click_helper.c buttons/obj_menu.c \
-			buttons/new_shape.c
+			buttons/new_shape.c buttons/button_click_helper.c \
+			buttons/click_in.c buttons/make_buttons.c \
+			buttons/add_shape.c buttons/shape_buttons.c
 
 KEYS	=	keys/arrows.c keys/hjkl.c keys/key_press.c \
 			keys/mod.c keys/wasd.c keys/zaxis.c \

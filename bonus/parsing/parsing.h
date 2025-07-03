@@ -48,4 +48,9 @@ int		valid_rgb(char *str);
 int		valid_double(char *str);
 int		valid_coords(char *str);
 
+int		shape_len(t_shape **o_shape);
+void	check_copy(t_gen *res, int copy);
+t_gen	*handle_err(t_errmes mes, char *line, int i, t_gen *res);
+int		init_elem(t_gen *gen, char *line);
+
 #endif

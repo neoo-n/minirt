@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:59:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:23:28 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:35:24 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	camera(t_vars *vars, int i, int rgb)
 			pthread_join(threads[j], NULL);
 			j++;
 		}
-		error_exit_vars(vars, "fucking hell", 0);
+		error_exit_vars(vars, "Error creating threads", 0);
 	}
 	i = 0;
 	while (i < 8)

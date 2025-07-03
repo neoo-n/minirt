@@ -63,7 +63,7 @@ int	max_for_page(t_vars *vars, int buttons)
 	if (vars->page_num < max_pages)
 		return (buttons);
 	if (objs % buttons == 0)
-		return  (buttons - 1);
+		return (buttons - 1);
 	return ((objs % buttons) - 1);
 }
 
