@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 14:56:08 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:56:08 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 16:00:03 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 16:00:03 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,7 @@ t_gen	*init_gen(int copy)
 		return (0);
 	res->a = malloc(sizeof(t_amb));
 	res->c = malloc(sizeof(t_cam));
-	if (!copy)
-	{
-		res->l = malloc(sizeof(t_light *));
-		res->shapes = malloc(sizeof(t_shape *));
-	}
-	else
-	{
-		res->l = 0;
-		res->shapes = 0;
-	}
+	check_copy(res, copy);
 	if (!res->c || !res->a || (!copy && (!res->shapes || !res->l)))
 	{
 		free_gen(res);
@@ -76,12 +67,9 @@ t_shape	**copy_shapes(t_shape **o_shape, int i)
 {
 	t_shape	**new_shape;
 
-	while (o_shape[i])
-		i++;
-	new_shape = malloc(sizeof(t_shape *) * (i + 1));
+	new_shape = malloc(sizeof(t_shape *) * (shape_len(o_shape) + 1));
 	if (!new_shape)
 		return (0);
-	i = -1;
 	while (o_shape[++i])
 	{
 		new_shape[i] = malloc(sizeof(t_shape));
@@ -90,11 +78,13 @@ t_shape	**copy_shapes(t_shape **o_shape, int i)
 		new_shape[i]->shape = o_shape[i]->shape;
 		new_shape[i]->coords = o_shape[i]->coords;
 		new_shape[i]->rgb = o_shape[i]->rgb;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE || new_shape[i]->shape == CONE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE
+			|| new_shape[i]->shape == CONE)
 			new_shape[i]->diam = o_shape[i]->diam;
 		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == CONE)
 			new_shape[i]->height = o_shape[i]->height;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE || new_shape[i]->shape == CONE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE
+			|| new_shape[i]->shape == CONE)
 			new_shape[i]->vector = o_shape[i]->vector;
 	}
 	new_shape[i] = 0;
@@ -120,7 +110,7 @@ t_gen	*copy_gen(t_gen *o_gen)
 		free_gen(new_gen);
 		return (0);
 	}
-	new_gen->shapes = copy_shapes(o_gen->shapes, 0);
+	new_gen->shapes = copy_shapes(o_gen->shapes, -1);
 	if (!new_gen->shapes)
 	{
 		free_gen(new_gen);
@@ -128,31 +118,6 @@ t_gen	*copy_gen(t_gen *o_gen)
 	}
 	new_gen->saved_gen = 0;
 	return (new_gen);
-}
-
-int	init_elem(t_gen *gen, char *line)
-{
-	if (line[0] == 'A')
-		return (handle_a(gen, line));
-	if (line[0] == 'C')
-		return (handle_c(gen, line));
-	if (line[0] == 'L')
-		return (handle_l(gen, line, 0));
-	if (line[0] == 's')
-		return (handle_sp(gen, line, 0));
-	if (line[0] == 'p')
-		return (handle_pl(gen, line, 0));
-	if (line[0] == 'c' || line[0] == 't')
-		return (handle_cts(gen, line, 0));
-	return (0);
-}
-
-t_gen	*handle_err(t_errmes mes, char *line, int i, t_gen *res)
-{
-	print_error(mes, line, i);
-	free(line);
-	free_gen(res);
-	return (0);
 }
 
 t_gen	*parse_file(int fd, int i)

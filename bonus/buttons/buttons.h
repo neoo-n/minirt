@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 14:16:46 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/27 14:16:46 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 15:47:23 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 15:47:23 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,23 @@ void	make_arrows(t_vars *vars, int boxlength, int arrow, t_dataimg img);
 
 void	add_obj(t_vars *vars, t_dataimg img);
 void	new_obj(t_vars *vars, t_type obj);
+
+void	hide_buttons(t_vars *vars, t_dataimg img);
+void	menu_click(t_vars *vars, t_dataimg img);
+int		button_fit(t_vars *vars);
+
+t_bool	obj_click(t_vars *vars, int x, int y, int buttons);
+t_bool	check_menu_button(t_vars *vars, int x, int y);
+t_type	check_arrow_click(t_vars *vars, int x, int y, int button_len);
+
+void	light_text(t_vars *vars, t_button *button, char **num);
+void	shape_text(t_vars *vars, t_button *button, char **num);
+
+void	make_sphere_button(t_vars *vars, t_dataimg img, int height);
+void	add_light(t_vars *vars);
+void	add_sphere(t_vars *vars);
+void	add_cyl(t_vars *vars);
+void	add_cone(t_vars *vars);
+void	add_plane(t_vars *vars);
 
 #endif
