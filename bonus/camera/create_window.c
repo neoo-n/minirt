@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 15:21:54 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:11:59 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:18:45 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	creating_window(t_gen *gen)
 	button.ey = vars.win_sizes.y_height / 2 * 1.1;
 	make_box(&vars, button, 0, vars.loading_image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.loading_image.img, 0, 0);
-	camera(&vars, -1, 0);
+	camera(&vars, -1);
 	mlx_hook(vars.win, 2, 1L << 0, closing, &vars);
 	mlx_hook(vars.win, 17, 1L << 17, mouse_closing, &vars);
 	mlx_mouse_hook(vars.win, &mouse_click, &vars);

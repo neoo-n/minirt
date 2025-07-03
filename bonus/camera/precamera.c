@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precamera.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:53:07 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/07/03 16:23:46 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:45:15 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,44 +91,25 @@ void	pre_camera(t_vars *vars, int i)
 	t_data			tdata[8];
 	pthread_t		threads[8];
 	int				step;
-	int				j;
 
 	vars->state = PRERENDER;
 	vars->screen = screen_calcul(vars);
 	step = vars->win_sizes.x_len / 8;
 	while (i < 8)
 	{
-		tdata[i].vars = deep_copy(vars);
-		if (!tdata[i].vars)
+		if (!create_threads(i, step, vars, tdata))
 			break ;
-		tdata[i].sx = i * step;
-		if (i == 7)
-			tdata[i].ex = vars->win_sizes.x_len;
-		else
-			tdata[i].ex = (i + 1) * step;
 		pthread_create(&threads[i], NULL, pre_camera_thread, &tdata[i]);
 		i++;
 	}
 	if (i != 8)
-	{
-		j = 0;
-		while (j < i)
-		{
-			thread_failure(tdata[j].vars);
-			pthread_join(threads[j], NULL);
-			j++;
-		}
-		error_exit_vars(vars, "fucking hell", 0);
-	}
+		total_failure(vars, i, tdata, threads);
 	i = 0;
 	while (i < 8)
 		pthread_join(threads[i++], NULL);
 	i = 0;
 	while (i < 8)
-	{
-		thread_failure(tdata[i].vars);
-		i++;
-	}
+		thread_failure(tdata[i++].vars);
 	info_box(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->pre_img_copy.img, 0, 0);
 }

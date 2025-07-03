@@ -20,7 +20,8 @@ CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \
 			camera/lighting_helper.c camera/rgb_utils.c \
 			camera/precamera.c camera/thread_fct.c \
-			camera/copy.c camera/closing_window.c
+			camera/copy.c camera/closing_window.c \
+			camera/camera_helper.c
 
 FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/abcde.c fonts/fghij.c \
@@ -37,7 +38,7 @@ BUTTONS	=	buttons/buttons.c buttons/mouse_click.c \
 
 KEYS	=	keys/arrows.c keys/hjkl.c keys/key_press.c \
 			keys/mod.c keys/wasd.c keys/zaxis.c \
-			keys/rgb.c
+			keys/rgb.c keys/rotate_helper.c
 
 VECT	=	vector/vector.c vector/vector_ops.c
 

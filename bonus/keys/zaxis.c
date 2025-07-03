@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:55:25 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:55:30 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 21:54:34 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,77 +66,61 @@ void	e_press(t_vars *vars, int light_count)
 	}
 }
 
-void	z_press(t_vars *vars, int light_count)
+void	z_press(t_vars *vars, int light_count, int shape_id)
 {
-	int			shape_id;
 	t_coords	simul;
+	double		cost;
+	double		sint;
+	t_cam		*cam;
 
 	shape_id = vars->obj_id - light_count - 1;
 	if (vars->obj == CAM)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
-			- vars->screen.vect_x.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
-			- vars->screen.vect_x.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
-			- vars->screen.vect_x.z * 0.05;
-		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
-		vars->gen->c->vector.x = simul.x;
-		vars->gen->c->vector.y = simul.y;
-		vars->gen->c->vector.z = simul.z;
+		cam = vars->gen->c;
+		simul.x = cam->coords.x + cam->vector.x - vars->screen.vect_x.x * 0.05;
+		simul.y = cam->coords.y + cam->vector.y - vars->screen.vect_x.y * 0.05;
+		simul.z = cam->coords.z + cam->vector.z - vars->screen.vect_x.z * 0.05;
+		reassign_vector(&vars->gen->c->vector, vect_sub(simul, cam->coords));
 	}
-	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
+	else if (can_rotate(vars, shape_id))
 	{
-		double cost;
-		double sint;
-		t_coords final;
 		cost = cos(5 * PI / 180);
 		sint = sin(5 * PI / 180);
-		final.x = vars->gen->shapes[shape_id]->vector.x * cost - vars->gen->shapes[shape_id]->vector.y * sint;
-		final.y = vars->gen->shapes[shape_id]->vector.x * sint + vars->gen->shapes[shape_id]->vector.y * cost;
-		final.z = vars->gen->shapes[shape_id]->vector.z;
-		final = vect_normalised(final);
-		vars->gen->shapes[shape_id]->vector.x = final.x;
-		vars->gen->shapes[shape_id]->vector.y = final.y;
-		vars->gen->shapes[shape_id]->vector.z = final.z;
+		simul.x = vars->gen->shapes[shape_id]->vector.x * cost
+			- vars->gen->shapes[shape_id]->vector.y * sint;
+		simul.y = vars->gen->shapes[shape_id]->vector.x * sint
+			+ vars->gen->shapes[shape_id]->vector.y * cost;
+		simul.z = vars->gen->shapes[shape_id]->vector.z;
+		reassign_vector(&vars->gen->shapes[shape_id]->vector, simul);
 	}
 }
 
-void	x_press(t_vars *vars, int light_count)
+void	x_press(t_vars *vars, int light_count, int shape_id)
 {
-	int			shape_id;
 	t_coords	simul;
+	double		cost;
+	double		sint;
+	t_cam		*cam;
 
 	shape_id = vars->obj_id - light_count - 1;
 	if (vars->obj == CAM)
 	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x
-			+ vars->screen.vect_x.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y
-			+ vars->screen.vect_x.y * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z
-			+ vars->screen.vect_x.z * 0.05;
-		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
-		vars->gen->c->vector.x = simul.x;
-		vars->gen->c->vector.y = simul.y;
-		vars->gen->c->vector.z = simul.z;
+		cam = vars->gen->c;
+		simul.x = cam->coords.x + cam->vector.x + vars->screen.vect_x.x * 0.05;
+		simul.y = cam->coords.y + cam->vector.y + vars->screen.vect_x.y * 0.05;
+		simul.z = cam->coords.z + cam->vector.z + vars->screen.vect_x.z * 0.05;
+		reassign_vector(&vars->gen->c->vector, vect_sub(simul, cam->coords));
 	}
-	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
-			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
+	else if (can_rotate(vars, shape_id))
 	{
-		double cost;
-		double sint;
-		t_coords final;
 		cost = cos(-5 * PI / 180);
 		sint = sin(-5 * PI / 180);
-		final.x = vars->gen->shapes[shape_id]->vector.x * cost - vars->gen->shapes[shape_id]->vector.y * sint;
-		final.y = vars->gen->shapes[shape_id]->vector.x * sint + vars->gen->shapes[shape_id]->vector.y * cost;
-		final.z = vars->gen->shapes[shape_id]->vector.z;
-		final = vect_normalised(final);
-		vars->gen->shapes[shape_id]->vector.x = final.x;
-		vars->gen->shapes[shape_id]->vector.y = final.y;
-		vars->gen->shapes[shape_id]->vector.z = final.z;
+		simul.x = vars->gen->shapes[shape_id]->vector.x * cost
+			- vars->gen->shapes[shape_id]->vector.y * sint;
+		simul.y = vars->gen->shapes[shape_id]->vector.x * sint
+			+ vars->gen->shapes[shape_id]->vector.y * cost;
+		simul.z = vars->gen->shapes[shape_id]->vector.z;
+		reassign_vector(&vars->gen->shapes[shape_id]->vector, simul);
 	}
 }
 
@@ -150,8 +134,8 @@ void	zaxis_handler(int button, t_vars *vars, int light_count)
 	if (button == E)
 		e_press(vars, light_count);
 	if (button == Z)
-		z_press(vars, light_count);
+		z_press(vars, light_count, 0);
 	if (button == X)
-		x_press(vars, light_count);
+		x_press(vars, light_count, 0);
 	pre_camera(vars, 0);
 }

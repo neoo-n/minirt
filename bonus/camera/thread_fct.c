@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_fct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 15:56:02 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/07/03 15:56:54 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:17:17 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,28 @@
 void	*camera_thread(void *data)
 {
 	t_data		*info;
-	int			j;
-	int			i;
 	t_coords	vect;
 	int			rgb;
 	t_inter		shape;
 
 	info = data;
-	i = info->sx;
-	while (i < info->ex)
+	info->i = info->sx - 1;
+	while (++info->i < info->ex)
 	{
-		j = 0;
-		while (j < info->vars->win_sizes.y_height)
+		info->j = 0;
+		while (info->j < info->vars->win_sizes.y_height)
 		{
-			vect = camera_vect(info->vars, i, j, info->vars->screen);
+			vect = camera_vect(info->vars, info->i,
+					info->j, info->vars->screen);
 			shape = find_closest_shape(vect, info->vars->gen->c->coords,
 					info->vars->gen->shapes, 0);
 			if (shape.shape)
 			{
 				rgb = get_rgb(shape, info->vars->gen, info->vars);
-				my_mlx_pixel_put(&(info->vars->img), i, j, rgb);
+				my_mlx_pixel_put(&(info->vars->img), info->i, info->j, rgb);
 			}
-			j++;
+			info->j++;
 		}
-		i++;
 	}
 	return (0);
 }

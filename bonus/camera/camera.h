@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:35:31 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:17:28 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:35:07 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_coords		camera_vect(t_vars *vars, int i, int j, t_cam_screen screen);
 int				get_rgb(t_inter shape, t_gen *gen, t_vars *vars);
 t_inter			find_closest_shape(t_coords ray, t_coords origin,
 					t_shape **shapes, t_shape *check_shape);
-void			camera(t_vars *vars, int i, int rgb);
+void			camera(t_vars *vars, int i);
 
 void			pre_camera(t_vars *vars, int i);
 
@@ -53,5 +53,8 @@ void			copy_pre_image(t_vars *vars);
 void			error_exit_vars(t_vars *vars, char *message, int is_perror);
 
 t_cam_screen	screen_calcul(t_vars *vars);
+void			total_failure(t_vars *vars, int i, t_data tdata[8],
+					pthread_t threads[8]);
+int				create_threads(int i, int step, t_vars *vars, t_data tdata[8]);
 
 #endif

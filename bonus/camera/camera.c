@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:59:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:35:24 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:38:14 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,49 +87,28 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 	return (result);
 }
 
-void	camera(t_vars *vars, int i, int rgb)
+void	camera(t_vars *vars, int i)
 {
 	t_data			tdata[8];
 	pthread_t		threads[8];
 	int				step;
-	int				j;
 
-	(void) rgb;
 	vars->state = RENDER;
 	vars->screen = screen_calcul(vars);
 	step = vars->win_sizes.x_len / 8;
 	while (++i < 8)
 	{
-		tdata[i].vars = deep_copy(vars);
-		if (!tdata[i].vars)
+		if (!create_threads(i, step, vars, tdata))
 			break ;
-		tdata[i].sx = i * step;
-		if (i == 7)
-			tdata[i].ex = vars->win_sizes.x_len;
-		else
-			tdata[i].ex = (i + 1) * step;
 		pthread_create(&threads[i], NULL, camera_thread, &tdata[i]);
 	}
 	if (i != 8)
-	{
-		j = 0;
-		while (j < i)
-		{
-			thread_failure(tdata[j].vars);
-			pthread_join(threads[j], NULL);
-			j++;
-		}
-		error_exit_vars(vars, "Error creating threads", 0);
-	}
+		total_failure(vars, i, tdata, threads);
 	i = 0;
 	while (i < 8)
 		pthread_join(threads[i++], NULL);
-	i = 0;
-	while (i < 8)
-	{
-		thread_failure(tdata[i].vars);
-		i++;
-	}
+	while (i > 0)
+		thread_failure(tdata[--i].vars);
 	copy_image(vars);
 	make_menu(vars, 0, 0, vars->img_copy);
 	vars->mode = HIDDEN;

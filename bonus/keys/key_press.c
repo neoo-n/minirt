@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mod.c                                              :+:      :+:    :+:   */
+/*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:03:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 11:51:14 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 21:18:51 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	render_next_frame(t_vars *vars)
 		vars->light_count = 0;
 		vars->shape_count = 0;
 		vars->page_num = 1;
-		camera(vars, -1, 0);
+		camera(vars, -1);
 	}
 	return (0);
 }

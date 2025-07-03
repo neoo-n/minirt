@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:04:28 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/07/03 16:13:51 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:13:35 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,8 @@ void	copy_pre_image(t_vars *vars)
 	}
 }
 
-t_vars	*deep_copy(t_vars	*vars)
+void	copy_helper(t_vars *copy, t_vars *vars)
 {
-	t_vars	*copy;
-
-	copy = malloc(sizeof(t_vars));
-	if (!copy)
-		return (0);
 	copy->mlx = vars->mlx;
 	copy->win = vars->win;
 	copy->win_sizes = vars->win_sizes;
@@ -86,6 +81,16 @@ t_vars	*deep_copy(t_vars	*vars)
 	copy->screen = vars->screen;
 	copy->img = vars->img;
 	copy->pre_img = vars->pre_img;
+}
+
+t_vars	*deep_copy(t_vars *vars)
+{
+	t_vars	*copy;
+
+	copy = malloc(sizeof(t_vars));
+	if (!copy)
+		return (0);
+	copy_helper(copy, vars);
 	copy->gen = copy_gen(vars->gen);
 	if (!copy->gen)
 	{

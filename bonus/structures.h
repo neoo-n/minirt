@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:52:27 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:11:02 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 21:15:41 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,6 +292,8 @@ typedef struct s_data
 	t_vars	*vars;
 	int		sx;
 	int		ex;
+	int		i;
+	int		j;
 }	t_data;
 
 #endif
