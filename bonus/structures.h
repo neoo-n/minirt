@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:52:27 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:52:27 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 16:11:02 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,6 @@ typedef struct s_inter
 	t_coords	point;
 	t_coords	normal;
 	t_coords	ray;
-	t_coords	center_t;
 }	t_inter;
 
 typedef struct s_gen
@@ -272,7 +271,6 @@ typedef struct s_vars
 	t_dataimg		loading_image;
 	t_win_size		win_sizes;
 	t_gen			*gen;
-	int				epsilon;
 	int				colour;
 	t_mode			mode;
 	t_obj			obj;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:56:08 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:56:08 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 15:43:23 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ t_shape	**copy_shapes(t_shape **o_shape, int i)
 		new_shape[i]->shape = o_shape[i]->shape;
 		new_shape[i]->coords = o_shape[i]->coords;
 		new_shape[i]->rgb = o_shape[i]->rgb;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE || new_shape[i]->shape == CONE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == SPHERE
+			|| new_shape[i]->shape == CONE)
 			new_shape[i]->diam = o_shape[i]->diam;
 		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == CONE)
 			new_shape[i]->height = o_shape[i]->height;
-		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE || new_shape[i]->shape == CONE)
+		if (new_shape[i]->shape == CYLINDER || new_shape[i]->shape == PLANE
+			|| new_shape[i]->shape == CONE)
 			new_shape[i]->vector = o_shape[i]->vector;
 	}
 	new_shape[i] = 0;
@@ -142,7 +144,7 @@ int	init_elem(t_gen *gen, char *line)
 		return (handle_sp(gen, line, 0));
 	if (line[0] == 'p')
 		return (handle_pl(gen, line, 0));
-	if (line[0] == 'c' || line[0] == 't')
+	if (line[0] == 'c')
 		return (handle_cts(gen, line, 0));
 	return (0);
 }

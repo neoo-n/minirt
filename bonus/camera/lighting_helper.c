@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:59 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/30 20:37:00 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/07/03 16:20:59 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
+
+t_coords	calc_norm(t_inter shape, t_coords ray)
+{
+	t_coords	n;
+
+	if (shape.shape->shape == PLANE)
+		n = shape.shape->vector;
+	else if (shape.shape->shape == SPHERE)
+		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
+	else if (shape.shape->shape == CYLINDER)
+		n = cyl_n(shape);
+	else if (shape.shape->shape == CONE)
+		n = co_n(shape);
+	if (dot_prod(vect_normalised(n), vect_normalised(ray)) > 0)
+		n = vect_mult(n, -1);
+	return (n);
+}
 
 t_coords	cyl_n(t_inter shape)
 {
@@ -48,10 +65,24 @@ t_coords	co_n(t_inter shape)
 		n = vect_normalised(shape.shape->vector);
 	else
 	{
-		s = vect_add(shape.shape->coords, vect_mult(shape.shape->vector, shape.shape->height));
+		s = vect_add(shape.shape->coords, vect_mult(shape.shape->vector,
+					shape.shape->height));
 		dist_ps = vect_dist(shape.point, s);
-		pc = vect_sub(s, vect_mult(shape.shape->vector, dist_ps / cos(atan((shape.shape->diam / 2) / shape.shape->height))));
+		pc = vect_sub(s, vect_mult(shape.shape->vector, dist_ps / cos(
+						atan((shape.shape->diam / 2) / shape.shape->height))));
 		n = vect_normalised(vect_sub(shape.point, pc));
 	}
 	return (n);
+}
+
+double	calc_fog(double t)
+{
+	double	fog;
+
+	fog = (t - 30) / (100 - 30);
+	if (fog > 1)
+		fog = 1;
+	else if (fog < 0)
+		fog = 0;
+	return (fog);
 }

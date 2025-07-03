@@ -5,18 +5,22 @@ GNL		= 	gnl/get_next_line_utils.c gnl/get_next_line.c
 PARSING =	parsing/handle_shapes.c parsing/handling.c \
 			parsing/helper.c parsing/helper2.c \
 			parsing/initialization.c parsing/insert.c \
-			parsing/validation.c parsing/handle_helper.c
+			parsing/validation.c parsing/handle_helper.c \
+			parsing/handling_light.c
 
 UTILS	=	utils/atoi.c utils/errors.c \
 			utils/frees.c utils/libft.c \
-			utils/split.c utils/angle_calcul.c
+			utils/split.c utils/angle_calcul.c \
+			utils/frees2.c
 
 INTER	= 	intersections/cylinder.c intersections/plane.c \
 			intersections/sphere.c intersections/cone.c \
 
 CAM		=	camera/camera.c camera/create_window.c \
 			camera/my_mlx_pixel_put.c camera/lighting.c \
-			camera/lighting_helper.c camera/rgb_utils.c
+			camera/lighting_helper.c camera/rgb_utils.c \
+			camera/precamera.c camera/thread_fct.c \
+			camera/copy.c camera/closing_window.c
 
 FONTS	=	fonts/font.c fonts/handle_letters.c \
 			fonts/abcde.c fonts/fghij.c \

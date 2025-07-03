@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arrows.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:54:58 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:55:19 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 16:14:07 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,9 @@ void	left_press(t_vars *vars, int light_count)
 
 {
 	int			shape_id;
-	t_coords	simul;
 
 	shape_id = vars->obj_id - light_count - 1;
-	if (vars->obj == CAM)
-	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x + vars->gen->c->vector.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y + vars->gen->c->vector.x * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z + vars->gen->c->vector.x * 0.05;
-		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
-		vars->gen->c->vector.x = simul.x;
-		vars->gen->c->vector.y = simul.y;
-		vars->gen->c->vector.z = simul.z;
-	}
-	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
+	if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
 			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;
@@ -127,20 +116,9 @@ void	right_press(t_vars *vars, int light_count)
 
 {
 	int			shape_id;
-	t_coords	simul;
 
 	shape_id = vars->obj_id - light_count - 1;
-	if (vars->obj == CAM)
-	{
-		simul.x = vars->gen->c->coords.x + vars->gen->c->vector.x - vars->gen->c->vector.x * 0.05;
-		simul.y = vars->gen->c->coords.y + vars->gen->c->vector.y - vars->gen->c->vector.x * 0.05;
-		simul.z = vars->gen->c->coords.z + vars->gen->c->vector.z - vars->gen->c->vector.x * 0.05;
-		simul = vect_normalised(vect_sub(simul, vars->gen->c->coords));
-		vars->gen->c->vector.x = simul.x;
-		vars->gen->c->vector.y = simul.y;
-		vars->gen->c->vector.z = simul.z;
-	}
-	else if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
+	if (vars->obj == SHAPE && (vars->gen->shapes[shape_id]->shape == PLANE
 			|| vars->gen->shapes[shape_id]->shape == CYLINDER || vars->gen->shapes[shape_id]->shape == CONE))
 	{
 		double cost;

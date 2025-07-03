@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   handle_shapes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:58:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:58:51 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 15:09:14 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int		handle_sp(t_gen *gen, char *line, int i)
+int	handle_sp(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -38,7 +38,7 @@ int		handle_sp(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int		handle_pl(t_gen *gen, char *line, int i)
+int	handle_pl(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 
@@ -66,7 +66,7 @@ int		handle_pl(t_gen *gen, char *line, int i)
 	return (1);
 }
 
-int		c_helper(t_shape *shape, char *line, int i)
+int	c_helper(t_shape *shape, char *line, int i)
 {
 	i = parse_double(line, i, &shape->diam);
 	if (i == -1)
@@ -88,7 +88,7 @@ static t_id	which_type_ct(char *line)
 		return (CONE);
 }
 
-int		handle_cts(t_gen *gen, char *line, int i)
+int	handle_cts(t_gen *gen, char *line, int i)
 {
 	t_shape	*shape;
 

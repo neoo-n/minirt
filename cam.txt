@@ -1,0 +1,80 @@
+void	merge_image(t_dataimg *dst, t_dataimg *src, int sx, int ex, int height)
+{
+	int	x;
+	int	y;
+	int	colour;
+
+	x = sx;
+	while (x < ex)
+	{
+		y = 0;
+		while (y < height)
+		{
+			colour = get_colour(src, x, y);
+			my_mlx_pixel_put(dst, x, y, colour);
+			y++;
+		}
+		x++;
+	}
+}
+
+void	camera(t_vars *vars, int i, int rgb)
+{
+	int				j;
+	t_inter			shape;
+	t_coords		vect;
+
+	vars->state = RENDER;
+	vars->screen = screen_calcul(vars);
+	while (++i < vars->win_sizes.x_len)
+	{
+		j = -1;
+		while (++j < vars->win_sizes.y_height)
+		{
+			vect = camera_vect(vars, i, j, vars->screen);
+			shape = find_closest_shape(vect, vars->gen->c->coords,
+					vars->gen->shapes, 0);
+			if (shape.shape)
+			{
+				rgb = get_rgb(shape, vars->gen, vars);
+				my_mlx_pixel_put(&(vars->img), i, j, rgb);
+			}
+		}
+	}
+	copy_image(vars);
+	make_menu(vars, 0, 0, vars->img_copy);
+	vars->mode = HIDDEN;
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img_copy.img, 0, 0);
+	printf("end: %ld\n", current_time());
+}
+
+void	pre_camera(t_vars *vars, int i)
+{
+	int				j;
+	t_inter			shape;
+	t_coords		vect;
+	long			start;
+	long			end;
+
+	start = current_time();
+	vars->state = PRERENDER;
+	vars->screen = screen_calcul(vars);
+	while (i < vars->win_sizes.x_len)
+	{
+		j = 0;
+		while (j < vars->win_sizes.y_height)
+		{
+			vect = camera_vect(vars, i, j, vars->screen);
+			shape = find_closest_shape(vect, vars->gen->c->coords,
+					vars->gen->shapes, 0);
+			if (shape.shape)
+				draw_pixel_block(vars, shape, i, j);
+			j += PIXELS;
+		}
+		i += PIXELS;
+	}
+	info_box(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->pre_img_copy.img, 0, 0);
+	end = current_time();
+	printf("%ld\n", end - start);
+}

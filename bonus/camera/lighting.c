@@ -3,33 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:54:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:54:28 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 16:19:10 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-t_coords	calc_norm(t_inter shape, t_coords ray)
-{
-	t_coords	n;
-
-	if (shape.shape->shape == PLANE)
-		n = shape.shape->vector;
-	else if (shape.shape->shape == SPHERE)
-		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
-	else if (shape.shape->shape == CYLINDER)
-		n = cyl_n(shape);
-	else if (shape.shape->shape == CONE)
-		n = co_n(shape);
-	if (dot_prod(vect_normalised(n), vect_normalised(ray)) > 0)
-		n = vect_mult(n, -1);
-	return (n);
-}
-
-int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
+int	in_shade(t_inter shape, t_gen *gen, int i)
 {
 	t_coords	newray;
 	t_inter		closest_shape;
@@ -37,7 +20,6 @@ int	in_shade(t_inter shape, t_gen *gen, double angle, int i)
 	t_coords	newpoint;
 	t_coords	offset_point;
 
-	(void) angle;
 	newray = vect_normalised(vect_sub(gen->l[i]->coords, shape.point));
 	offset_point = vect_add(shape.point, vect_mult(shape.normal, 1e-6));
 	closest_shape = find_closest_shape(newray, offset_point, gen->shapes, NULL);
@@ -82,25 +64,13 @@ double	specular(t_vars *vars, t_inter shape, t_light *light_pt)
 	return (spec);
 }
 
-double	calc_fog(double t)
-{
-	double	fog;
-
-	fog = (t - 30) / (100 - 30);
-	if (fog > 1)
-		fog = 1;
-	else if (fog < 0)
-		fog = 0;
-	return (fog);
-}
-
 t_rgb	calc_lights(t_vars *vars, t_inter shape, t_rgb *spec_light, int i)
 {
 	t_rgb	dif_light;
 	double	light[2];
 
 	dif_light = init_rgb();
-	if (!in_shade(shape, vars->gen, 0, i) || vars->shadow == OFF)
+	if (!in_shade(shape, vars->gen, i) || vars->shadow == OFF)
 	{
 		light[0] = calc_dif_int(shape, vars->gen->l[i]);
 		light[1] = specular(vars, shape, vars->gen->l[i]);

@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 16:04:10 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:56:18 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/03 15:17:24 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	valid_line(char *line)
 		|| !ft_strncmp(line, "L ", 2))
 		return (1);
 	if (!ft_strncmp(line, "sp ", 3) || !ft_strncmp(line, "pl ", 3)
-		|| !ft_strncmp(line, "cy ", 3) || !ft_strncmp(line, "co ", 3)
-		|| !ft_strncmp(line, "to ", 3))
+		|| !ft_strncmp(line, "cy ", 3) || !ft_strncmp(line, "co ", 3))
 		return (1);
 	return (0);
 }

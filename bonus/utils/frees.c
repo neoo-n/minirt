@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:16:42 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/29 16:17:08 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/03 15:07:54 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,16 +107,4 @@ void	free_gen(t_gen *gen)
 	if (gen->saved_gen)
 		free_gen_saved(gen->saved_gen);
 	free(gen);
-}
-
-void	free_characters(t_character *character)
-{
-	t_character	*next;
-
-	while (character)
-	{
-		next = character->next;
-		free(character);
-		character = next;
-	}
 }
