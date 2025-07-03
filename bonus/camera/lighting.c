@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:48:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/01 15:06:19 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 14:40:24 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 14:40:32 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 	t_coords	n;
 
 	if (shape.shape->shape == PLANE)
-	{
 		n = shape.shape->vector;
-		return (n);
-	}
 	else if (shape.shape->shape == SPHERE)
 		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
 	else if (shape.shape->shape == CYLINDER)
