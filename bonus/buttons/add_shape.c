@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 15:46:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 15:46:32 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 16:13:14 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 16:13:14 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	add_light(t_vars *vars)
 	vars->obj_id = count_lights(vars) + 1;
 	vars->gen->l = realloc_light(vars->gen->l, light);
 	if (!vars->gen->l)
-		error_exit_vars(vars, "fuck", 0);
+		error_exit_vars(vars, "Error allocating light", 0);
 }
 
 void	add_sphere(t_vars *vars)
@@ -53,7 +53,7 @@ void	add_sphere(t_vars *vars)
 	vars->obj = SHAPE;
 	vars->gen->shapes = realloc_shape(vars->gen->shapes, sphere);
 	if (!vars->gen->shapes)
-		error_exit_vars(vars, "fuck", 0);
+		error_exit_vars(vars, "Error allocating sphere", 0);
 }
 
 void	add_cyl(t_vars *vars)
@@ -81,7 +81,7 @@ void	add_cyl(t_vars *vars)
 	vars->obj_id = count_lights(vars) + count_objs(vars) - 1;
 	vars->gen->shapes = realloc_shape(vars->gen->shapes, cyl);
 	if (!vars->gen->shapes)
-		error_exit_vars(vars, "fuck", 0);
+		error_exit_vars(vars, "Error allocating cylinder", 0);
 }
 
 void	add_cone(t_vars *vars)
@@ -109,7 +109,7 @@ void	add_cone(t_vars *vars)
 	vars->obj_id = count_lights(vars) + count_objs(vars) - 1;
 	vars->gen->shapes = realloc_shape(vars->gen->shapes, cyl);
 	if (!vars->gen->shapes)
-		error_exit_vars(vars, "fuck", 0);
+		error_exit_vars(vars, "Error allocating cone", 0);
 }
 
 void	add_plane(t_vars *vars)
@@ -135,5 +135,5 @@ void	add_plane(t_vars *vars)
 	vars->obj_id = count_lights(vars) + count_objs(vars) - 1;
 	vars->gen->shapes = realloc_shape(vars->gen->shapes, plane);
 	if (!vars->gen->shapes)
-		error_exit_vars(vars, "fuck", 0);
+		error_exit_vars(vars, "Error allocating plane", 0);
 }

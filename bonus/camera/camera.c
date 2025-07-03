@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 14:59:11 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 14:59:29 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/03 16:13:40 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/03 16:13:40 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,7 @@ void	camera(t_vars *vars, int i, int rgb)
 			pthread_join(threads[j], NULL);
 			j++;
 		}
-		error_exit_vars(vars, "fucking hell", 0);
+		error_exit_vars(vars, "Error creating threads", 0);
 	}
 	i = 0;
 	while (i < 8)
@@ -464,7 +464,7 @@ void	pre_camera(t_vars *vars, int i)
 			pthread_join(threads[j], NULL);
 			j++;
 		}
-		error_exit_vars(vars, "fucking hell", 0);
+		error_exit_vars(vars, "Error creating threads", 0);
 	}
 	i = 0;
 	while (i < 8)
