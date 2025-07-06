@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 14:52:27 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 21:15:41 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/04 13:47:06 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/04 14:20:05 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef enum e_obj
 	CAM,
 	LIGHT,
 	SHAPE,
+	SETT,
 	NONE,
 }	t_obj;
 

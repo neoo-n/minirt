@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 15:35:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 15:35:55 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/04 14:19:08 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/04 14:19:08 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	make_obj_button(t_vars *vars, t_dataimg img)
 		light_text(vars, &button, &num);
 	else if (vars->obj == SHAPE)
 		shape_text(vars, &button, &num);
+	else if (vars->obj == SETT)
+		button.text = "settings selected";
 	make_box(vars, button, 0, img);
 	if (vars->obj == LIGHT || vars->obj == SHAPE)
 		free(num);

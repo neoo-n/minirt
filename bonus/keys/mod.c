@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 16:04:19 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 22:36:39 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/04 13:57:57 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/04 13:57:57 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	plus_press(t_vars *vars, int light_count)
 		plus_rgb(vars, light_id, shape_id);
 	else if (vars->obj == SHAPE)
 		vars->gen->shapes[shape_id]->diam += 0.1;
-	else if (vars->gen->l[light_id]->bright <= 0.95)
+	else if (vars->obj == SETT && vars->gen->a->light <= 0.95)
+		vars->gen->a->light += 0.05;
+	else if (vars->obj == LIGHT && vars->gen->l[light_id]->bright <= 0.95)
 		vars->gen->l[light_id]->bright += 0.05;
 }
 
@@ -39,6 +41,8 @@ void	minus_press(t_vars *vars, int light_count)
 	else if (vars->obj == SHAPE
 		&& vars->gen->shapes[shape_id]->diam > 0.2)
 		vars->gen->shapes[shape_id]->diam -= 0.1;
+	else if (vars->obj == SETT && vars->gen->a->light >= 0.05)
+		vars->gen->a->light -= 0.05;
 	else if (vars->obj == LIGHT && vars->gen->l[light_id]->bright >= 0.05)
 		vars->gen->l[light_id]->bright -= 0.05;
 }
@@ -69,9 +73,9 @@ void	mod_handler(int button, t_vars *vars, int light_count)
 		plus_press(vars, light_count);
 	else if (button == MINUS && vars->obj != CAM)
 		minus_press(vars, light_count);
-	else if (button == ZERO && vars->obj != LIGHT)
+	else if (button == ZERO && vars->obj == SHAPE)
 		zero_press(vars, light_count);
-	else if (button == NINE && vars->obj != LIGHT)
+	else if (button == NINE && vars->obj == SHAPE)
 		nine_press(vars, light_count);
 	pre_camera(vars, 0);
 }

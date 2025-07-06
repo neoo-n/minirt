@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 15:37:53 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 15:42:45 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/04 14:31:13 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/04 14:31:13 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	select_obj(t_vars *vars, t_dataimg img)
 	vars->light_count = 0;
 	vars->shape_count = 0;
 	vars->page_num = 1;
-	if (vars->obj_id == 0)
+	if (vars->obj_id == -1)
+		vars->obj = SETT;
+	else if (vars->obj_id == 0)
 		vars->obj = CAM;
 	else if (vars->obj_id <= count_lights(vars))
 		vars->obj = LIGHT;
@@ -58,7 +60,10 @@ void	basic_handler(t_vars *vars, t_dataimg img, int x, int y)
 	if (click_in_button(vars, x, y) == TEXT && vars->mode == BASIC)
 		select_click(vars, img);
 	else if (click_in_button(vars, x, y) == SETTINGS && vars->mode == BASIC)
-		printf("SETTINGS\n");
+	{
+		vars->obj_id = -1;
+		select_obj(vars, img);
+	}
 	else if (click_in_button(vars, x, y) == PRINT && vars->mode == BASIC)
 		print_gen(vars->gen);
 	else if (click_in_button(vars, x, y) == RESET && vars->mode == BASIC)
@@ -91,12 +96,12 @@ int	mouse_click(int button, int x, int y, t_vars *vars)
 		img = vars->img_copy;
 	if (vars->state == RENDERING || button != 1)
 		return (0);
-	if (vars->mode == BASIC)
+	else if (click_in_button(vars, x, y) == MENU)
+		menu_click(vars, img);
+	else if (vars->mode == BASIC)
 		basic_handler(vars, img, x, y);
 	else if (click_in_button(vars, x, y) == TEXT && (check_select_mode(vars)))
 		select_obj(vars, img);
-	else if (click_in_button(vars, x, y) == MENU)
-		menu_click(vars, img);
 	else if (click_in_button(vars, x, y) == ARROW_L)
 		left_arrow_click(vars, img);
 	else if (click_in_button(vars, x, y) == ARROW_R)

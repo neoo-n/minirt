@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 15:09:20 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 15:09:20 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/04 14:26:47 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/04 14:42:04 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	menu_click(t_vars *vars, t_dataimg img)
 	if (vars->mode == HIDDEN || vars->mode == RED || vars->mode == GREEN
 		|| vars->mode == BLUE)
 	{
+		vars->mode = BASIC;
 		if (vars->state == PRERENDER)
 		{
 			button.colour = 0x9c9797;
@@ -44,7 +45,6 @@ void	menu_click(t_vars *vars, t_dataimg img)
 			button.by = vars->win_sizes.y_height * 0.95;
 			make_box(vars, button, 0, img);
 		}
-		vars->mode = BASIC;
 		make_obj_button(vars, img);
 	}
 	else

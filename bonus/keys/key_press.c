@@ -6,7 +6,7 @@
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:03:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 21:18:51 by akabbaj          ###   ########.fr       */
+/*   Updated: 2025/07/04 13:53:51 by akabbaj          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	key_press_obj(int button, t_vars *vars, int light_count)
 		wasd_handler(button, vars, light_count);
 	else if ((button == PLUS || button == MINUS || button == ZERO
 			|| button == NINE) && (vars->obj == SHAPE
-			|| vars->obj == LIGHT))
+			|| vars->obj == LIGHT || vars->obj == SETT))
 		mod_handler(button, vars, light_count);
 	else if (button == E || button == Q || button == Z || button == X)
 		zaxis_handler(button, vars, light_count);
