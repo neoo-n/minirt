@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 14:13:31 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/07/03 15:47:45 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:43:44 by dvauthey         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "intersections.h"
 
@@ -18,13 +18,16 @@ static double	cone_quadratic(t_coords ray, t_coords n,
 	double	t;
 	double	dot_ray_n;
 	double	dot_camedge_n;
+	double	quadratic_val[3];
 
 	dot_ray_n = dot_prod(ray, n);
 	dot_camedge_n = dot_prod(cam_edge, n);
-	t = quadratic(dot_prod(ray, ray) - ratio * dot_ray_n * dot_ray_n,
-			2 * (dot_prod(cam_edge, ray) - (ratio * dot_camedge_n * dot_ray_n)
-				), dot_prod(cam_edge, cam_edge) - (ratio * dot_camedge_n
-				* dot_camedge_n));
+	quadratic_val[0] = dot_prod(ray, ray) - ratio * dot_ray_n * dot_ray_n;
+	quadratic_val[1] = 2 * (dot_prod(cam_edge, ray) - (ratio * dot_camedge_n
+						* dot_ray_n));
+	quadratic_val[2] = dot_prod(cam_edge, cam_edge) - (ratio * dot_camedge_n
+						* dot_camedge_n);
+	t = quadratic(quadratic_val[0], quadratic_val[1], quadratic_val[2]);
 	return (t);
 }
 
@@ -51,7 +54,8 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 	cone->vector = vect_normalised(cone->vector);
 	cam_edge = vect_sub(origin, vect_add(cone->coords, vect_mult(cone->vector,
 					cone->height)));
-	ratio = ((cone->diam * cone->diam / 4) / (cone->height * cone->height)) + 1;
+	ratio = (cone->diam * cone->diam / 4) / (cone->height * cone->height);
+	ratio += 1;
 	t = cone_quadratic(ray, cone->vector, cam_edge, ratio);
 	if (t != -1)
 	{
