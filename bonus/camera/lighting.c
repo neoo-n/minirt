@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 14:54:28 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 16:19:10 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/07/06 14:23:56 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/06 14:23:56 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double	calc_dif_int(t_inter shape, t_light	*light)
 
 	light_dir = vect_normalised(vect_sub(light->coords, shape.point));
 	angle = dot_prod(shape.normal, light_dir);
-	if (angle <= 1e-8)
+	if (angle <= 1e-6)
 		return (0);
 	return (angle * light->bright);
 }

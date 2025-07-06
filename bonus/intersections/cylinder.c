@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 11:37:01 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/21 16:28:46 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/06 13:47:41 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/06 13:52:18 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double	quadratic(double a, double b, double c)
 	double	t2;
 
 	delta = pow(b, 2) - (4 * a * c);
-	if (delta < 0)
+	if (delta < 1e-6)
 		return (-1);
 	t1 = (-b + sqrt(delta)) / (2 * a);
 	t2 = (-b - sqrt(delta)) / (2 * a);

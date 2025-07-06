@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 14:13:31 by dvauthey          #+#    #+#             */
-/*   Updated: 2025/07/05 14:43:44 by dvauthey         ###   ########.fr       */
+/*   Created: 06/07/2025 13:22:28 by akabbaj           #+#    #+#             */
+/*   Updated: 06/07/2025 14:22:10 by akabbaj          ###   ########.ch       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "intersections.h"
 
@@ -24,9 +24,9 @@ static double	cone_quadratic(t_coords ray, t_coords n,
 	dot_camedge_n = dot_prod(cam_edge, n);
 	quadratic_val[0] = dot_prod(ray, ray) - ratio * dot_ray_n * dot_ray_n;
 	quadratic_val[1] = 2 * (dot_prod(cam_edge, ray) - (ratio * dot_camedge_n
-						* dot_ray_n));
+				* dot_ray_n));
 	quadratic_val[2] = dot_prod(cam_edge, cam_edge) - (ratio * dot_camedge_n
-						* dot_camedge_n);
+			* dot_camedge_n);
 	t = quadratic(quadratic_val[0], quadratic_val[1], quadratic_val[2]);
 	return (t);
 }
@@ -51,7 +51,6 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 	t_coords	p;
 	double		dist;
 
-	cone->vector = vect_normalised(cone->vector);
 	cam_edge = vect_sub(origin, vect_add(cone->coords, vect_mult(cone->vector,
 					cone->height)));
 	ratio = (cone->diam * cone->diam / 4) / (cone->height * cone->height);
@@ -65,5 +64,6 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 			t = -1;
 	}
 	t = check_caps_cone(ray, origin, cone, t);
+	t -= 0.3;
 	return (t);
 }
