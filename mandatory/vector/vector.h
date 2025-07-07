@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:18:15 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/10 13:18:15 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 16:17:31 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 16:17:31 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 t_coords	vect_normalised(t_coords v);
 t_coords	vect_cross(t_coords v1, t_coords v2);
 t_coords	vect_y(void);
+t_coords	vect_x(void);
 double		dot_prod(t_coords a, t_coords b);
 t_coords	vect_sub(t_coords	a, t_coords b);
 t_coords	vect_add(t_coords	a, t_coords b);

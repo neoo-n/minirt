@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:35:31 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/03 21:35:07 by akabbaj          ###   ########.fr       */
+/*   Created: 2025/07/07 16:18:51 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 16:18:51 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minirt.h"
 # include "../parsing/parsing.h"
 # include "../features/features.h"
+# include "../vector/vector.h"
 
 int				mouse_closing(t_vars *vars);
 int				closing(int keycode, t_vars *vars);

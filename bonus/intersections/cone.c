@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 11:24:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/07 11:28:55 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 16:30:52 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 16:30:52 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 	cam_edge = vect_sub(origin, vect_add(cone->coords, vect_mult(cone->vector,
 					cone->height)));
 	ratio = (cone->diam * cone->diam / 4) / (cone->height * cone->height);
-	ratio +=1;
+	ratio += 1;
 	t = cone_quadratic(ray, cone->vector, cam_edge, ratio);
 	if (t != -1)
 	{

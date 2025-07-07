@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 13:21:06 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/12 11:13:34 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/07/07 16:19:12 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 16:19:12 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ t_coords	vect_y(void)
 
 	v.x = 0.0;
 	v.y = 1.0;
+	v.z = 0.0;
+	return (v);
+}
+
+t_coords	vect_x(void)
+{
+	t_coords	v;
+
+	v.x = 1.0;
+	v.y = 0.0;
 	v.z = 0.0;
 	return (v);
 }

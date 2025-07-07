@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 11:19:40 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 11:19:56 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 16:18:20 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 16:29:29 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "camera.h"
 
-static t_cam_screen	screen_calcul(t_vars *vars)
+t_cam_screen	screen_calcul(t_vars *vars)
 {
 	t_cam_screen	screen;
 
@@ -21,10 +21,21 @@ static t_cam_screen	screen_calcul(t_vars *vars)
 		/ vars->win_sizes.x_len * screen.len_x;
 	screen.len_pix_x = screen.len_x / vars->win_sizes.x_len;
 	screen.len_pix_y = screen.len_y / vars->win_sizes.y_height;
-	screen.vect_x = vect_normalised(vect_cross(vect_y(), vars->gen->c->vector));
-	screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector,
-				screen.vect_x));
-	screen.vect_y = vect_mult(screen.vect_y, -1);
+	if (vars->gen->c->vector.x == 0.0 && vars->gen->c->vector.z == 0.0)
+	{
+		screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector,
+					vect_x()));
+		screen.vect_x = vect_normalised(vect_cross(screen.vect_y,
+					vars->gen->c->vector));
+	}
+	else
+	{
+		screen.vect_x = vect_normalised(vect_cross(vect_y(),
+					vars->gen->c->vector));
+		screen.vect_y = vect_normalised(vect_cross(vars->gen->c->vector,
+					screen.vect_x));
+		screen.vect_y = vect_mult(screen.vect_y, -1);
+	}
 	screen.p_mid = vect_add(vars->gen->c->vector, vars->gen->c->coords);
 	return (screen);
 }
@@ -73,7 +84,7 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 			continue ;
 		temp.shape = shapes[i];
 		temp.t = get_intersection(ray, origin, temp.shape);
-		if (temp.t > 1e-6 && (result.t == -1 || temp.t < result.t))
+		if (temp.t >= 0 && (result.t == -1 || temp.t < result.t))
 			result = temp;
 	}
 	if (result.shape)
