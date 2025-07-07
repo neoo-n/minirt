@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/04 13:47:06 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/04 14:20:05 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 10:45:26 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 10:45:26 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,6 @@ typedef struct s_cam
 {
 	t_coords	coords;
 	t_coords	vector;
-	// t_coords	up;
-	// t_coords	right;
 	double		fov;
 }	t_cam;
 

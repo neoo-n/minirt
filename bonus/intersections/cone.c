@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 06/07/2025 13:22:28 by akabbaj           #+#    #+#             */
-/*   Updated: 06/07/2025 14:22:10 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 11:24:40 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 11:28:55 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 	cam_edge = vect_sub(origin, vect_add(cone->coords, vect_mult(cone->vector,
 					cone->height)));
 	ratio = (cone->diam * cone->diam / 4) / (cone->height * cone->height);
-	ratio += 1;
+	ratio +=1;
 	t = cone_quadratic(ray, cone->vector, cam_edge, ratio);
 	if (t != -1)
 	{
@@ -64,6 +64,5 @@ double	cone_intersect(t_coords ray, t_coords origin, t_shape *cone, double t)
 			t = -1;
 	}
 	t = check_caps_cone(ray, origin, cone, t);
-	t -= 0.3;
 	return (t);
 }
