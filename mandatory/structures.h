@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/13 10:41:51 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/20 14:54:04 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/07/07 10:09:11 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 10:09:21 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef enum e_id
 	SPHERE,
 	PLANE,
 	CYLINDER
-}
+}	t_id;
+
 typedef enum e_errmes
 {
 	NO_FILE,

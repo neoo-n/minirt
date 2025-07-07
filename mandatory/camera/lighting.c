@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/18 11:19:32 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 11:19:32 by akabbaj          ###   ########.ch       */
+/*   Created: 2025/07/07 10:21:09 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/07 10:23:43 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,39 +17,33 @@ t_coords	calc_norm(t_inter shape, t_coords ray)
 	t_coords	n;
 
 	if (shape.shape->shape == PLANE)
-	{
 		n = shape.shape->vector;
-		return (n);
-	}
 	else if (shape.shape->shape == SPHERE)
 		n = vect_normalised(vect_sub(shape.point, shape.shape->coords));
 	else if (shape.shape->shape == CYLINDER)
 		n = cyl_n(shape);
-	if (dot_prod(n, ray) > 0)
+	if (dot_prod(vect_normalised(n), vect_normalised(ray)) > 0)
 		n = vect_mult(n, -1);
 	return (n);
 }
 
-int	in_shade(t_inter shape, t_gen *gen, double angle)
+int	in_shade(t_inter shape, t_gen *gen)
 {
 	t_coords	newray;
 	t_inter		closest_shape;
-	double		dist;
-	double		shape_dist;
+	double		dist[2];
 	t_coords	newpoint;
+	t_coords	offset_point;
 
-	angle = dot_prod(calc_norm(shape, shape.ray), shape.ray);
-	if (angle >= -1e-6)
-		return (1);
 	newray = vect_normalised(vect_sub(gen->l->coords, shape.point));
-	closest_shape = find_closest_shape(newray, shape.point, gen->shapes,
-			shape.shape);
+	offset_point = vect_add(shape.point, vect_mult(shape.normal, 1e-6));
+	closest_shape = find_closest_shape(newray, offset_point, gen->shapes, NULL);
 	if (!closest_shape.shape || closest_shape.t == -1)
 		return (0);
-	dist = dot_prod(vect_sub(shape.point, gen->l->coords), newray);
-	newpoint = vect_add(shape.point, vect_mult(newray, closest_shape.t));
-	shape_dist = dot_prod(vect_sub(shape.point, newpoint), newray);
-	if (dist < shape_dist - 1e-6)
+	dist[0] = dot_prod(vect_sub(gen->l->coords, offset_point), newray);
+	newpoint = vect_add(offset_point, vect_mult(newray, closest_shape.t));
+	dist[1] = dot_prod(vect_sub(newpoint, offset_point), newray);
+	if (dist[1] < dist[0] - 1e-6)
 		return (1);
 	return (0);
 }
@@ -72,7 +66,7 @@ int	get_rgb(t_inter shape, t_gen *gen, double dif_int)
 	t_rgb	amb_light;
 	t_rgb	shape_col;
 
-	if (in_shade(shape, gen, 0))
+	if (in_shade(shape, gen))
 		dif_int = 0;
 	else
 		dif_int = calc_dif_int(shape, gen);
