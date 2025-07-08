@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 14:24:09 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/06 14:24:09 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/08 10:22:22 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,11 @@ double	calc_fog(double t)
 	else if (fog < 0)
 		fog = 0;
 	return (fog);
+}
+
+void	set_result_closestshape(t_inter *result, t_coords origin, t_coords ray)
+{
+	result->point = vect_add(origin, vect_mult(ray, result->t));
+	result->normal = calc_norm(*result, ray);
+	result->ray = ray;
 }

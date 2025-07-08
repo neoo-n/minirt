@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:18:18 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/06/18 11:18:18 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/08 10:20:11 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,11 @@ t_rgb	rgb_final(t_rgb rgb, t_rgb amb, t_rgb dif)
 	rgb.g = fmin(rgb.g * (amb.g + dif.g), 1);
 	rgb.b = fmin(rgb.b * (amb.b + dif.b), 1);
 	return (rgb);
+}
+
+void	set_result_closestshape(t_inter *result, t_coords origin, t_coords ray)
+{
+	result->point = vect_add(origin, vect_mult(ray, result->t));
+	result->normal = calc_norm(*result, ray);
+	result->ray = ray;
 }

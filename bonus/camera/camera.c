@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:27:30 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/07 16:28:11 by akabbaj          ###   ########.ch       */
+/*   Updated: 2025/07/08 10:21:54 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,14 @@ t_inter	find_closest_shape(t_coords ray, t_coords origin, t_shape **shapes,
 			continue ;
 		temp.shape = shapes[i];
 		temp.t = get_intersection(ray, origin, temp.shape);
-		if (temp.t >= 0 && (result.t == -1 || temp.t < result.t))
+		if (temp.t >= 0 && (result.t == -1 || ((temp.t < result.t + 1e-6)
+					&& temp.shape->shape == SPHERE)))
+			result = temp;
+		else if (temp.t >= 0 && (result.t == -1 || temp.t < result.t - 1e-6))
 			result = temp;
 	}
 	if (result.shape)
-	{
-		result.point = vect_add(origin, vect_mult(ray, result.t));
-		result.normal = calc_norm(result, ray);
-		result.ray = ray;
-	}
+		set_result_closestshape(&result, origin, ray);
 	return (result);
 }
 

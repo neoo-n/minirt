@@ -73,7 +73,7 @@ REPLACE := \033[9A\033[9K\033[A
 all:	${NAME} header
 
 header:
-	@for i in 1 2 3 4 5 ; do \
+	@for i in 1 ; do \
 		sleep 0.5 ; \
 		echo "$(L_PURPLE)"  ; \
 		echo "  __  __              _   _                 ____      _____   " ; \
