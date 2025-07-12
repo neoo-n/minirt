@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akabbaj <akabbaj@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 14:09:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/08 10:26:00 by dvauthey         ###   ########.fr       */
+/*   Created: 2025/07/08 10:35:35 by akabbaj           #+#    #+#             */
+/*   Updated: 2025/07/08 10:36:29 by akabbaj          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
 	double		t;
 
 	temp = vect_sub(origin, plane->coords);
-	if (dot_prod(temp, plane->vector) < 1e-6)
+	if (dot_prod(temp, plane->vector) == 0)
 		return (0);
 	denom = dot_prod(plane->vector, ray);
 	if (fabs(denom) < 1e-8)

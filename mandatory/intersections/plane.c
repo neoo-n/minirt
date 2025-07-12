@@ -6,7 +6,7 @@
 /*   By: dvauthey <dvauthey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 14:09:23 by akabbaj           #+#    #+#             */
-/*   Updated: 2025/07/08 10:07:47 by dvauthey         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:36:52 by dvauthey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ double	plane_intersect(t_coords ray, t_coords origin, t_shape *plane)
 	t_coords	temp;
 	double		numerator;
 	double		t;
-	
+
 	temp = vect_sub(origin, plane->coords);
-	if (dot_prod(temp, plane->vector) < 1e-6)
+	if (dot_prod(temp, plane->vector) == 0)
 		return (0);
 	denom = dot_prod(plane->vector, ray);
 	if (fabs(denom) < 1e-6)

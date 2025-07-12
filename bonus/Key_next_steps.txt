@@ -1,5 +1,0 @@
-Global settings
-Reflectivity
-Plane rotate error
-Proper rotations
-
